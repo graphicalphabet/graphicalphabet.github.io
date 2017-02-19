@@ -1,2 +1,2 @@
 # graphicalphabet.github.io
-Personal Website of Nathan Paterson
+Personal website of Nathan Paterson
