@@ -6,7 +6,7 @@
     <title>The Golden Present (in Black)</title>
   </head>
   <body>
-    <div id="myData"></div>
+    <div id="dailyReading"></div>
     <script>
       fetch('golden-present.json')
       .then(function (response) {
@@ -19,7 +19,7 @@
         console.log('error: ' + err);
       });
       function appendData(data) {
-        var mainContainer = document.getElementById("myData");
+        var mainContainer = document.getElementById("dailyReading");
         for (var i = 0; i < data.length; i++) {
           var div = document.createElement("div");
           div.innerHTML = 'Name: ' + data[i].gsx$pub-date + ' ' + data[i].gsx$pub-month;
