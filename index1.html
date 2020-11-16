@@ -27,12 +27,12 @@
         return response.json();
       })
       .then(function (data) {
-        appendData(data);
+        dailyReading(data);
       })
       .catch(function (err) {
         console.log('error: ' + err);
       });
-      function appendData(data) {
+      function dailyReading(data) {
         var mainContainer = document.getElementById("dailyReading");
         for (var i = 0; i < data.feed.entry.length; i++) {
           var div = document.createElement("div");
