@@ -32,23 +32,23 @@
       .catch(function (err) {
         console.log('error: ' + err);
       });
-      function dailyReading(data) {
-        var reading = data.feed.entry
-        var mainContainer = document.getElementById("dailyReading");
-        for (var i = 0; i < data.length; i++) {
-          var title = data.feed.entry[i]['gsx$titletext']['$t'];
-          var div = document.createElement("div");
-          div.innerHTML =
-            "<h1>" + title + "</h1>";
-          mainContainer.appendChild(div);
       // function dailyReading(data) {
+      //   var reading = data.feed.entry
       //   var mainContainer = document.getElementById("dailyReading");
-      //   for (var i = 0; i < data.feed.entry.length; i++) {
+      //   for (var i = 0; i < data.length; i++) {
+      //     var title = data.feed.entry[i]['gsx$titletext']['$t'];
       //     var div = document.createElement("div");
       //     div.innerHTML =
-      //       "<h1>" + data.feed.entry[i].titletext + "</h1>" +
-      //       "<p>" + data.feed.entry[i].bodytext + "</p>";
+      //       "<h1>" + title + "</h1>";
       //     mainContainer.appendChild(div);
+      function dailyReading(data) {
+        var mainContainer = document.getElementById("dailyReading");
+        for (var i = 0; i < data.feed.entry.length; i++) {
+          var div = document.createElement("div");
+          div.innerHTML =
+            "<h1>" + data.feed.entry[i].['gsx$titletext']['$t'] + "</h1>" +
+            "<p>" + data.feed.entry[i].['gsx$bodytext']['$t'] + "</p>";
+          mainContainer.appendChild(div);
         }
       }
     </script>
