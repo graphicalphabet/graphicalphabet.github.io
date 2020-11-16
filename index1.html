@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>JSON Test</title>
+    <title>The Golden Present (in Black)</title>
   </head>
   <body>
     <div id="myData"></div>
     <script>
-      fetch('people.json')
+      fetch('golden-present.json')
       .then(function (response) {
         return response.json();
       })
@@ -22,7 +22,7 @@
         var mainContainer = document.getElementById("myData");
         for (var i = 0; i < data.length; i++) {
           var div = document.createElement("div");
-          div.innerHTML = 'Name: ' + data[i].firstName + ' ' + data[i].lastName;
+          div.innerHTML = 'Name: ' + data[i].gsx$pub-date + ' ' + data[i].gsx$pub-month;
           mainContainer.appendChild(div);
         }
       }
