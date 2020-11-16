@@ -22,7 +22,7 @@
         var mainContainer = document.getElementById("dailyReading");
         for (var i = 0; i < data.length; i++) {
           var div = document.createElement("div");
-          div.innerHTML = 'Name: ' + data[i].gsx$pub-date + ' ' + data[i].gsx$pub-month;
+          div.innerHTML = 'Today’s Reading: ' + data[i].gsx$pub-date + ' ' + data[i].gsx$pub-month;
           mainContainer.appendChild(div);
         }
       }
