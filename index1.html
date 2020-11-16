@@ -20,9 +20,9 @@
       });
       function appendData(data) {
         var mainContainer = document.getElementById("dailyReading");
-        for (var i = 0; i < data.length; i++) {
+        for (var i = 0; i < data.entry.length; i++) {
           var div = document.createElement("div");
-          div.innerHTML = 'Today’s Reading: ' + data[i].entry + ' ' + data[i].gsx$reading-day;
+          div.innerHTML = 'Today’s Reading: ' + data[i].entry.gsx$reading-day + ' ' + data[i].entry.gsx$reading-month;
           mainContainer.appendChild(div);
         }
       }
