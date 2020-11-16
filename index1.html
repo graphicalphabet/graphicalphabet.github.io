@@ -33,13 +33,27 @@
         console.log('error: ' + err);
       });
       function dailyReading(data) {
+        var data = data.feed.entry
         var mainContainer = document.getElementById("dailyReading");
-        for (var i = 0; i < data.feed.entry.length; i++) {
+        for (var i = 0; i < data.length; i++) {
+          var readingday = data.feed.entry[i]['gsx$readingday']['$t'];
+          var readingmonth = data.feed.entry[i]['gsx$readingmonth']['$t'];
+          var titletext = data.feed.entry[i]['gsx$titletext']['$t'];
+          var bodytext = data.feed.entry[i]['gsx$bodytext']['$t'];
           var div = document.createElement("div");
           div.innerHTML =
-            "<h1>" + data.feed.entry[i].titletext + "</h1>" +
-            "<p>" + data.feed.entry[i].bodytext + "</p>";
+            "<h3>" + readingday + ' ' + readingmonth + "</h3>" +
+            "<h1>" + titletext + "</h1>" +
+            "<p>" + bodytext + "</p>";
           mainContainer.appendChild(div);
+      // function dailyReading(data) {
+      //   var mainContainer = document.getElementById("dailyReading");
+      //   for (var i = 0; i < data.feed.entry.length; i++) {
+      //     var div = document.createElement("div");
+      //     div.innerHTML =
+      //       "<h1>" + data.feed.entry[i].titletext + "</h1>" +
+      //       "<p>" + data.feed.entry[i].bodytext + "</p>";
+      //     mainContainer.appendChild(div);
         }
       }
     </script>
