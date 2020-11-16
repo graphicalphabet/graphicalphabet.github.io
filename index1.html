@@ -36,15 +36,10 @@
         var data = data.feed.entry
         var mainContainer = document.getElementById("dailyReading");
         for (var i = 0; i < data.length; i++) {
-          var day = data.feed.entry[i]['gsx$readingday']['$t'];
-          var month = data.feed.entry[i]['gsx$readingmonth']['$t'];
           var title = data.feed.entry[i]['gsx$titletext']['$t'];
-          var body = data.feed.entry[i]['gsx$bodytext']['$t'];
           var div = document.createElement("div");
           div.innerHTML =
-            "<h3>" + day + " " + month + "</h3>" +
-            "<h1>" + title + "</h1>" +
-            "<p>" + body + "</p>";
+            "<h1>" + title + "</h1>";
           mainContainer.appendChild(div);
       // function dailyReading(data) {
       //   var mainContainer = document.getElementById("dailyReading");
