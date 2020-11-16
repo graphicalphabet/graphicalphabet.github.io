@@ -22,7 +22,7 @@
         var mainContainer = document.getElementById("dailyReading");
         for (var i = 0; i < data.feed.entry.length; i++) {
           var div = document.createElement("div");
-          div.innerHTML = "<h1>" + data.feed.entry[i].title + "</h1>";
+          div.innerHTML = "<h1>" + data.feed.entry.title[i].$t + "</h1>";
           mainContainer.appendChild(div);
         }
       }
