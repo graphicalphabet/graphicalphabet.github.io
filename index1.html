@@ -8,7 +8,7 @@
   <body>
     <div id="myData"></div>
     <script>
-      fetch('people.json')
+      fetch('golden-present.json')
       .then(function (response) {
         return response.json();
       })
@@ -22,7 +22,7 @@
         var mainContainer = document.getElementById("myData");
         for (var i = 0; i < data.length; i++) {
           var div = document.createElement("div");
-          div.innerHTML = 'Name: ' + data[i].firstName + ' ' + data[i].lastName;
+          div.innerHTML = 'Reading: ' + data[i].gsx$pub-date + ' ' + data[i].gsx$pub-month;
           mainContainer.appendChild(div);
         }
       }
