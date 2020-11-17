@@ -22,6 +22,11 @@
       <p class="pt3 bt b--black black" id="footer">The Golden Present (in black) <i>by <a class="link dim black no-underline" href="https://swamisatchidananda.org/" target="_blank">Sri Swami Satchidananda</a></i>.</p>
     </main>
     <script>
+      // Get current date
+      var today = new Date();
+        var options = { month: 'long', day: 'numeric' };
+        document.getElementById("readingdate").innerHTML = today.toLocaleDateString(undefined, options);
+
       // Fetch readings data
       fetch('readings.json')
       .then(function (response) {
@@ -35,22 +40,12 @@
       });
 
       // Write today's reading
-      // function dailyReading(data) {
-      //   var mainContainer = document.getElementById("dailyReading");
-      //   for (var i = 0; i < data.feed.entry.length; i++) {
-      //     var div = document.createElement("div");
-      //     div.innerHTML =
-      //       "<h2>" + data.feed.entry[i]['gsx$readingdate']['$t'] + "</h2>" +
-      //       "<h1>" + data.feed.entry[i]['gsx$readingtitle']['$t'] + "</h1>" +
-      //       "<p>" + data.feed.entry[i]['gsx$readingbody']['$t'] + "</p>";
-      //     mainContainer.appendChild(div);
-      //   }
-
-        var today = new Date();
-          var options = { month: 'long', day: 'numeric' };
-          document.getElementById("readingdate").innerHTML = today.toLocaleDateString(undefined, options);
+      function dailyReading(data) {
+        var mainContainer = document.getElementById("dailyReading");
+        for (var i = 0; i < data.feed.entry.length; i++) {
           document.getElementById("readingtitle").innerHTML = data.feed.entry[i]['gsx$readingtitle']['$t'];
           document.getElementById("readingbody").innerHTML = data.feed.entry[i]['gsx$readingbody']['$t'];
+        }
       }
     </script>
   </body>
