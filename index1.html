@@ -39,59 +39,6 @@
       document.getElementById("reading-date").innerHTML = date + ' ' + namedMonth;
       document.getElementById("reading-title").innerHTML = title;
       document.getElementById("reading-body").innerHTML = body;
-
-
-      // // Write today's date
-      // var today = new Date();
-      //   var options = { month: 'long', day: 'numeric' };
-      //   document.getElementById("readingdate").innerHTML = today.toLocaleDateString(undefined, options);
-      //
-      // // Fetch readings data
-      // fetch('readings.json')
-      // .then(function (response) {
-      //   return response.json();
-      // })
-      // .then(function (data) {
-      //   dailyReading(data);
-      // })
-      // .catch(function (err) {
-      //   console.log('error: ' + err);
-      // });
-      //
-      // // Write today's reading
-      // function dailyReading(data) {
-      //   var mainContainer = document.getElementById("daily-reading");
-      //   for (var i = 0; i < data.feed.entry.length; i++) {
-      //     document.getElementById("reading-title").innerHTML = data.feed.entry[i]['gsx$readingtitle']['$t'];
-      //     document.getElementById("reading-body").innerHTML = data.feed.entry[i]['gsx$readingbody']['$t'];
-      //   }
-      // }
-
-
-
-      // var getReading = `[{"gsx$readingdate":{"$t"},"gsx$readingtitle":{"$t"},{"gsx$readingbody":"$t"}]`;
-      // // Parse the given JSON string
-      // var json_reading = JSON.parse(getReading);
-      //
-      // function getReadingForCurrentDate() {
-      //   var currentDate = getCurrentDate(); // For which data is to be fetched and converted into JSON date format yyyy-mm-dd
-      //   // Find the particular object that contains the current date
-      //   var searchedObj = json_reading[0]['content'].find(f => f['gsx$readingdate'] == currentDate);
-      //   if(searchedObj!==undefined)
-      //     console.log('count is', searchedObj['content']);
-      // }
-      //
-      // function getCurrentDate() {
-      //   var nowDate = new Date();
-      //   var month = (nowDate.getMonth() + 1).toString().length == 1 ? '0' + (nowDate.getMonth() + 1) : (nowDate.getMonth() + 1);
-      //   var day = nowDate.getDate().toString().length == 1 ? '0' + nowDate.getDate() : +nowDate.getDate();
-      //   return nowDate.getFullYear() + '-' + month + '-' + day;
-      // }
-      //
-      // getReadingForCurrentDate();
-
-
-
     </script>
   </body>
 </html>
