@@ -45,16 +45,23 @@
       		$t: 'Be very regular in your chanting and mantra repetition. That is the most important practice. Even if you miss other things, don’t ever miss the mantra repetition. Let it be a part and parcel of your life. The mantra literally surrounds you. The mantram acts as a shield around you. No undesirable influence can affect you. When you take a trip begin by repeating the mantram. When you drive, keep repeating the mantram. In every available situation, let it be always in your heart and on your lips. You will see miracles happening. But it all depends upon how sincere you are and how devoted you are to it.'
       	},
       }];
+
+      // Define reading defaults
+      entry.gsx$readingtitle ?? ['The Onyx Present'];
+      entry.gsx$readingbody ?? ['Go outside today and play with rocks.'];
+
       // Get date and month
       var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
       var today = new Date();
       var month = today.getMonth();
       var namedMonth = months[month];
       var date = today.getDate();
+
       // Find today's reading
       var reading = entry.find(el => el['gsx$readingdate'] === `${date} ${namedMonth}`);
       var title = entry['gsx$readingtitle'];
       var body = entry['gsx$readingbody'];
+
       // Replace HTML elements
       document.getElementById('reading-date').innerHTML = date + ' ' + namedMonth;
       document.getElementById('reading-title').innerHTML = title;
