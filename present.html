@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Onyx Present</title>
+    <meta name="description" content="The Golden Present (in black)">
+    <meta name="keywords" content="design, rocks">
+    <meta name="author" content="Nathan Paterson">
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;1,300&family=Work+Sans:wght@700&display=swap">
+    <style>
+      body { font-family: 'Crimson Pro', serif; }
+      h1, #reading-date { font-family: 'Work Sans', sans-serif; }
+    </style>
+    <script src="readings.js"></script>
+  </head>
+  <body class="bg-light-silver">
+    <main class="w-100 pv5 ph3 pl5-ns f3 lh-copy mw7 black" id="daily-reading">
+      <p class="f5 ttu tracked" id="reading-date">X Month</p>
+      <h1 class="f1 lh-title" id="reading-title">The Onyx Present</h1>
+      <p class="pb5" id="reading-body">Go outside today and play with rocks.</p>
+      <p class="pt3 bt b--black black" id="footer">The Golden Present (in black) <i>by <a class="link dim black no-underline" href="https://swamisatchidananda.org/" target="_blank">Sri Swami Satchidananda</a></i>.</p>
+    </main>
+    <script>
+      // Get date and month
+      var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      var today = new Date();
+      var month = today.getMonth();
+      var namedMonth = months[month];
+      var date = today.getDate();
+      // Find today's reading
+      var reading = entry.find(el => el['gsx$readingdate'] === `${date} ${namedMonth}`);
+      var title = reading['gsx$readingtitle'];
+      var body = reading['gsx$readingbody'];
+      // Replace HTML elements
+      document.getElementById('reading-date').innerHTML = date + ' ' + namedMonth;
+      document.getElementById('reading-title').innerHTML = title;
+      document.getElementById('reading-body').innerHTML = body;
+    </script>
+  </body>
+</html>
