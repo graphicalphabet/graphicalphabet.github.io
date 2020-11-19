@@ -13,30 +13,26 @@
       body { font-family: 'Crimson Pro', serif; }
       h1, #reading-date { font-family: 'Work Sans', sans-serif; }
     </style>
-    <!-- <script src="readings.js"></script> -->
+    <script src="readings.js"></script>
   </head>
   <body class="bg-light-silver">
     <main class="w-100 pv5 ph3 pl5-ns f3 lh-copy mw7 black" id="daily-reading">
       <p class="f5 ttu tracked" id="reading-date">X Month</p>
-      <h1 class="f1" id="reading-title">Reading Title</h1>
-      <p class="pb5" id="reading-body">Reading body.</p>
+      <h1 class="f1" id="reading-title">The Onyx Present</h1>
+      <p class="pb5" id="reading-body">Go outside today and play with rocks.</p>
       <p class="pt3 bt b--black black" id="footer">The Golden Present (in black) <i>by <a class="link dim black no-underline" href="https://swamisatchidananda.org/" target="_blank">Sri Swami Satchidananda</a></i>.</p>
     </main>
     <script>
       // List daily readings
-      var entry = [{
-      	gsx$readingdate: '1 January',
-      	gsx$readingtitle: 'Jump the Hurdles',
-      	gsx$readingbody: 'Life must be a challenge. Only then is it exciting. In an obstacle race, you are forced to surmount all the obstacles: to jump over the hurdles, go through barrels, crawl under rugs, climb over walls. What would happen if, to avoid all that, you went around all the obstacles and asked for the winner’s cup? Would they give it to you? No. They would say, “You must go back and face all the obstacles.” Why? you might ask. “If you are interested in giving me the cup, just give it.” Sorry. You have to prove that you deserve it, that you worked for it. Life is also a game, and we are proving ourselves. The challenge itself is joyous. If your life is always smooth, when you have great grandchildren you won’t be able to sit back and tell them about all the adventures you had. Imagine this conversation: “You know, my child, when I was young like you this is what I did…” “Oh! Grandpa, you did that? And then what happened?” “I went to the jungle. I was chased by a tiger.” “Ah! Ooo! Is that so?” It will be so enjoyable to tell stories like that. Instead if you just say, “Well, since my birth I just sat there at home. Nothing much happened,” the kids will get up and walk away. They won’t even listen to your story. So have something exciting to tell everyone later on. You will be so happy and proud. Make your life as exciting as possible, but always think of it as fun. The adversities as well as the harmony should be enjoyable. Don’t become sober and morose and have a castor oil face in the name of spirituality. Just be happy. Jump with joy. Even if you make a mistake, say, “Hey, I did this? Great! What a wonderful lesson I learned!” If you really want to, you can make everything fun.'
-      }, {
-      	gsx$readingdate: '19 November',
-      	gsx$readingtitle: 'Let It Always Be in Your Heart and on Your Lips',
-      	gsx$readingbody: 'Be very regular in your chanting and mantra repetition. That is the most important practice. Even if you miss other things, don’t ever miss the mantra repetition. Let it be a part and parcel of your life. The mantra literally surrounds you. The mantram acts as a shield around you. No undesirable influence can affect you. When you take a trip begin by repeating the mantram. When you drive, keep repeating the mantram. In every available situation, let it be always in your heart and on your lips. You will see miracles happening. But it all depends upon how sincere you are and how devoted you are to it.',
-      }];
-
-      // Define reading defaults
-      entry.gsx$readingtitle ?? ['The Onyx Present'];
-      entry.gsx$readingbody ?? ['Go outside today and play with rocks.'];
+      // var entry = [{
+      // 	gsx$readingdate: '1 January',
+      // 	gsx$readingtitle: 'Jump the Hurdles',
+      // 	gsx$readingbody: 'Life must be a challenge. Only then is it exciting. In an obstacle race, you are forced to surmount all the obstacles: to jump over the hurdles, go through barrels, crawl under rugs, climb over walls. What would happen if, to avoid all that, you went around all the obstacles and asked for the winner’s cup? Would they give it to you? No. They would say, “You must go back and face all the obstacles.” Why? you might ask. “If you are interested in giving me the cup, just give it.” Sorry. You have to prove that you deserve it, that you worked for it. Life is also a game, and we are proving ourselves. The challenge itself is joyous. If your life is always smooth, when you have great grandchildren you won’t be able to sit back and tell them about all the adventures you had. Imagine this conversation: “You know, my child, when I was young like you this is what I did…” “Oh! Grandpa, you did that? And then what happened?” “I went to the jungle. I was chased by a tiger.” “Ah! Ooo! Is that so?” It will be so enjoyable to tell stories like that. Instead if you just say, “Well, since my birth I just sat there at home. Nothing much happened,” the kids will get up and walk away. They won’t even listen to your story. So have something exciting to tell everyone later on. You will be so happy and proud. Make your life as exciting as possible, but always think of it as fun. The adversities as well as the harmony should be enjoyable. Don’t become sober and morose and have a castor oil face in the name of spirituality. Just be happy. Jump with joy. Even if you make a mistake, say, “Hey, I did this? Great! What a wonderful lesson I learned!” If you really want to, you can make everything fun.'
+      // }, {
+      // 	gsx$readingdate: '19 November',
+      // 	gsx$readingtitle: 'Let It Always Be in Your Heart and on Your Lips',
+      // 	gsx$readingbody: 'Be very regular in your chanting and mantra repetition. That is the most important practice. Even if you miss other things, don’t ever miss the mantra repetition. Let it be a part and parcel of your life. The mantra literally surrounds you. The mantram acts as a shield around you. No undesirable influence can affect you. When you take a trip begin by repeating the mantram. When you drive, keep repeating the mantram. In every available situation, let it be always in your heart and on your lips. You will see miracles happening. But it all depends upon how sincere you are and how devoted you are to it.',
+      // }];
 
       // Get date and month
       var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -47,8 +43,8 @@
 
       // Find today's reading
       var reading = entry.find(el => el['gsx$readingdate'] === `${date} ${namedMonth}`);
-      var title = entry['gsx$readingtitle'];
-      var body = entry['gsx$readingbody'];
+      var title = reading['gsx$readingtitle'];
+      var body = reading['gsx$readingbody'];
 
       // Replace HTML elements
       document.getElementById('reading-date').innerHTML = date + ' ' + namedMonth;
