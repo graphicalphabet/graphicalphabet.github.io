@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Onyx Present</title>
+    <meta name="description" content="The Golden Present (in black). Daily inspiration by Sri Swami Satchidananda. Happy birthday, Davide.">
+    <meta name="keywords" content="inspiration, meditation, design, rocks">
+    <meta name="author" content="Nathan Paterson">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤘</text></svg>">
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;1,300&family=Work+Sans:wght@500;900&display=swap">
+    <style>
+      body { font-family: 'Crimson Pro', serif; }
+      h1, #reading-date { font-family: 'Work Sans', sans-serif; }
+    </style>
+    <script src="https://graphicalphabet.com/readings.js"></script>
+  </head>
+  <body class="bg-light-silver">
+    <main class="w-100 pv5 ph3 pl5-ns f3 lh-copy mw7 black" id="daily-reading">
+      <p class="f7 ttu tracked" id="reading-date">Today</p>
+      <h1 class="f1 lh-title" id="reading-title">The Golden Present</h1>
+      <p class="pb5" id="reading-body">These daily readings contain Swami Satchidananda’s teachings on the spiritual life. How to serve others and realize peace, truth and union with the divine. Culled from years of lectures to spiritual seekers in the West and the East, they are expressed with the simplicity and authority of one who speaks from his own experience.</p>
+      <p class="f4 pt3 bt b--black black" id="footer">The Golden Present (in black). Daily inspiration by <i><a class="link dim black no-underline" href="https://swamisatchidananda.org/" target="_blank">Sri Swami Satchidananda</a></i>.</p>
+    </main>
+    <script>
+      // Get date and month
+      var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      var today = new Date();
+      var month = today.getMonth();
+      var namedMonth = months[month];
+      var date = today.getDate();
+      // Find today's reading
+      var reading = entry.find(el => el['gsx$readingdate'] === `${namedMonth} ${date}`);
+      var title = reading['gsx$readingtitle'];
+      var body = reading['gsx$readingbody'];
+      // Replace HTML elements
+      document.getElementById('reading-date').innerHTML = namedMonth + ' ' + date;
+      document.getElementById('reading-title').innerHTML = title;
+      document.getElementById('reading-body').innerHTML = body;
+    </script>
+  </body>
+</html>
