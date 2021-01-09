@@ -37,7 +37,7 @@ var entry = [{
 }, {
 	gsx$readingdate: 'January 10',
 	gsx$readingtitle: 'Health Is Your Birthright',
-	gsx$readingbody: 'Don’t think that Hatha Yoga is just for athletes or for young people. It is written in the ancient yoga scriptures: “Anyone who practices yoga properly and sincerely becomes a siddha — an accomplished one — be he young or old, weak or strong, or even very elderly or sickly. From prince to peasant, child to grandparent, ailing to robust-all can practice these yoga postures and get maximum benefit.” Health is your birthright, not disease; strength your heritage, not weakness; courage, not fear; bliss, not sorrow; peace, not restlessness; knowledge, not ignorance. The person with health and strength of body, soundness of mind, with morality and spirit is a real gem among all humanity. Such a one possesses the true treasure.'
+	gsx$readingbody: 'Don’t think that Hatha Yoga is just for athletes or for young people. It is written in the ancient yoga scriptures: “Anyone who practices yoga properly and sincerely becomes a siddha — an accomplished one — be he young or old, weak or strong, or even very elderly or sickly. From prince to peasant, child to grandparent, ailing to robust — all can practice these yoga postures and get maximum benefit.” Health is your birthright, not disease; strength your heritage, not weakness; courage, not fear; bliss, not sorrow; peace, not restlessness; knowledge, not ignorance. The person with health and strength of body, soundness of mind, with morality and spirit is a real gem among all humanity. Such a one possesses the true treasure.'
 }, {
 	gsx$readingdate: 'January 11',
 	gsx$readingtitle: 'Try This Yourself',
