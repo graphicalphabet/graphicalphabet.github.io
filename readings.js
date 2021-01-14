@@ -57,7 +57,7 @@ var entry = [{
 }, {
 	gsx$readingdate: 'January 15',
 	gsx$readingtitle: 'We Are All Learning',
-	gsx$readingbody: 'Let us not deny anybody just because he or she follows a certain path or doesn’t follow a certain path. Ultimately we are all learning. If anyone is interested in knowing what practices you are doing, talk about it; explain how you have benefited, but don’t try to persuade another to do, the same thing. That is what is meant by the Biblical saying, “Ask and it shall be given.” You don’t have to go and teach anyone. If someone asks, simply share what you know. If that person wants to do the same thing, fine. If not, if he or she wants to follow another path, that’s fine too. With such an attitude you will learn to love everyone, respect everyone, and there will be harmony in your life.'
+	gsx$readingbody: 'Let us not deny anybody just because he or she follows a certain path or doesn’t follow a certain path. Ultimately we are all learning. If anyone is interested in knowing what practices you are doing, talk about it; explain how you have benefited, but don’t try to persuade another to do the same thing. That is what is meant by the Biblical saying, “Ask and it shall be given.” You don’t have to go and teach anyone. If someone asks, simply share what you know. If that person wants to do the same thing, fine. If not, if he or she wants to follow another path, that’s fine too. With such an attitude you will learn to love everyone, respect everyone, and there will be harmony in your life.'
 }, {
 	gsx$readingdate: 'January 16',
 	gsx$readingtitle: 'That Is the Best Victory',
