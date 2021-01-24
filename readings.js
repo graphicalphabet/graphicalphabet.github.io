@@ -97,7 +97,7 @@ var entry = [{
 }, {
 	gsx$readingdate: 'January 25',
 	gsx$readingtitle: 'You Should Always Choose Peace',
-	gsx$readingbody: 'When anything comes to you, first ask yourself, “Will I be maintaining my peace by getting this, or will my peace be disturbed?” Ask that for everything. People you would like to be with, possessions you would like to acquire It doesn’t matter what you want to do; strike that against the touchstone of peace. “Will this rob me of my peace?” If the answer is “Yes, you must choose peace or the other thing,” you should always choose peace.If the answer is, “My peace will not be disturbed by it,” okay, you can have that and still have your peace. That should be our aim.'
+	gsx$readingbody: 'When anything comes to you, first ask yourself, “Will I be maintaining my peace by getting this, or will my peace be disturbed?” Ask that for everything. People you would like to be with, possessions you would like to acquire. It doesn’t matter what you want to do; strike that against the touchstone of peace. “Will this rob me of my peace?” If the answer is, “Yes, you must choose peace or the other thing,” you should always choose peace. If the answer is, “My peace will not be disturbed by it,” okay, you can have that and still have your peace. That should be our aim.'
 }, {
 	gsx$readingdate: 'January 26',
 	gsx$readingtitle: 'Remember God’s Unseen Hand Always',
