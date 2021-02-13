@@ -177,7 +177,7 @@ var entry = [{
 }, {
 	gsx$readingdate: 'February 14',
 	gsx$readingtitle: 'Everybody Has a Heart',
-	gsx$readingbody: 'Everybody has a heart. You should know how to touch it. Behave in such a way that you can transform other hearts, melt them. Let that beautiful feeling come to the surface by your example. If you don’t know how to touch the heart, it is your mistake and not the other person’s mistake. Be patient;have strength. We tame even the wild animals, don’t we? Bengal tigers walk like a little puppy. Cobras dance with joy. Can’t we do something to a human being? Don’t just put the blame on the other person.'
+	gsx$readingbody: 'Everybody has a heart. You should know how to touch it. Behave in such a way that you can transform other hearts, melt them. Let that beautiful feeling come to the surface by your example. If you don’t know how to touch the heart, it is your mistake and not the other person’s mistake. Be patient; have strength. We tame even the wild animals, don’t we? Bengal tigers walk like a little puppy. Cobras dance with joy. Can’t we do something to a human being? Don’t just put the blame on the other person.'
 }, {
 	gsx$readingdate: 'February 15',
 	gsx$readingtitle: 'The Darkness Will Run Away',
