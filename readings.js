@@ -201,7 +201,7 @@ var entry = [{
 }, {
 	gsx$readingdate: 'February 20',
 	gsx$readingtitle: 'The Heart Will Win',
-	gsx$readingbody: 'The heart should play an important role, not only in married life, but in all of our relationships: with friends, relatives, business associates, and even strangers. Even if the other person uses the head, you should use morehart. Remember, ultimately the heart will win; it might take time but it will win. If you really want to use your heart, you will be guided in that direction. God’s guidance will be there. Pray more and trust in that higher force.'
+	gsx$readingbody: 'The heart should play an important role, not only in married life, but in all of our relationships: with friends, relatives, business associates, and even strangers. Even if the other person uses the head, you should use more heart. Remember, ultimately the heart will win; it might take time but it will win. If you really want to use your heart, you will be guided in that direction. God’s guidance will be there. Pray more and trust in that higher force.'
 }, {
 	gsx$readingdate: 'February 21',
 	gsx$readingtitle: 'There Is a Natural Gravitation',
