@@ -213,7 +213,7 @@ var entry = [{
 }, {
 	gsx$readingdate: 'February 23',
 	gsx$readingtitle: 'Have That Complete Trust',
-	gsx$readingbody: 'Question: How can you know if another person is telling you the truth? Sri Gurudev: Until you positively know that he is telling a lie, trust that he is telling you the truth. If you always look at that person with suspicion, even the truth will look like a lie to you because that is what you are looking for. If you constantly look for lies, even the truth will look false to you. Have that trust. Even if all of a sudden you come across a situation where someone seems to have told a lie, don’t immediately jumpto that conclusion. Investigate well. Things are not necessarily what they seem. Make sure that you understand the situation correctly before drawing conclusions.'
+	gsx$readingbody: 'Question: How can you know if another person is telling you the truth? Sri Gurudev: Until you positively know that he is telling a lie, trust that he is telling you the truth. If you always look at that person with suspicion, even the truth will look like a lie to you because that is what you are looking for. If you constantly look for lies, even the truth will look false to you. Have that trust. Even if all of a sudden you come across a situation where someone seems to have told a lie, don’t immediately jump to that conclusion. Investigate well. Things are not necessarily what they seem. Make sure that you understand the situation correctly before drawing conclusions.'
 }, {
 	gsx$readingdate: 'February 24',
 	gsx$readingtitle: 'You Can Just Tap Right into It',
