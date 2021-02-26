@@ -229,7 +229,7 @@ var entry = [{
 }, {
 	gsx$readingdate: 'February 27',
 	gsx$readingtitle: 'By Your Very Thought',
-	gsx$readingbody: 'Your thought, ideas, and energy can be transferred without even seeing or touching a person. By your very thought, you can send your energy and thought forces anywhere you want. Touching or seeing are limited in a way.In touching you are only using your body; in seeing you are limited to the sense of sight. But the flow of energy is not limited to these things; it can travel fast. Thought forces are even more powerful than physical forces.'
+	gsx$readingbody: 'Your thought, ideas, and energy can be transferred without even seeing or touching a person. By your very thought, you can send your energy and thought forces anywhere you want. Touching or seeing are limited in a way. In touching you are only using your body; in seeing you are limited to the sense of sight. But the flow of energy is not limited to these things; it can travel fast. Thought forces are even more powerful than physical forces.'
 }, {
 	gsx$readingdate: 'February 28',
 	gsx$readingtitle: 'Then Why Should You Go to Surf?',
