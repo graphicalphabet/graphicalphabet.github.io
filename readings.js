@@ -301,7 +301,7 @@ var entry = [{
 }, {
 	gsx$readingdate: 'March 16',
 	gsx$readingtitle: 'The Meaning of OM',
-	gsx$readingbody: 'OM is the sound of the Cosmic Vibration. The entire cosmos vibrates. Every cell vibrates. In fact, the whole universe is nothing but sound vibrations.The basic vibration is a hum, and the sum total of the universal vibration is also a hum. In between, there are fragments. All the words, all the languages, all the various sounds that are created by the human beings or animals or even machines are smaller parts of this cosmic hum. Without thathum, there is nothing. To denote that cosmic hum, there should be a word.OM is the word that comes closest to representing that cosmic hum. The word OM itself is not the hum. It’s the name of the hum.'
+	gsx$readingbody: 'OM is the sound of the Cosmic Vibration. The entire cosmos vibrates. Every cell vibrates. In fact, the whole universe is nothing but sound vibrations. The basic vibration is a hum, and the sum total of the universal vibration is also a hum. In between, there are fragments. All the words, all the languages, all the various sounds that are created by the human beings or animals or even machines are smaller parts of this cosmic hum. Without that hum, there is nothing. To denote that cosmic hum, there should be a word. OM is the word that comes closest to representing that cosmic hum. The word OM itself is not the hum. It’s the name of the hum.'
 }, {
 	gsx$readingdate: 'March 17',
 	gsx$readingtitle: 'What Would Your Hands Do?',
