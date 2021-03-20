@@ -321,7 +321,7 @@ var entry = [{
 }, {
 	gsx$readingdate: 'March 21',
 	gsx$readingtitle: 'Honest Want Is Prayer',
-	gsx$readingbody: 'By sincere prayer you put yourself in a receptive mood. You become good receiver. You tune your heart radio. Prayer is a form of tuning. Once you tune your heart through prayer, you get all the cosmic things Whatever you pray for, you get. Pray for peace, you are tuning your radio to the peace station. Pray for beauty, you tune your radio to the beauty station. More things are wrought by prayer than the world dreams of: We don’t” know the power of prayers. Don’t we say, “You want it, you got it!” It is literally true; if you really want it sincerely, you get it. Real want, sincere want, honest want is prayer. Through that sincere prayer,you tune your heart to God.'
+	gsx$readingbody: 'By sincere prayer you put yourself in a receptive mood. You become a good receiver. You tune your heart radio. Prayer is a form of tuning. Once you tune your heart through prayer, you get all the cosmic things. Whatever you pray for, you get. Pray for peace, you are tuning your radio to the peace station. Pray for beauty, you tune your radio to the beauty station. More things are wrought by prayer than the world dreams of: We don’t know the power of prayers. Don’t we say, “You want it, you got it!” It is literally true; if you really want it sincerely, you get it. Real want, sincere want, honest want is prayer. Through that sincere prayer, you tune your heart to God.'
 }, {
 	gsx$readingdate: 'March 22',
 	gsx$readingtitle: 'The First Duty',
