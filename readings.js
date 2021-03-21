@@ -325,7 +325,7 @@ var entry = [{
 }, {
 	gsx$readingdate: 'March 22',
 	gsx$readingtitle: 'The First Duty',
-	gsx$readingbody: 'A spiritual seeker’s first duty is to have good control over the tongue.Without control of the tongue we can forget about spirituality. Control in both ways: eating and talking. All the senses are controlled if the tongue is controlled.'
+	gsx$readingbody: 'A spiritual seeker’s first duty is to have good control over the tongue. Without control of the tongue we can forget about spirituality. Control in both ways: eating and talking. All the senses are controlled if the tongue is controlled.'
 }, {
 	gsx$readingdate: 'March 23',
 	gsx$readingtitle: 'You Will Only See Beauty',
