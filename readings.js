@@ -361,7 +361,7 @@ var entry = [{
 }, {
 	gsx$readingdate: 'March 31',
 	gsx$readingtitle: 'Everything Goes Smoothly',
-	gsx$readingbody: 'Question: How can I know if I am following the Will of God when I make a decision? Sri Gurudev: You will find out very soon. It won’t take very long. If it is the Will of God, everything will go smoothly. If it is your egoistic will,you’ll get the blow right away. God’s Will is always for the benefit of everybody, including you. Your egoistic thought is selfish; it wants your benefit first. The ego always wants something for itself.'
+	gsx$readingbody: 'Question: How can I know if I am following the Will of God when I make a decision? Sri Gurudev: You will find out very soon. It won’t take very long. If it is the Will of God, everything will go smoothly. If it is your egoistic will, you’ll get the blow right away. God’s Will is always for the benefit of everybody, including you. Your egoistic thought is selfish; it wants your benefit first. The ego always wants something for itself.'
 }, {
 	gsx$readingdate: 'April 1',
 	gsx$readingtitle: 'Our Lives Will Be Super Peaceful',
