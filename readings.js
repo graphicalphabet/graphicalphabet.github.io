@@ -365,7 +365,7 @@ var entry = [{
 }, {
 	gsx$readingdate: 'April 1',
 	gsx$readingtitle: 'Our Lives Will Be Super Peaceful',
-	gsx$readingbody: 'If you totally surrender yourself into the hands of God, you will feel: “God didn’t plan to come here. You sent me here. You have a purpose. I don’t know what that purpose is. If I could ask You for anything, it would be this: ’Let me always remember that You are working through me. I am not responsible for any of these things. Please let me not forget this.’” If this is our prayer, our lives will be super, super peaceful. If you have that faith, His power will make you think, make you do. Even the impulse to act comes from Him. When you become a good instrument, the ideas are dropped in. They come and prompt you, “Okay now, go ahead, do this.” Your job is to simply allow it to happen.'
+	gsx$readingbody: 'If you totally surrender yourself into the hands of God, you will feel: “God didn’t plan to come here. You sent me here. You have a purpose. I don’t know what that purpose is. If I could ask You for anything, it would be this: ‘Let me always remember that You are working through me. I am not responsible for any of these things. Please let me not forget this.’” If this is our prayer, our lives will be super, super peaceful. If you have that faith, His power will make you think, make you do. Even the impulse to act comes from Him. When you become a good instrument, the ideas are dropped in. They come and prompt you, “Okay now, go ahead, do this.” Your job is to simply allow it to happen.'
 }, {
 	gsx$readingdate: 'April 2',
 	gsx$readingtitle: 'Love Even the Mosquitoes That Bite You',
