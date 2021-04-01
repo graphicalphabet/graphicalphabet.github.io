@@ -369,7 +369,7 @@ var entry = [{
 }, {
 	gsx$readingdate: 'April 2',
 	gsx$readingtitle: 'Love Even the Mosquitoes That Bite You',
-	gsx$readingbody: 'Universal love means to see the same Self in everything. Unlimited,unconditional love is universal. If you have universal love, there is not even a single thing you dislike. You love everything, even the mosquitoes that bite you. You don’t dislike them; you simply say, “Well, mosquito,that is the purpose for which you were created. You are doing your job in biting me. I am doing my job and saying, `Please get out.“’ You don’t stop loving the mosquito. But loving the mosquito doesn’t mean allowing it to bite you. Often people think, “Because I love that mosquito, I cannot chase it away.” That’s not so. You can love the poison, but you don’t have to swallow it.'
+	gsx$readingbody: 'Universal love means to see the same Self in everything. Unlimited, unconditional love is universal. If you have universal love, there is not even a single thing you dislike. You love everything, even the mosquitoes that bite you. You don’t dislike them; you simply say, “Well, mosquito, that is the purpose for which you were created. You are doing your job in biting me. I am doing my job and saying, ‘Please get out.’” You don’t stop loving the mosquito. But loving the mosquito doesn’t mean allowing it to bite you. Often people think, “Because I love that mosquito, I cannot chase it away.” That’s not so. You can love the poison, but you don’t have to swallow it.'
 }, {
 	gsx$readingdate: 'April 3',
 	gsx$readingtitle: 'God’s Club',
