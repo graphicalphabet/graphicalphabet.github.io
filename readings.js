@@ -385,7 +385,7 @@ var entry = [{
 }, {
 	gsx$readingdate: 'April 6',
 	gsx$readingtitle: 'You Don’t Have to Be Afraid of Anything',
-	gsx$readingbody: 'Have complete faith. Don’t even go near fear. Remember: If anything has to happen, it will happen. Think, “All right, let it happen. I am bold! What’sthe use of being afraid of it? I’m not going to be able to stop anything that is meant to happen.” If you really have faith, you don’t have to be afraid of anything. That doesn’t mean that you should not be careful. Be careful, but don’t be afraid.'
+	gsx$readingbody: 'Have complete faith. Don’t even go near fear. Remember: If anything has to happen, it will happen. Think, “All right, let it happen. I am bold! What’s the use of being afraid of it? I’m not going to be able to stop anything that is meant to happen.” If you really have faith, you don’t have to be afraid of anything. That doesn’t mean that you should not be careful. Be careful, but don’t be afraid.'
 }, {
 	gsx$readingdate: 'April 7',
 	gsx$readingtitle: 'The Secret',
