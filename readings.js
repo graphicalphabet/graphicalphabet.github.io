@@ -405,7 +405,7 @@ var entry = [{
 }, {
 	gsx$readingdate: 'April 11',
 	gsx$readingtitle: 'The Highest Form of Faith',
-	gsx$readingbody: 'If you have absolute faith you don’t have to do anything. You will accept everything — even if you sometimes feel foolish. “I am foolish? Well, God made me that way. I don’t know why He did that, but He must have had some reason for it. If He doesn’t want me to be foolish anymore then He will take care of it.” That is the highest form of faith. If you can’t easily develop that kind of faith, your prayer can be, “God, let me have faith in You. Let me know that You are doing everything for me. You are taking care of me. Please give me a mind that can always remember this truth. Sometimes I forget that; I know You are testing me then. Even when I forget, you are the culprit who made that happen! Still I can’t help asking for You not to make me forget.”'
+	gsx$readingbody: 'If you have absolute faith you don’t have to do anything. You will accept everything — even if you sometimes feel foolish. “I am foolish? Well, God made me that way. I don’t know why He did that, but He must have had some reason for it. If He doesn’t want me to be foolish anymore then He will take care of it.” That is the highest form of faith. If you can’t easily develop that kind of faith, your prayer can be, “God, let me have faith in You. Let me know that You are doing everything for me. You are taking care of me. Please give me a mind that can always remember this truth. Sometimes I forget that; I know You are testing me then. Even when I forget, you are the culprit who made that happen! Still, I can’t help asking for You not to make me forget.”'
 }, {
 	gsx$readingdate: 'April 12',
 	gsx$readingtitle: 'It’s All for Good',
