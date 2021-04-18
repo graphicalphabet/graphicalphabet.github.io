@@ -437,7 +437,7 @@ var entry = [{
 }, {
 	gsx$readingdate: 'April 19',
 	gsx$readingtitle: 'The Biggest Miracle',
-	gsx$readingbody: 'Siddhis or powers can come with spiritual practice. But remember, they are the worst impediments. Who would want a siddhi? Your ego. “I want to do this. I want to get that. I want to have name,fame. I want to show my superiority. I want to perform miracles.” The biggest miracle is to become humble. Spiritual growth comes only when you humble your ego. Siddhis will never humble your ego.'
+	gsx$readingbody: 'Siddhis or powers can come with spiritual practice. But remember, they are the worst impediments. Who would want a siddhi? Your ego. “I want to do this. I want to get that. I want to have name, fame. I want to show my superiority. I want to perform miracles.” The biggest miracle is to become humble. Spiritual growth comes only when you humble your ego. Siddhis will never humble your ego.'
 }, {
 	gsx$readingdate: 'April 20',
 	gsx$readingtitle: 'Nothing Is Impossible for the Mind',
