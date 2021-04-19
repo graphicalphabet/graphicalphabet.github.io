@@ -441,7 +441,7 @@ var entry = [{
 }, {
 	gsx$readingdate: 'April 20',
 	gsx$readingtitle: 'Nothing Is Impossible for the Mind',
-	gsx$readingbody: 'Nature never discriminates. It has made the same knowledge equally available to everyone. When the mind is calm and clean it can get all the ideas.Nothing is impossible for the mind. If it is completely free from any selfishness, it is always clean and calm, always serene. In such a mind knowledge dawns by itself.'
+	gsx$readingbody: 'Nature never discriminates. It has made the same knowledge equally available to everyone. When the mind is calm and clean it can get all the ideas. Nothing is impossible for the mind. If it is completely free from any selfishness, it is always clean and calm, always serene. In such a mind knowledge dawns by itself.'
 }, {
 	gsx$readingdate: 'April 21',
 	gsx$readingtitle: 'She Shuffles the Cards',
