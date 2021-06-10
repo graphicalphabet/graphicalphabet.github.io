@@ -649,7 +649,7 @@ var entry = [{
 }, {
 	gsx$readingdate: 'June 11',
 	gsx$readingtitle: 'Hundreds of Worries',
-	gsx$readingbody: 'How many wants do you have? How many things do you worry about? “I don’t have this. ” “I didn’t get that.” “I don’t have a nice enough office.” “I didn’t get the car I wanted.” “I don’t have air conditioner.” “I didn’t get what I wanted to eat.” There are all kinds of unnecessary worries. Hundreds and hundreds and hundreds of worries. How can you lift even a small blade of grass with that kind of attitude? The mind is the main source of health and happiness. The same mind can completely rob you of all your health and happiness if you don’t train it properly. Heat, humidity, cold, hunger — all these conditions are nothing if your mind is calm and balanced.'
+	gsx$readingbody: 'How many wants do you have? How many things do you worry about? “I don’t have this.” “I didn’t get that.” “I don’t have a nice enough office.” “I didn’t get the car I wanted.” “I don’t have an air conditioner.” “I didn’t get what I wanted to eat.” There are all kinds of unnecessary worries. Hundreds and hundreds and hundreds of worries. How can you lift even a small blade of grass with that kind of attitude? The mind is the main source of health and happiness. The same mind can completely rob you of all your health and happiness if you don’t train it properly. Heat, humidity, cold, hunger — all these conditions are nothing if your mind is calm and balanced.'
 }, {
 	gsx$readingdate: 'June 12',
 	gsx$readingtitle: 'It’s God’s Child Given in Your Care',
