@@ -810,7 +810,7 @@ var entry = [{
 	gsx$readingdate: 'July 21',
 	gsx$readingtitle: 'You Are Always Doing Spiritual Work',
 	gsx$readingbody: 'You are always doing spiritual work. To know whether you are doing it properly, watch your feelings. Are you becoming more and more easeful? More and more peaceful? Are you lessening your worries? Do you always feel happy? If it bothers you more and more, then you are not doing it right. It’s not the action that is important, but how you do it. To decide whether you are doing the work in a spiritual way or not, ask yourself: “Am I maintaining my peace while doing this?” If the answer is “No,” then you are doing something wrong. Every job should make you happy, jubilant. You should enjoy it, whatever it is, and feel like doing mores You should forget yourself while you are doing it. Work should be fun, not a burden. If you become heavy while doing it, then you are doing it as a labour. Even if you look for a thank you, you are looking for some reward. When you do something for a reward, it’s labour. It’s not service. Labour means you do it to get it. Service means you just do it, and forget it.'
-}, {mic
+}, {
 	gsx$readingdate: 'July 22',
 	gsx$readingtitle: 'The Prayer Will Come',
 	gsx$readingbody: 'Question: Could you suggest a prayer that a sick person might say? Sri Gurudev: There’s no need for a suggestion. If he or she is really sick, the prayer will come. You don’t need to worry about the words. God will know what you mean. And remember, a really hearty cry relieves a lot of psychological problems. Don’t ever be ashamed of crying. I remember a South Indian saint used to say, “Lord, I know the trick. I know how to get You. If I cry, You cannot resist. If I cry, I’ll get You; but my ego never allows me to cry.'
