@@ -841,7 +841,7 @@ var entry = [{
 }, {
 	gsx$readingdate: 'July 29',
 	gsx$readingtitle: 'If You Can, Do Something',
-	gsx$readingbody: 'Simply take it easy, trust in God, and do what you can. Let whatever you do be for the benefit of others. If you can, do something. If you cannot, accept it. Somebody else will do it; it is not that you have to do it all yourself Honestly try to do your part, but know that you are not the end-all. You are not going to do everything. If a thing is meant to happen, it will happen. Just begin. Start it and if it has to happen through you, more energy will come to you. If not, you will very soon know that you are not to do that. Accept it. Do your best, and leave the rest.'
+	gsx$readingbody: 'Simply take it easy, trust in God, and do what you can. Let whatever you do be for the benefit of others. If you can, do something. If you cannot, accept it. Somebody else will do it; it is not that you have to do it all yourself. Honestly try to do your part, but know that you are not the end-all. You are not going to do everything. If a thing is meant to happen, it will happen. Just begin. Start it and if it has to happen through you, more energy will come to you. If not, you will very soon know that you are not to do that. Accept it. Do your best, and leave the rest.'
 }, {
 	gsx$readingdate: 'July 30',
 	gsx$readingtitle: 'The Real Me Is the Spirit',
