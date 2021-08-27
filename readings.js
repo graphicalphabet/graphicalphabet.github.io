@@ -961,7 +961,7 @@ var entry = [{
 }, {
 	gsx$readingdate: 'August 28',
 	gsx$readingtitle: 'A Heart Free From Attachment',
-	gsx$readingbody: 'Question: Please explain the meaning of Jesus’ teaching, “It is easier for a camel to go through the eye of a needle than for a rich man to enter the kingdom of God.”\nSri Gurudev: Poverty is not in things. You need food, shelter, a body. Poverty means giving up “mineness,” or calling things mine, mine, mine.” A rich man, in this sense, is the one who thinks that he owns everything and possesses everything. A heart free from attachment is a poor heart. And it is only into such a heart that God can enter.'
+	gsx$readingbody: 'Question: Please explain the meaning of Jesus’ teaching, “It is easier for a camel to go through the eye of a needle than for a rich man to enter the kingdom of God.”\nSri Gurudev: Poverty is not in things. You need food, shelter, a body. Poverty means giving up “mineness,” or calling things “mine, mine, mine.” A rich man, in this sense, is the one who thinks that he owns everything and possesses everything. A heart free from attachment is a poor heart. And it is only into such a heart that God can enter.'
 }, {
 	gsx$readingdate: 'August 29',
 	gsx$readingtitle: 'All the Rest Is Just a Dream',
