@@ -1081,7 +1081,7 @@ var entry = [{
 }, {
 	gsx$readingdate: 'September 27',
 	gsx$readingtitle: 'Even Once',
-	gsx$readingbody: 'We can all pray, “Thy Will be done. It’s all Your Grace. It’s all for good.” We believe it; but when it comes to putting that belief into practice, we might fail because the mind is not yet clean. A prayer is heard if it is uttered even once with a clean mind. Even once. You don’t need to repeat the prayer hundreds of times. No. God is not deaf; there is no need to repeat it again and again and again. You don’t even need to say it out loud. He knows even your thoughts. But He also knows we are all hypocrites. We don’t really mean what we say. We often pray just for show. God knows all that. So if we say it even once with complete sincerity -just once-that’s all He needs.'
+	gsx$readingbody: 'We can all pray, “Thy Will be done. It’s all Your Grace. It’s all for good.” We believe it; but when it comes to putting that belief into practice, we might fail because the mind is not yet clean. A prayer is heard if it is uttered even once with a clean mind. Even once. You don’t need to repeat the prayer hundreds of times. No. God is not deaf; there is no need to repeat it again and again and again. You don’t even need to say it out loud. He knows even your thoughts. But He also knows we are all hypocrites. We don’t really mean what we say. We often pray just for show. God knows all that. So if we say it even once with complete sincerity — just once — that’s all He needs.'
 }, {
 	gsx$readingdate: 'September 28',
 	gsx$readingtitle: 'Self-Healing Is Possible',
