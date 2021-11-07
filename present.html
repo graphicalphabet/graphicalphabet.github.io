@@ -37,9 +37,9 @@
       var namedMonth = months[month];
       var date = today.getDate();
       // Find today's reading
-      var reading = entry.find(el => el['gsx$readingdate'] === `${namedMonth} ${date}`);
-      var title = reading['gsx$readingtitle'];
-      var body = reading['gsx$readingbody'];
+      var reading = entry.find(el => el['readingdate'] === `${namedMonth} ${date}`);
+      var title = reading['readingtitle'];
+      var body = reading['readingbody'];
       // Replace HTML elements
       document.getElementById('reading-date').innerHTML = namedMonth + ' ' + date;
       document.getElementById('reading-title').innerHTML = title;
