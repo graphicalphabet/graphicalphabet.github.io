@@ -1265,7 +1265,7 @@ var entry = [{
 }, {
 	readingdate: 'November 12',
 	readingtitle: 'Your Prayer Should Be to Give Them Understanding',
-	readingbody: 'Question: If we pray for others, is their karma taken away? Sri Gurudev: We are not praying to have the karma of others taken away. We pray so that they can get insight into their karma and get the strength to face it and purge it out. Your prayer should be for their strength and understanding. What you sow, you must reap, If they understand the cause and the benefit of the suffering, then they can easily bear it. Just because you say, “Take their karma away,” God is not going to listen to you and take their karma away. So a prayer should help them to understand.'
+	readingbody: 'Question: If we pray for others, is their karma taken away? Sri Gurudev: We are not praying to have the karma of others taken away. We pray so that they can get insight into their karma and get the strength to face it and purge it out. Your prayer should be for their strength and understanding. What you sow, you must reap. If they understand the cause and the benefit of the suffering, then they can easily bear it. Just because you say, “Take their karma away,” God is not going to listen to you and take their karma away. So a prayer should help them to understand.'
 }, {
 	readingdate: 'November 13',
 	readingtitle: 'Many, Many Things Can Happen Through Prayer',
