@@ -13,6 +13,16 @@
     <style>
       body { font-family: 'Crimson Pro', serif; }
       h1, h2, h3 { font-family: 'Work Sans', sans-serif; }
+      button {
+        display: block;
+        margin: 4rem 0;
+        padding: 1rem;
+        outline: none;
+        font-size: 1.2rem;
+        color: white;
+        background: none;
+        border: 1px solid rgba(255,255,255);
+      }
     </style>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-QTXN3HEGYE"></script>
   <script>
@@ -21,15 +31,17 @@
       gtag('js', new Date());
       gtag('config', 'G-QTXN3HEGYE');
   </script>
+  <script src="quotes.js"></script>
   </head>
   <body class="w-100 pv5 ph3 pl5-ns f3 lh-copy mw7 near-white bg-black">
     <main>
-      <h1 class="f2 fw7 f1-ns lh-title">Quotes & Probes</h1>
+      <h1 class="f2 fw7 f1-ns lh-title">Quotes</h1>
       <h2 class="pb1 fw5">Wisdom from giants past.</h2>
-      <blockquote class="mh0 pb5">
-        <p class="pb1 i measure-narrow">“A little girl was in a drawing lesson. She was six. The teacher said this girl hardly ever paid attention, and in this drawing lesson, she did. The teacher was fascinated. She went over to her and said, ‘What are you drawing?’ The girl said, ‘I’m drawing a picture of God.’ The teacher said, ‘But nobody knows what God looks like.’ The girl said, ‘They will in a minute.’”</p>
-        <cite class="fs-normal">— Sir Ken Robinson, <a class="i link yellow dim" href="https://www.ted.com/talks/ken_robinson_says_schools_kill_creativity?language=en" target="_blank">Do Schools Kill Creativity?</a></cite>
+      <blockquote class="mh0 fw3">
+        <p class="pb3 i measure-narrow" id="quotation">“A little girl was in a drawing lesson. She was six. The teacher said this girl hardly ever paid attention, and in this drawing lesson, she did. The teacher was fascinated. She went over to her and said, ‘What are you drawing?’ The girl said, ‘I’m drawing a picture of God.’ The teacher said, ‘But nobody knows what God looks like.’ The girl said, ‘They will in a minute.’”</p>
+        <p>&mdash; <cite class="fs-normal" id="source">Sir Ken Robinson</cite></p>
       </blockquote>
+      <button>Next Quote</button>
     </main>
     <footer>
       <p class="f2 pv5">🤘</p>
