@@ -20,7 +20,7 @@
         gtag('js', new Date());
         gtag('config', 'G-QTXN3HEGYE');
     </script>
-    <script src="readings.js"></script>
+    <script src="js/readings.js"></script>
   </head>
   <body class="w-100 pv5 ph3 pl5-ns f3 lh-copy mw7 near-white bg-black">
     <main id="daily-reading">
@@ -51,7 +51,7 @@
       var month = today.getMonth();
       var namedMonth = months[month];
       var date = today.getDate();
-      // Find today's reading
+      // Find today’s reading
       var reading = entry.find(el => el['readingdate'] === `${namedMonth} ${date}`);
       var title = reading['readingtitle'];
       var body = reading['readingbody'];
