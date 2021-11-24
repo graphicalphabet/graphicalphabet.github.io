@@ -1,5 +1,5 @@
 var quotes = [{
-   quote: 'When I do good, I feel good. When I do bad, I feel bad. That’s my religion.',
+   quote: 'When I do good, I feel good. When I do bad, I feel bad. That is my religion.',
    source: 'Abraham Lincoln'
 }, {
    quote: 'Relax. Nothing is under control.',
