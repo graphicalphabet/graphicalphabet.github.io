@@ -9,35 +9,30 @@
     <meta name="author" content="Nathan Paterson">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤘</text></svg>">
     <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+    <link rel="stylesheet" href="css/global.css"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,500;1,300;1,500&family=Work+Sans:wght@500;900&display=swap">
-    <style>
-      body { font-family: 'Crimson Pro', serif; }
-      h1, h2, h3 { font-family: 'Work Sans', sans-serif; }
-      blockquote { quotes: "“" "”" "‘" "’"; }
-      #quote::before { content: open-quote; }
-      #quote::after { content: close-quote; }
-      #source::before { content: "— "; }
-    </style>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QTXN3HEGYE"></script>
-  <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-QTXN3HEGYE');
-  </script>
-  <script src="js/quotes.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QTXN3HEGYE"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-QTXN3HEGYE');
+    </script>
+    <script src="js/quotes.js"></script>
   </head>
   <body class="w-100 pv5 ph3 pl5-ns f3 fw3 lh-copy mw7 near-white bg-black">
     <main>
       <h1 class="f2 fw7 f1-ns lh-title">Quotes</h1>
-      <h2 class="pb1 fw5">Wisdom from giants past.</h2>
-      <blockquote class="mh0">
-        <p class="pb3 i measure-narrow" id="quote">A little girl was in a drawing lesson. She was six. The teacher said this girl hardly ever paid attention, and in this drawing lesson, she did. The teacher was fascinated. She went over to her and said, ‘What are you drawing?’ The girl said, ‘I’m drawing a picture of God.’ The teacher said, ‘But nobody knows what God looks like.’ The girl said, ‘They will in a minute.’</p>
-        <p class="fs-normal" id="source">Sir Ken Robinson</p>
-      </blockquote>
+      <figure class="mh0">
+        <blockquote class="mh0">
+          <p class="pb1 i measure-narrow" id="quote">A little girl was in a drawing lesson. She was six. The teacher said this girl hardly ever paid attention, and in this drawing lesson, she did. The teacher was fascinated. She went over to her and said, ‘What are you drawing?’ The girl said, ‘I’m drawing a picture of God.’ The teacher said, ‘But nobody knows what God looks like.’ The girl said, ‘They will in a minute.’</p>
+        </blockquote>
+        <figcaption class="fs-normal" id="source">Sir Ken Robinson, <cite><a class="i link yellow dim" href="https://www.ted.com/talks/ken_robinson_says_schools_kill_creativity?language=en" target="_blank">Do Schools Kill Creativity?</a></cite></figcaption>
+      </figure>
     </main>
     <footer>
-      <p class="f2 pv5">🤘</p>
+      <h2 class="pv5 f3 fw3">Wisdom from giants past.</h2>
+      <p class="pb5 f2">🤘</p>
       <p class="pb5"><a class="link yellow dim" href="https://www.google.com" target="_blank">#AlwaysBeCurious</a></p>
       <p class="pt3">
         <a class="no-underline white bg-red dim inline-flex items-center tc br-pill mr3 pa3" href="https://twitter.com/graphicalphabet" title="Twitter" target="_blank">
