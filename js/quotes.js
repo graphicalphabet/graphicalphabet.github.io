@@ -870,5 +870,5 @@ var quotes = [{
    source: 'Yuval Noah Harari'
 }, {
    quote: 'Happiness is the absence of the striving for happiness',
-   source: 'Zhuangzi"
+   source: 'Zhuangzi'
 }];
