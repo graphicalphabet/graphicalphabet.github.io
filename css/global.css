@@ -1,6 +1,5 @@
 body { font-family: 'Crimson Pro', serif; }
 h1, h3, #reading-date { font-family: 'Work Sans', sans-serif; }
-h2 { font-family: 'Crimson Pro', serif; }
 blockquote { quotes: "“" "”" "‘" "’"; }
 #quote::before { content: open-quote; }
 #quote::after { content: close-quote; }
