@@ -1,4 +1,4 @@
-var quotes = [{
+const quotes = [{
    quote: 'When I do good, I feel good. When I do bad, I feel bad. That is my religion.',
    source: 'Abraham Lincoln'
 }, {
