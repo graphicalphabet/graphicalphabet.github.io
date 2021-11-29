@@ -290,6 +290,9 @@ const quotes = [{
    quote: 'You desire to know the art of living, my friend? It is contained in one phrase: make use of suffering.',
    source: 'Henri-Frédéric Amiel'
 }, {
+   quote: 'What you get by achieving your goals is not as important as what you become by achieving your goals.'
+   source: 'Henry David Thoreau'
+}, {
    quote: 'Failure is simply the opportunity to begin again, this time more intelligently.',
    source: 'Henry Ford'
 }, {
