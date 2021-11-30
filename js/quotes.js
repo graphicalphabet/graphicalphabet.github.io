@@ -107,6 +107,9 @@ const quotes = [{
    quote: 'When I am working on a problem I never think about beauty. I only think about how to solve the problem. But when I have finished, if the solution is not beautiful, I know it is wrong.',
    source: 'Buckminster Fuller'
 }, {
+   quote: 'Peace comes from within. Do not seek it without.',
+   source: 'Buddha'
+}, {
    quote: 'We are what we think. All that we are arises with our thoughts. With our thoughts we make the world.',
    source: 'Buddha'
 }, {
@@ -117,7 +120,7 @@ const quotes = [{
    source: 'Buddha'
 }, {
    quote: 'If the path before you is clear, you’re probably on someone else’s.',
-   source: 'C.G. Jung'
+   source: 'Carl Jung'
 }, {
    quote: 'Humility is not thinking less of yourself, it’s thinking of yourself less.',
    source: 'C.S. Lewis'
@@ -250,9 +253,6 @@ const quotes = [{
 }, {
    quote: 'What is great in man is that he is a bridge and not an end.',
    source: 'Friedrich Nietzsche'
-}, {
-   quote: 'Peace comes from within. Do not seek it without.',
-   source: 'Gautama Buddha'
 }, {
    quote: 'Life isn’t about finding yourself. It’s about creating yourself.',
    source: 'George Bernard Shaw'
