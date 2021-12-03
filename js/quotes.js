@@ -38,7 +38,7 @@ const quotes = [{
    quote: 'Errare humanun est, perdonare divinum.',
    source: 'Alexander Pope'
 }, {
-   quote: 'We talk a lot about making impact. What about making history?.',
+   quote: 'We talk a lot about making impact. What about making history?',
    source: 'Alice Huang'
 }, {
    quote: 'Strategic Imagination.',
@@ -68,7 +68,7 @@ const quotes = [{
    quote: 'The problem with the world is that the stupid are cocksure and the intelligent are full of doubt.',
    source: 'Bertrand Russell'
 }, {
-   quote: 'It’s not about time, is about choices. How are you spending your choices?.',
+   quote: 'It’s not about time, is about choices. How are you spending your choices?',
    source: 'Beverly Adamo'
 }, {
    quote: 'Lead based on first principles.',
@@ -137,7 +137,7 @@ const quotes = [{
    quote: 'You have to wake up every day and decide the kind of person you want to be. I want to be a kind, loving, open, fearless person today.',
    source: 'Chad Coleman'
 }, {
-   quote: 'Who would say that pleasure is not useful?.',
+   quote: 'Who would say that pleasure is not useful?',
    source: 'Charles Eames'
 }, {
    quote: 'A lie will go round the world while truth is pulling its boots on.',
@@ -185,7 +185,7 @@ const quotes = [{
    quote: 'By understanding the context of the environment, people know which aspects of their social identity to perform.',
    source: 'Danah Boyd'
 }, {
-   quote: 'All creative endeavors are fundamentally problem-solving: how do we create a novel and useful solution to whatever problem we’re facing?.',
+   quote: 'All creative endeavors are fundamentally problem-solving: how do we create a novel and useful solution to whatever problem we’re facing?',
    source: 'David Burkus'
 }, {
    quote: 'Creativity isn’t the preserve of an elite few; Creativity is what human brains do.',
@@ -290,7 +290,7 @@ const quotes = [{
    quote: 'You desire to know the art of living, my friend? It is contained in one phrase: make use of suffering.',
    source: 'Henri-Frédéric Amiel'
 }, {
-   quote: 'What you get by achieving your goals is not as important as what you become by achieving your goals.'
+   quote: 'What you get by achieving your goals is not as important as what you become by achieving your goals.',
    source: 'Henry David Thoreau'
 }, {
    quote: 'Failure is simply the opportunity to begin again, this time more intelligently.',
@@ -578,7 +578,7 @@ const quotes = [{
    quote: 'There is a magnet in your heart that will attract true friends. That magnet is unselfishness, thinking of others first. When you learn to love for others, they will live for you.',
    source: 'Paramahansa Yogananda'
 }, {
-   quote: 'If someone says: ‘That’s impossible.’ You should understand it as: ‘According to my very limited experience and narrow understanding of reality, that’s very unlikely.’.',
+   quote: 'If someone says: ‘That’s impossible.’ You should understand it as: ‘According to my very limited experience and narrow understanding of reality, that’s very unlikely.’',
    source: 'Paul Buchheit'
 }, {
    quote: 'I believe that evolution is an extension of gratitude and sharing, not a neo-Darwinian concept of competition and ‘first to food wins’.',
@@ -668,7 +668,7 @@ const quotes = [{
    quote: 'If perception and action are the disciplines of the mind and the body, then the will is the discipline of the heart and the soul.',
    source: 'Ryan Holiday'
 }, {
-   quote: 'Are you a pioneer or a settler?.',
+   quote: 'Are you a pioneer or a settler?',
    source: 'Ryan Littrell'
 }, {
    quote: 'So much complexity in software comes from trying to make one thing do two things.',
@@ -722,7 +722,7 @@ const quotes = [{
    quote: 'Develop the habit of being happy. You have to do it. Nobody else can give you that. Nobody else can do it.',
    source: 'Sri Sri Ravi Shankar'
 }, {
-   quote: 'Fallor Ergo Sum. / I err therefore I am.',
+   quote: 'Fallor Ergo Sum. (I err therefore I am.)',
    source: 'St. Augustine'
 }, {
    quote: 'Everything around you that you call life was made up by people that were no smarter than you. And you can change it, you can influence it… Once you learn that, you’ll never be the same again.',
@@ -752,7 +752,7 @@ const quotes = [{
    quote: 'Always doing what you’re told doesn’t mean that you will succeed in life.',
    source: 'Sukiyabashi Jiro'
 }, {
-   quote: 'Once you decide on your occupation you must immerse yourself in your work. You must fall in love with your work. Never complain about your job. You must dedicate your life to mastering your skill. That’s the secret of success!.',
+   quote: 'Once you decide on your occupation you must immerse yourself in your work. You must fall in love with your work. Never complain about your job. You must dedicate your life to mastering your skill. That’s the secret of success.',
    source: 'Sukiyabashi Jiro'
 }, {
    quote: 'The most important thing is to remember the most important thing.',
@@ -800,7 +800,7 @@ const quotes = [{
    quote: 'The most engaged, yet least attached, wins.',
    source: 'Unknown'
 }, {
-   quote: 'Was Du erlebst, kann keine Macht der Welt Dir rauben. / What you have experienced, no power on earth can take from you.',
+   quote: 'Was Du erlebst, kann keine Macht der Welt Dir rauben. (What you have experienced, no power on earth can take from you.)',
    source: 'Unknown'
 }, {
    quote: 'Never regret. If it’s good it’s wonderful. If it’s bad it’s experience.',
