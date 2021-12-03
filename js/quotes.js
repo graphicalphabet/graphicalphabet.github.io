@@ -662,6 +662,9 @@ const quotes = [{
    quote: 'Yesterday I was clever so I wanted to change the world. Today I am wise so I’m trying to change myself.',
    source: 'Rumi'
 }, {
+   quote: 'You don't just wake up as the butterfly. Growth is a process.',
+   source: 'Rupi Kaur'
+}, {
    quote: 'You can’t teach ‘give-a-damn’ and empathy.',
    source: 'Ryan Deiss'
 }, {
