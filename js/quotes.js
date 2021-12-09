@@ -725,6 +725,9 @@ const quotes = [{
    quote: 'Develop the habit of being happy. You have to do it. Nobody else can give you that. Nobody else can do it.',
    source: 'Sri Sri Ravi Shankar'
 }, {
+   quote: 'As you think, so you become.',
+   source: 'Sri Swami Satchidananda'
+}, {
    quote: 'Fallor Ergo Sum. (I err therefore I am.)',
    source: 'St. Augustine'
 }, {
