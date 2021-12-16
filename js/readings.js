@@ -1405,7 +1405,7 @@ const entry = [{
 }, {
 	readingdate: 'December 17',
 	readingtitle: 'Do Everything As an Instrument in the Hands of God',
-	readingbody: 'Question: What is the best way of disciplining oneself to complete a task? Sri Gurudev: Know that it is God’s task. God wants you to do that, so He is giving you the interest, the capacity and the knowledge to do it. If you think of yourself as an instrument in the hands of God, you will always succeed in whatever you do. You will always do a better job. But if you project your ego and say, “I am doing it,” then you get into problems. That means you want people to pat you on your shoulder and say, “Ahh, you did it very well.” And if they don’t, you won’t do it the next time. Instead, do everything as an instrument in the hands of God.'
+	readingbody: 'Question: What is the best way of disciplining oneself to complete a task? Sri Gurudev: Know that it is God’s task. God wants you to do that, so He is giving you the interest, the capacity, and the knowledge to do it. If you think of yourself as an instrument in the hands of God, you will always succeed in whatever you do. You will always do a better job. But if you project your ego and say, “I am doing it,” then you get into problems. That means you want people to pat you on your shoulder and say, “Ahh, you did it very well.” And if they don’t, you won’t do it the next time. Instead, do everything as an instrument in the hands of God.'
 }, {
 	readingdate: 'December 18',
 	readingtitle: 'There Is an Unseen Guide Behind Everything',
