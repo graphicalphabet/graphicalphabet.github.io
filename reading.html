@@ -20,24 +20,40 @@
         gtag('config', 'G-QTXN3HEGYE');
     </script>
   </head>
-  <body class="w-100 pv5 ph3 pl5-ns f3 fw3 lh-copy mw7 near-white bg-black">
-    <main id="daily-reading">
+
+  <body class="w-100 pv5 ph3 pl5-ns f3 fw3 lh-copy mw7 near-white bg-black" id="daily-reading">
+
+    <header>
+
+      <!-- Headings -->
       <p class="f7 ttu tracked" id="reading-date">Today</p>
       <h1 class="f1-ns fw7 lh-title" id="reading-title">The Golden Present</h1>
+
+    </header>
+
+    <main>
+
       <p class="pb5" id="reading-body">These daily readings contain Swami Satchidananda’s teachings on the spiritual life. How to serve others and realize peace, truth, and union with the divine. Culled from years of lectures to spiritual seekers in the West and the East, they are expressed with the simplicity and authority of one who speaks from his own experience.</p>
+
     </main>
+
     <footer>
       <h4 class="pb3 f3 fw3 i">The Golden Present. Daily inspiration by <cite><a class="link yellow dim" href="https://swamisatchidananda.org/" target="_blank">Sri Swami Satchidananda</a></cite>.</h4>
       <p class="pv5 f2">🤘</p>
+
+      <!-- Footer Nav -->
       <nav class="pb5 f7 ttu tracked">
         <ul class="list pl0">
           <li class="pv3 pv2-l"><a class="link no-underline white dim" href="index.html">Home</a></li>
           <li class="pv3 pv2-l"><a class="link no-underline white dim" href="meditation.html">Meditation</a></li>
           <li class="pv3 pv2-l"><a class="link no-underline white dim" href="reading.html">Reading</a></li>
           <li class="pv3 pv2-l"><a class="link no-underline white dim" href="quote.html">Quote</a></li>
+          <li class="pv3 pv2-l"><a class="link no-underline white dim" href="focus.html">Focus</a></li>
           <li class="pv3 pv2-l"><a class="link no-underline white dim" href="nidra.html">Yoga Nidra</a></li>
         </ul>
       </nav>
+
+      <!-- Footer Links -->
       <p class="pb5"><a class="link yellow dim" href="https://www.google.com" target="_blank">#AlwaysBeCurious</a></p>
       <p class="pt3">
         <a class="no-underline white bg-red dim inline-flex items-center tc br-pill mr3 pa3" href="https://twitter.com/graphicalphabet" title="Twitter" target="_blank">
@@ -51,6 +67,7 @@
         </a>
       </p>
     </footer>
+
     <script>
       // Get date and month
       var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -67,5 +84,6 @@
       document.getElementById('reading-title').innerHTML = title;
       document.getElementById('reading-body').innerHTML = body;
     </script>
+
   </body>
 </html>
