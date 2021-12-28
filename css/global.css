@@ -7,6 +7,12 @@ h1, h3, nav, #reading-date {
   font-family: 'Work Sans', sans-serif;
 }
 
+button {
+  cursor: pointer;
+  outline: none;
+  transition: 0.4s;
+}
+
 blockquote {
   quotes: "“""”""‘""’";
 }
@@ -57,7 +63,6 @@ blockquote {
 
 /* Accordion */
 .accordion {
-  cursor: pointer;
   outline: none;
   transition: 0.4s;
 }
