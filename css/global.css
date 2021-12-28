@@ -79,5 +79,4 @@ blockquote {
 
 .accordion.active::after {
   content: "\2796";
-  color: #f4f4f4;
 }
