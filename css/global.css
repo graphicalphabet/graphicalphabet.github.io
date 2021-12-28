@@ -1,6 +1,83 @@
-body { font-family: 'Crimson Pro', serif; }
-h1, h3, nav, #reading-date { font-family: 'Work Sans', sans-serif; }
-blockquote { quotes: "“" "”" "‘" "’"; }
-#quote::before { content: open-quote; }
-#quote::after { content: close-quote; }
-#source::before { content: "— "; }
+/* Global */
+body {
+  font-family: 'Crimson Pro', serif;
+}
+
+h1, h3, nav, #reading-date {
+  font-family: 'Work Sans', sans-serif;
+}
+
+blockquote {
+  quotes: "“""”""‘""’";
+}
+
+#quote::before {
+  content: open-quote;
+}
+
+#quote::after {
+  content: close-quote;
+}
+
+#source::before {
+  content: "\2014\0020";
+}
+
+/* Nav */
+.nav-collapse ul {
+  display: block;
+}
+
+.nav-collapse li {
+  display: block;
+}
+
+.js .nav-collapse {
+  clip: rect(0 0 0 0);
+  max-height: 0;
+  position: absolute;
+  display: block;
+  overflow: hidden;
+  zoom: 1;
+}
+
+.nav-collapse.opened {
+  max-height: 9999px;
+}
+
+@media screen and (min-width: 9999em) {
+  .js .nav-collapse {
+    position: relative;
+  }
+
+  .js .nav-collapse.closed {
+    max-height: none;
+  }
+}
+
+/* Accordion */
+.accordion {
+  cursor: pointer;
+  outline: none;
+  transition: 0.4s;
+}
+
+.panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+.accordion::after {
+  content: "\02795";
+  color: #f4f4f4;
+  font-size: 0.4em;
+  float: right;
+  margin-left: 0.6em;
+  padding-top: 0.6em;
+}
+
+.accordion.active::after {
+  content: "\2796";
+  color: #f4f4f4;
+}

@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Nathan Paterson &mdash; The Golden Present</title>
     <meta name="description" content="The Golden Present. Daily inspiration by Sri Swami Satchidananda.">
-    <meta name="keywords" content="readings, inspiration, meditation">
+    <meta name="keywords" content="readings, inspiration, wisdom">
     <meta name="author" content="Nathan Paterson">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤘</text></svg>">
     <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
-    <link rel="stylesheet" href="css/global.css"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;1,300&family=Work+Sans:wght@500;900&display=swap">
+    <link rel="stylesheet" href="css/global.css"/>
+    <script src="js/responsive-nav.js"></script>
     <script src="js/readings.js"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QTXN3HEGYE"></script>
     <script>
@@ -25,8 +26,22 @@
 
     <header>
 
+      <!-- Header Nav -->
+      <nav class="nav-collapse f7 ttu tracked">
+        <ul class="list w-100 pl0 pb4">
+          <li class="pv3 pv2-l w-100"><a class="link no-underline white dim" href="index.html">Home</a></li>
+          <li class="pv3 pv2-l w-100"><a class="link no-underline white dim" href="meditation.html">Meditation</a></li>
+          <li class="pv3 pv2-l w-100"><a class="link no-underline white dim" href="reading.html">Reading</a></li>
+          <li class="pv3 pv2-l w-100"><a class="link no-underline white dim" href="quote.html">Quote</a></li>
+          <li class="pv3 pv2-l w-100"><a class="link no-underline white dim" href="focus.html">Focus</a></li>
+          <li class="pv3 pv2-l w-100"><a class="link no-underline white dim" href="nidra.html">Yoga Nidra</a></li>
+        </ul>
+      </nav>
+
+      <button id="toggle" class="closed near-white bg-black bn pv2 ph0">&#9776;</button>
+
       <!-- Headings -->
-      <p class="f7 ttu tracked" id="reading-date">Today</p>
+      <p class="f7 ttu tracked mt4" id="reading-date">Today</p>
       <h1 class="f1-ns fw7 lh-title" id="reading-title">The Golden Present</h1>
 
     </header>
@@ -84,6 +99,12 @@
       document.getElementById('reading-date').innerHTML = namedMonth + ' ' + date;
       document.getElementById('reading-title').innerHTML = title;
       document.getElementById('reading-body').innerHTML = body;
+    </script>
+
+    <script>
+    var nav = responsiveNav(".nav-collapse", {
+      customToggle: "#toggle"
+    });
     </script>
 
   </body>
