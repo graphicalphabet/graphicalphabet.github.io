@@ -3,7 +3,7 @@ body {
   font-family: 'Crimson Pro', serif;
 }
 
-h1, h3, nav, #reading-date {
+h1, h3, nav, button.accordion, #reading-date {
   font-family: 'Work Sans', sans-serif;
 }
 
