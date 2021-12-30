@@ -251,6 +251,12 @@ const quotes = [{
    quote: 'What one programmer can do in one month, two programmers can do in two months.',
    source: 'Fred Brooks'
 }, {
+   quote: 'Anyone who has a why to live can bear almost any what.',
+   source: 'Friedrich Nietzsche'
+}, {
+   quote: 'Was mich nicht umbringt, macht mich stärker. / That which does not kill me, makes me stronger.',
+   source: 'Friedrich Nietzsche'
+}, {
    quote: 'What is great in man is that he is a bridge and not an end.',
    source: 'Friedrich Nietzsche'
 }, {
@@ -551,12 +557,6 @@ const quotes = [{
    quote: 'Minimalism is not a lack of something. It’s simply the perfect amount of something.',
    source: 'Nicholas Burroughs'
 }, {
-   quote: 'Anyone who has a why to live can bear almost any what.',
-   source: 'Nietzsche'
-}, {
-   quote: 'Was mich nicht umbringt, macht mich stärker. / That which does not kill me, makes me stronger.',
-   source: 'Nietzsche'
-}, {
    quote: 'A mind stretched by a new idea can never go back to its original dimensions.',
    source: 'Oliver Wendell Holmes Jr.'
 }, {
@@ -629,7 +629,7 @@ const quotes = [{
    quote: 'You manage things; you lead people.',
    source: 'Rear Admiral Grace Murray Hopper'
 }, {
-   quote: 'Listen, smile, agree and then do whatever the fuck you were gonna do anyway.',
+   quote: 'Listen, smile, agree, then do whatever the fuck you were gonna do anyway.',
    source: 'Robert Downey Jr.'
 }, {
    quote: 'Two roads diverged in a wood, and I — I took the one less traveled by, and that has made all the difference.',
