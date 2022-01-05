@@ -21,7 +21,7 @@ const entry = [{
 }, {
 	readingdate: 'January 6',
 	readingtitle: 'Have Fun and Play Your Part',
-	readingbody: 'As long as you are in the world playing a part in this big drama, use the makeup and costumes, but don’t get caught in your part. Have fun and play that part until the curtain falls. Many people finish their part even in the midst of the drama. Once their part is over, they make their exit. Then they don’t come back to the stage again. On the world’s stage, many of us finish our job and leave, but the drama continues. Maybe the hero, the heroine and the villain will continue throughout, and be the last people to leave the stage. In the meantime, many extras come and go. We are probably all extras. Remembering this will help to keep the ego a little bit soft.'
+	readingbody: 'As long as you are in the world playing a part in this big drama, use the makeup and costumes, but don’t get caught in your part. Have fun and play that part until the curtain falls. Many people finish their part even in the midst of the drama. Once their part is over, they make their exit. Then they don’t come back to the stage again. On the world’s stage, many of us finish our job and leave, but the drama continues. Maybe the hero, the heroine, and the villain will continue throughout, and be the last people to leave the stage. In the meantime, many extras come and go. We are probably all extras. Remembering this will help to keep the ego a little bit soft.'
 }, {
 	readingdate: 'January 7',
 	readingtitle: 'Silence',
