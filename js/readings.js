@@ -205,7 +205,7 @@ const entry = [{
 }, {
 	readingdate: 'February 21',
 	readingtitle: 'There Is a Natural Gravitation',
-	readingbody: 'Question: Why is it so difficult to be disciplined? Sri Gurudev: That is part of nature. There is a natural gravitation that makes it easy to push things down, and hard to lift them up. That pull is there; but we have been given the capacity to face it and rise above it.That is discipline.'
+	readingbody: 'Question: Why is it so difficult to be disciplined? Sri Gurudev: That is part of nature. There is a natural gravitation that makes it easy to push things down, and hard to lift them up. That pull is there; but we have been given the capacity to face it and rise above it. That is discipline.'
 }, {
 	readingdate: 'February 22',
 	readingtitle: 'Go Ahead',
