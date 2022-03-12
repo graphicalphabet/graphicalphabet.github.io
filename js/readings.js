@@ -289,7 +289,7 @@ const entry = [{
 }, {
 	readingdate: 'March 13',
 	readingtitle: 'A Pilgrimage',
-	readingbody: 'When God wants you to pray to Him, He creates some uncomfortable situation.He makes you run out of gas, or maybe something much worse. That’s why we say, “Adversities are blessings in disguise.” When we face situations like that, when we face a crisis, we think of God more. At other times we do think of Him, but only superficially. It’s not really deep. Our prayer becomes sincere and deep only when we have some crisis to make us realise our limitations. “That’s all, I can’t do any more. Now I leave it to You. I trust You. Please do something.” In a way, life itself is a journey toward God. A pilgrimage, in a way. A real pilgrimage is when you go with nothing in the hand, totally depending on God.'
+	readingbody: 'When God wants you to pray to Him, He creates some uncomfortable situation. He makes you run out of gas, or maybe something much worse. That’s why we say, “Adversities are blessings in disguise.” When we face situations like that, when we face a crisis, we think of God more. At other times we do think of Him, but only superficially. It’s not really deep. Our prayer becomes sincere and deep only when we have some crisis to make us realise our limitations. “That’s all, I can’t do any more. Now I leave it to You. I trust You. Please do something.” In a way, life itself is a journey toward God. A pilgrimage, in a way. A real pilgrimage is when you go with nothing in the hand, totally depending on God.'
 }, {
 	readingdate: 'March 14',
 	readingtitle: 'Perfection Doesn’t Come Overnight',
