@@ -3,15 +3,16 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Nathan Paterson &mdash; Focus</title>
+    <title>Nathan Paterson &mdash; Mantras</title>
     <meta name="description" content="Nathan Paterson is passionate about creating simple, beautiful connections between humans and our universe.">
-    <meta name="keywords" content="focus, concentration, mindfulness">
+    <meta name="keywords" content="mantras, inspiration, motivation">
     <meta name="author" content="Nathan Paterson">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤘</text></svg>">
     <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,500;1,300;1,500&family=Work+Sans:wght@500;900&display=swap">
     <link rel="stylesheet" href="css/global.css"/>
     <script src="js/responsive-nav.js"></script>
+    <script src="js/mantras.js"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QTXN3HEGYE"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -41,37 +42,23 @@
       <button id="toggle" class="closed pa3 near-white bn bg-red">&#9776;</button>
 
       <!-- Headings -->
-      <h1 class="mt5 f1-ns fw7 lh-title">Focus</h1>
-      <h2 class="pb5 f2 fw3 i">Sounds of nature.</h2>
+      <h1 class="mt5 f1-ns fw7 lh-title">Self-Love Mantra</h1>
 
     </header>
 
     <main>
 
-      <!-- Forest Bath -->
-      <figure class="nl1-ns mh0 pb3">
-        <figcaption class="pb3"><i>Forest Bath</i> <span class="ttu tracked f5">(25 min)</span></figcaption>
-        <audio
-          controls loop
-          src="./media/forest-bath.mp3">
-          Oops. Looks like this browser does not support the <code>audio</code> element.
-        </audio>
-      </figure>
-
-      <!-- Night Swim -->
-      <figure class="nl1-ns mh0 pb5">
-        <figcaption class="pb3"><i>Night Swim</i> <span class="ttu tracked f5">(25 min)</span></figcaption>
-        <audio
-          controls loop
-          src="./media/night-swim.mp3">
-          Oops. Looks like this browser does not support the <code>audio</code> element.
-        </audio>
+      <!-- Quote -->
+      <figure class="mh0 pb5">
+        <blockquote class="mh0">
+          <p class="pb1 i measure-narrow f2" id="mantra">I am loved.</p>
+        </blockquote>
       </figure>
 
     </main>
 
     <footer>
-      <h4 class="pb3 f3 fw3 i">Focus. Sounds by <cite><a class="link yellow dim" href="https://www.noisli.com/" target="_blank">Noisli</a></cite>.</h4>
+      <h4 class="pb3 f3 fw3 i">Self-love mantras. Love from your higher self.</h4>
       <p class="pv5 f2">🤘</p>
 
       <!-- Footer Nav -->
@@ -102,6 +89,14 @@
       </p>
 
     </footer>
+
+    <script>
+    function randomMantra() {
+      let random = mantras[Math.floor(Math.random() * mantras.length)];
+      mantra.innerText = `${random.mantra}`;
+    }
+    randomMantra();
+    </script>
 
     <script>
     var nav = responsiveNav(".nav-collapse", {
