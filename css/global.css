@@ -29,38 +29,6 @@ blockquote {
   content: "\2014\0020";
 }
 
-/* Nav */
-/* .nav-collapse ul {
-  display: block;
-}
-
-.nav-collapse li {
-  display: block;
-}
-
-.js .nav-collapse {
-  clip: rect(0 0 0 0);
-  max-height: 0;
-  position: absolute;
-  display: block;
-  overflow: hidden;
-  zoom: 1;
-}
-
-.nav-collapse.opened {
-  max-height: 9999px;
-}
-
-@media screen and (min-width: 9999em) {
-  .js .nav-collapse {
-    position: relative;
-  }
-
-  .js .nav-collapse.closed {
-    max-height: none;
-  }
-} */
-
 /* Accordion */
 .accordion {
   outline: none;
