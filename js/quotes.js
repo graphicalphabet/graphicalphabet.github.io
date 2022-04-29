@@ -641,6 +641,9 @@ const quotes = [{
     quote: 'Satisfaction lies in the effort, not the outcome.',
     source: 'Mahatma Ghandi'
 }, {
+    quote: 'Your beliefs become your thoughts. Your thoughts become your words. Your words become your actions. Your actions become your habits. Your habits become your values. Your values become your destiny.',
+    source: 'Mahatma Ghandi'
+}, {
     quote: 'The real voyage of discovery consists not in seeking new lands but seeing with new eyes.',
     source: 'Marcel Proust'
 }, {
@@ -745,6 +748,9 @@ const quotes = [{
 }, {
     quote: 'Improvement isn’t about perfection, it’s about the progress.',
     source: 'Mimi Ikonn'
+}, {
+      quote: 'The only power we have in our life is our attitude and that makes all the difference.',
+      source: 'Mimi Ikonn'
 }, {
     quote: 'Every end is a beginning. We just don’t know it at the time.',
     source: 'Mitch Albom'
