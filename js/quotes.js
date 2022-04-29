@@ -476,7 +476,7 @@ const quotes = [{
     quote: 'The most sophisticated people I know — inside, they are all children.',
     source: 'Jim Henson'
 }, {
-    quote: 'If you don’t like how things are, change it! You’re not a tree.',
+    quote: 'If you don’t like how things are, change it! You are not a tree.',
     source: 'Jim Rohn'
 }, {
     quote: 'My father gave me the greatest gift anyone could give another person, he believed in me.',
