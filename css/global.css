@@ -30,7 +30,7 @@ blockquote {
 }
 
 /* Nav */
-.nav-collapse ul {
+/* .nav-collapse ul {
   display: block;
 }
 
@@ -59,7 +59,7 @@ blockquote {
   .js .nav-collapse.closed {
     max-height: none;
   }
-}
+} */
 
 /* Accordion */
 .accordion {
