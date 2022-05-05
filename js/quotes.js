@@ -320,7 +320,7 @@ const quotes = [{
     quote: 'I hope you live a life that you’re proud of, and if you find that you’re not, I hope you have the strength to start over.',
     source: 'Eric Roth'
 }, {
-    quote: 'You can't ride yesterday's horse.',
+    quote: 'You can’t ride yesterday’s horse.',
     source: 'Eric Thomas'
 }, {
     quote: 'Art is the fare of the complete human being; it is a basis for existence, a medium of life and, since art knows no exhaustion, an eternal life without exhaustion. For in art, creativity knows no bounds.',
