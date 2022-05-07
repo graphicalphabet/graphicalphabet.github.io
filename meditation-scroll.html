@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nathan Paterson &mdash; Meditation</title>
+    <meta name="description" content="Nathan Paterson is passionate about creating simple, beautiful connections between humans and our universe.">
+    <meta name="keywords" content="meditation, mindfulness, loving kindness">
+    <meta name="author" content="Nathan Paterson">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤘</text></svg>">
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,500;1,300;1,500&family=Work+Sans:wght@500;900&display=swap">
+    <link rel="stylesheet" href="css/global.css"/>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QTXN3HEGYE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-QTXN3HEGYE');
+    </script>
+  </head>
+
+  <body class="w-100 pt3 pb5 ph3 pl5-ns f3 fw3 lh-copy mw7 near-white bg-black">
+
+    <header>
+
+      <!-- Headings -->
+      <h1 class="mt5 f1-ns fw7 lh-title">Meditation</h1>
+      <h2 class="pb5 f2 fw3 i">Unguided, loving kindness, mindfulness, and yoga nidra sessions.</h2>
+
+    </header>
+
+    <main class="pb5">
+
+      <!-- Unguided -->
+      <button class="accordion pv3 ph0 w-100 tl f4 fw7 ttu tracked-mega red bg-transparent b--none">Unguided</button>
+      <div class="panel ph1 pt3 bt b--dark-gray bw-1">
+        <figure class="nl1-ns mh0 pb3">
+          <figcaption class="pv3"><i>Unguided</i> <span class="ttu tracked f5">(10 min)</span></figcaption>
+          <audio
+            controls
+            src="./media/unguided-10min.mp3">
+            Oops. Looks like this browser does not support the <code>audio</code> element.
+          </audio>
+        </figure>
+
+        <figure class="nl1-ns mh0 pb5">
+          <figcaption class="pb3"><i>Unguided</i> <span class="ttu tracked f5">(20 min)</span></figcaption>
+          <audio
+            controls
+            src="./media/unguided-20min.mp3">
+            Oops. Looks like this browser does not support the <code>audio</code> element.
+          </audio>
+        </figure>
+      </div>
+
+      <!-- Loving Kindness -->
+      <button class="accordion pv3 ph0 w-100 tl f4 fw7 ttu tracked-mega red bg-transparent b--none">Loving Kindness</button>
+      <div class="panel ph1 pt3 bt b--dark-gray bw-1">
+        <figure class="nl1-ns mh0 pb3">
+          <figcaption class="pv3"><i>Loving Kindness</i> <span class="ttu tracked f5">(10 min)</span></figcaption>
+          <audio
+            controls
+            src="./media/loving-kindness-10min.mp3">
+            Oops. Looks like this browser does not support the <code>audio</code> element.
+          </audio>
+        </figure>
+
+        <figure class="nl1-ns mh0 pb5">
+          <figcaption class="pb3"><i>Loving Kindness</i> <span class="ttu tracked f5">(20 min)</span></figcaption>
+          <audio
+            controls
+            src="./media/loving-kindness-20min.mp3">
+            Oops. Looks like this browser does not support the <code>audio</code> element.
+          </audio>
+        </figure>
+      </div>
+
+      <!-- Mindfulness -->
+      <button class="accordion pv3 ph0 w-100 tl f4 fw7 ttu tracked-mega red bg-transparent b--none">Mindfulness</button>
+      <div class="panel ph1 pt3 bt b--dark-gray bw-1">
+        <figure class="nl1-ns mh0 pb3">
+          <figcaption class="pv3"><i>Mindfulness</i> <span class="ttu tracked f5">(10 min)</span></figcaption>
+          <audio
+            controls
+            src="./media/mindfulness-10min.mp3">
+            Oops. Looks like this browser does not support the <code>audio</code> element.
+          </audio>
+        </figure>
+
+        <figure class="nl1-ns mh0 pb5">
+          <figcaption class="pb3"><i>Mindfulness</i> <span class="ttu tracked f5">(20 min)</span></figcaption>
+          <audio
+            controls
+            src="./media/mindfulness-20min.mp3">
+            Oops. Looks like this browser does not support the <code>audio</code> element.
+          </audio>
+        </figure>
+      </div>
+
+      <!-- Yoga Nidra -->
+      <button class="accordion pv3 ph0 w-100 tl f4 fw7 ttu tracked-mega red bg-transparent b--none">Yoga Nidra</button>
+      <div class="panel ph1 pt3 bt b--dark-gray bw-1">
+        <figure class="nl1-ns mh0 pb5">
+          <figcaption class="pb3"><i>Yoga Nidra</i> <span class="ttu tracked f5">(12 min)</span></figcaption>
+          <audio
+            controls
+            src="./media/yoga-nidra.mp3">
+            Oops. Looks like this browser does not support the <code>audio</code> element.
+          </audio>
+        </figure>
+      </div>
+
+      <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+          acc[i].onclick = function() {
+
+            if (!this.classList.contains("active")) {
+              closeAll();
+            }
+
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+              panel.style.maxHeight = null;
+            } else {
+              panel.style.maxHeight = panel.scrollHeight + "px";
+              panel.scrollIntoView({ behavior: 'smooth'});
+            }
+          }
+        }
+
+        function openAll() {
+          for (i = 0; i < acc.length; i++) {
+            acc[i].classList.add("active");
+            acc[i].nextElementSibling.style.maxHeight = acc[i].nextElementSibling.scrollHeight + "px";
+          }
+        }
+
+        function closeAll() {
+          for (i = 0; i < acc.length; i++) {
+            acc[i].classList.remove("active");
+            acc[i].nextElementSibling.style.maxHeight = null;
+          }
+        }
+      </script>
+
+    </main>
+
+    <footer>
+      <h4 class="pb3 f3 fw3 i">Meditation. Sounds by <cite><a class="link yellow dim" href="https://medium.com/@kevinrose/oak-meditation-f8478d9fc00" target="_blank">Oak</a></cite>. Rhythmic Yoga Nidra by <cite><a class="link yellow dim" href="https://www.yoganidranetwork.org/mp3/rhythmic-yoga-nidra-remind-me-how-rest" target="_blank">Uma Dinsmore-Tuli</a></cite>.</h4>
+      <p class="pv5 f2">
+        <a class="no-underline dim" href="index.html" title="Home" target="_self">🤘</a>
+        <a class="no-underline dim fr pr3" href="prayer.html" title="Next" target="_self">👉</a>
+      </p>
+
+      <!-- Footer Nav -->
+      <nav class="pb5 f7 ttu tracked">
+        <ul class="list pl0">
+          <li class="pv3 pv2-l"><a class="link no-underline white dim" href="index.html">Home</a></li>
+          <li class="pv3 pv2-l"><a class="link no-underline white dim bb bw1 b--yellow pb1" href="meditation.html">Meditation</a></li>
+          <li class="pv3 pv2-l"><a class="link no-underline white dim" href="prayer.html">Prayer</a></li>
+          <li class="pv3 pv2-l"><a class="link no-underline white dim" href="reading.html">Reading</a></li>
+          <li class="pv3 pv2-l"><a class="link no-underline white dim" href="quote.html">Quote</a></li>
+          <li class="pv3 pv2-l"><a class="link no-underline white dim" href="mantra.html">Mantra</a></li>
+          <li class="pv3 pv2-l"><a class="link no-underline white dim" href="focus.html">Focus</a></li>
+        </ul>
+      </nav>
+
+      <!-- Footer Links -->
+      <p class="pb5"><a class="link yellow dim" href="https://www.google.com" target="_blank">#AlwaysBeCurious</a></p>
+      <p class="pt3">
+        <a class="no-underline white bg-red dim inline-flex items-center tc br-pill mr3 pa3" href="https://twitter.com/graphicalphabet" title="Twitter" target="_blank">
+          <svg class="dib h1 w1" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.414"><path d="M16 3.038c-.59.26-1.22.437-1.885.517.677-.407 1.198-1.05 1.443-1.816-.634.375-1.337.648-2.085.795-.598-.638-1.45-1.036-2.396-1.036-1.812 0-3.282 1.468-3.282 3.28 0 .258.03.51.085.75C5.152 5.39 2.733 4.084 1.114 2.1.83 2.583.67 3.147.67 3.75c0 1.14.58 2.143 1.46 2.732-.538-.017-1.045-.165-1.487-.41v.04c0 1.59 1.13 2.918 2.633 3.22-.276.074-.566.114-.865.114-.21 0-.416-.02-.617-.058.418 1.304 1.63 2.253 3.067 2.28-1.124.88-2.54 1.404-4.077 1.404-.265 0-.526-.015-.783-.045 1.453.93 3.178 1.474 5.032 1.474 6.038 0 9.34-5 9.34-9.338 0-.143-.004-.284-.01-.425.64-.463 1.198-1.04 1.638-1.7z" fill-rule="nonzero"/></svg>
+        </a>
+        <a class="no-underline white bg-red dim inline-flex items-center tc br-pill mr3 pa3" href="https://medium.com/@graphicalphabet" title="Medium" target="_blank">
+          <svg class="dib h1 w1" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.414"><path d="M11.824 12.628l-.276.45.798.398 2.744 1.372c.15.076.294.11.418.11.278 0 .467-.177.467-.492V5.883l-4.15 6.745zm4.096-8.67c-.004-.003 0-.01-.003-.012l-4.825-2.412c-.06-.03-.123-.038-.187-.044-.016 0-.03-.01-.047-.01-.184 0-.368.092-.467.254l-.24.39-.5.814-1.89 3.08 1.89 3.076.5.813.5.812.59.95 4.71-7.64c.02-.03.01-.06-.02-.08zm-6.27 7.045L7.17 6.97l-.295-.477-.294-.477-.25-.416v4.867l3.32 1.663.5.25.5.25-.5-.813-.5-.813zM.737 1.68L.59 1.608c-.085-.042-.166-.062-.24-.062-.206 0-.35.16-.35.427v10.162c0 .272.2.594.442.716l4.145 2.08c.107.06.208.08.3.08.257 0 .438-.2.438-.53V4.01c0-.02-.012-.04-.03-.047L.738 1.68z"/></svg>
+        </a>
+        <a class="no-underline white bg-red dim inline-flex items-center tc br-pill mr3 pa3" href="https://www.linkedin.com/in/graphicalphabet/" title="LinkedIn" target="_blank">
+          <svg class="dib h1 w1" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.414"><path d="M13.632 13.635h-2.37V9.922c0-.886-.018-2.025-1.234-2.025-1.235 0-1.424.964-1.424 1.96v3.778h-2.37V6H8.51V7.04h.03c.318-.6 1.092-1.233 2.247-1.233 2.4 0 2.845 1.58 2.845 3.637v4.188zM3.558 4.955c-.762 0-1.376-.617-1.376-1.377 0-.758.614-1.375 1.376-1.375.76 0 1.376.617 1.376 1.375 0 .76-.617 1.377-1.376 1.377zm1.188 8.68H2.37V6h2.376v7.635zM14.816 0H1.18C.528 0 0 .516 0 1.153v13.694C0 15.484.528 16 1.18 16h13.635c.652 0 1.185-.516 1.185-1.153V1.153C16 .516 15.467 0 14.815 0z" fill-rule="nonzero"/></svg>
+        </a>
+      </p>
+
+    </footer>
+
+  </body>
+</html>
