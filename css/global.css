@@ -32,13 +32,13 @@ blockquote {
 /* Accordion */
 .accordion {
   outline: none;
-  transition: 0.4s;
+  transition: 0.4s ease-out;
 }
 
 .panel {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.2s ease-out;
+  transition: max-height 0.4s ease-out;
 }
 
 .accordion::after {
