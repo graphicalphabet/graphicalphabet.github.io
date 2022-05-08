@@ -6,12 +6,6 @@ h1, h3, nav, button.accordion, #reading-date {
   font-family: 'Work Sans', sans-serif;
 }
 
-button {
-  cursor: pointer;
-  outline: none;
-  transition: 0.4s;
-}
-
 blockquote {
   quotes: "“""”""‘""’";
 }
@@ -34,14 +28,8 @@ blockquote {
   transition: 0.4s;
 }
 
-.panel {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease-out;
-}
-
 .accordion::after {
-  content: "\02795";
+  content: "\2795";
   color: #f4f4f4;
   font-size: 0.4em;
   float: right;
@@ -51,4 +39,10 @@ blockquote {
 
 .accordion.active::after {
   content: "\2796";
+}
+
+.panel {
+  max-height: 0;
+  overflow: hidden;
+  /* transition: max-height 0.3s ease-out; */
 }

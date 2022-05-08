@@ -111,43 +111,6 @@
         </figure>
       </div>
 
-      <script>
-        var acc = document.getElementsByClassName("accordion");
-        var i;
-
-        for (i = 0; i < acc.length; i++) {
-          acc[i].onclick = function() {
-
-        	if(!this.classList.contains("active")){
-            closeAll();
-          }
-
-          this.classList.toggle("active");
-            var panel = this.nextElementSibling;
-            if (panel.style.maxHeight){
-              panel.style.maxHeight = null;
-            } else {
-              panel.style.maxHeight = panel.scrollHeight + "px";
-            }
-            this.scrollIntoView({behavior:"smooth"})
-          }
-        }
-
-        function openAll(){
-          for (i = 0; i < acc.length; i++) {
-            acc[i].classList.add("active");
-            acc[i].nextElementSibling.style.maxHeight = acc[i].nextElementSibling.scrollHeight + "px";
-          }
-        }
-
-        function closeAll(){
-          for (i = 0; i < acc.length; i++) {
-            acc[i].classList.remove("active");
-            acc[i].nextElementSibling.style.maxHeight = null;
-          }
-        }
-      </script>
-
     </main>
 
     <footer>
@@ -185,6 +148,30 @@
       </p>
 
     </footer>
+
+    <script>
+      var acc = document.getElementsByClassName("accordion");
+      var i;
+
+      for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+
+          var panel = this.nextElementSibling;
+          if (panel.style.maxHeight){
+            panel.style.maxHeight = null;
+          } else {
+            let active = document.querySelectorAll(".accordion.active");
+            for(let j = 0; j < active.length; j++){
+              active[j].classList.remove("active");
+              active[j].nextElementSibling.style.maxHeight = null;
+            }
+            this.classList.toggle("active");
+            panel.style.maxHeight = panel.scrollHeight + "px";
+          }
+          this.scrollIntoView({behavior:"smooth"})
+        });
+      }
+    </script>
 
   </body>
 </html>
