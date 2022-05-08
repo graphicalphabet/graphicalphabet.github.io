@@ -113,16 +113,16 @@
 
       <script>
         var acc = document.getElementsByClassName("accordion");
+        var i;
 
-        for (let i = 0; i < acc.length; i++) {
-          acc[i].addEventListener("click", function() {
-            // for (let j = 0; j < acc.length; j++) {
-            //   acc[j].classList.remove("active");
-            //   if(j!=i){
-            //     acc[j].nextElementSibling.style.maxHeight = null;
-            //   }
-            // }
-            this.classList.add("active");
+        for (i = 0; i < acc.length; i++) {
+          acc[i].onclick = function() {
+
+        	if(!this.classList.contains("active")){
+            closeAll();
+          }
+
+          this.classList.toggle("active");
             var panel = this.nextElementSibling;
             if (panel.style.maxHeight){
               panel.style.maxHeight = null;
@@ -130,7 +130,21 @@
               panel.style.maxHeight = panel.scrollHeight + "px";
             }
             this.scrollIntoView({behavior:"smooth"})
-          });
+          }
+        }
+
+        function openAll(){
+          for (i = 0; i < acc.length; i++) {
+            acc[i].classList.add("active");
+            acc[i].nextElementSibling.style.maxHeight = acc[i].nextElementSibling.scrollHeight + "px";
+          }
+        }
+
+        function closeAll(){
+          for (i = 0; i < acc.length; i++) {
+            acc[i].classList.remove("active");
+            acc[i].nextElementSibling.style.maxHeight = null;
+          }
         }
       </script>
 
