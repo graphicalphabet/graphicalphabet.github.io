@@ -32,6 +32,8 @@
 
     <main class="pb5">
 
+      <audio id="audio" class="ui-click" src="./media/tab-2.m4a"></audio>
+
       <!-- Unguided -->
       <button class="accordion pv3 ph0 w-100 tl f4 fw7 ttu tracked-mega red bg-transparent b--none">Unguided</button>
       <div class="panel ph1 pt3 bt b--dark-gray bw-1">
@@ -77,7 +79,7 @@
       </div>
 
       <!-- Mindfulness -->
-      <button class="accordion pv3 ph0 w-100 tl f4 fw7 ttu tracked-mega red bg-transparent b--none">Mindfulness</button>
+      <button class="accordion pv3 ph0 w-100 tl f4 fw7 ttu tracked-mega red bg-transparent b--none" value="PLAY" onclick="play()">Mindfulness</button>
       <div class="panel ph1 pt3 bt b--dark-gray bw-1">
         <figure class="nl1-ns mh0 pb3">
           <figcaption class="pv3"><i>Mindfulness</i> <span class="ttu tracked f5">(10 min)</span></figcaption>
@@ -114,9 +116,11 @@
       <script>
         var acc = document.getElementsByClassName("accordion");
         var i;
+        var uiclick = document.getElementsByClassName("ui-click");
 
         for (i = 0; i < acc.length; i++) {
-          acc[i].addEventListener("click", function() {
+          acc[i].addEventListener("click", function play() {
+            audio.play();
             this.classList.toggle("active");
             var panel = this.nextElementSibling;
             if (panel.style.maxHeight) {
