@@ -74,20 +74,19 @@
     </footer>
 
     <script>
-      // Get date and month
-      var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
       var today = new Date();
       var month = today.getMonth();
       var namedMonth = months[month];
       var date = today.getDate();
-      // Find today’s reading
-      var reading = entry.find(el => el['readingdate'] === `${namedMonth} ${date}`);
-      var title = reading['readingtitle'];
-      var body = reading['readingbody'];
-      // Replace HTML elements
-      document.getElementById('reading-date').innerHTML = namedMonth + ' ' + date;
-      document.getElementById('reading-title').innerHTML = title;
-      document.getElementById('reading-body').innerHTML = body;
+
+      var reading = entry.find(el => el["readingdate"] === `${namedMonth} ${date}`);
+      var title = reading["readingtitle"];
+      var body = reading["readingbody"];
+
+      document.getElementById("reading-date").innerHTML = namedMonth + ' ' + date;
+      document.getElementById("reading-title").innerHTML = title;
+      document.getElementById("reading-body").innerHTML = body;
     </script>
 
   </body>
