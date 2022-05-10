@@ -113,26 +113,6 @@
         </figure>
       </div>
 
-      <script>
-        var acc = document.getElementsByClassName("accordion");
-        var i;
-        var uiclick = document.getElementsByClassName("ui-click");
-
-        for (i = 0; i < acc.length; i++) {
-          acc[i].addEventListener("click", function play() {
-            audio.play();
-            this.classList.toggle("active");
-            var panel = this.nextElementSibling;
-            if (panel.style.maxHeight) {
-              panel.style.maxHeight = null;
-            } else {
-              panel.style.maxHeight = panel.scrollHeight + "px";
-              this.scrollIntoView({behavior:"smooth"});
-            }
-          });
-        }
-      </script>
-
     </main>
 
     <footer>
@@ -170,6 +150,26 @@
       </p>
 
     </footer>
+
+    <script>
+      var acc = document.getElementsByClassName("accordion");
+      var i;
+      var uiclick = document.getElementsByClassName("ui-click");
+
+      for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function play() {
+          audio.play();
+          this.classList.toggle("active");
+          var panel = this.nextElementSibling;
+          if (panel.style.maxHeight) {
+            panel.style.maxHeight = null;
+          } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+            this.scrollIntoView({behavior:"smooth"});
+          }
+        });
+      }
+    </script>
 
   </body>
 </html>
