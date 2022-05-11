@@ -149,7 +149,8 @@
         acc[i].addEventListener("click", function() {
           // accClick.play();
           accClick = new Audio("./media/tab-2.mp3")
-          setTimeout(() => { accClick.play() }, 0)
+          accClick.play()
+          // setTimeout(() => { accClick.play() }, 0)
           this.classList.toggle("active");
           var panel = this.nextElementSibling;
           if (panel.style.maxHeight) {
