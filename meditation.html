@@ -32,8 +32,6 @@
 
     <main class="pb5">
 
-      <!-- <audio id="acc-click" src="./media/tab-2.mp3"></audio> -->
-
       <!-- Unguided (10 min) -->
       <button class="accordion pv3 ph0 w-100 tl f4 fw7 ttu tracked-mega red bg-transparent b--none">Unguided</button>
       <div class="panel ph1 pt3 bt b--dark-gray bw-1">
@@ -148,9 +146,8 @@
       for (i = 0; i < acc.length; i++) {
         acc[i].addEventListener("click", function() {
           // accClick.play();
-          accClick = new Audio("./media/tab-2.mp3")
-          accClick.play()
-          // setTimeout(() => { accClick.play() }, 0)
+          accClick = new audio("./media/tab-2.mp3")
+          setTimeout(() => { accClick.play() }, 0)
           this.classList.toggle("active");
           var panel = this.nextElementSibling;
           if (panel.style.maxHeight) {
