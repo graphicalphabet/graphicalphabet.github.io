@@ -573,7 +573,7 @@ var entry = [{
 }, {
 	readingdate: "May 23",
 	readingtitle: "You Are Spirit",
-	readingbody: "Your true personality is happiness; it is peace and love. The minute you forget that, you start to look for these things to come from outside. Unfortunately that has happened even from the very beginning. When God made Adam, He told him, “Adam, I have created you in My own image. That means you are Me; I am you. There is no difference at all. Have you ever seen Me unhappy? No. In the same way, you are never unhappy. You are happiness personified. Have you ever seen Me hungry, thirsty? No. In the same way, you are never hungry or thirsty because you are spirit. Hunger and thirst are physical phenomena; the body has that experience. You are not the body. You are not even the mind. You are the spirit. You are happiness, and you can always retain your happiness if you don’t forget that.”"
+	readingbody: "Your true personality is happiness; it is peace and love. The minute you forget that, you start to look for these things to come from outside. Unfortunately, that has happened even from the very beginning. When God made Adam, He told him, “Adam, I have created you in My own image. That means you are Me; I am you. There is no difference at all. Have you ever seen Me unhappy? No. In the same way, you are never unhappy. You are happiness personified. Have you ever seen Me hungry, thirsty? No. In the same way, you are never hungry or thirsty because you are spirit. Hunger and thirst are physical phenomena; the body has that experience. You are not the body. You are not even the mind. You are the spirit. You are happiness, and you can always retain your happiness if you don’t forget that.”"
 }, {
 	readingdate: "May 24",
 	readingtitle: "Take It As a Challenge",
