@@ -962,7 +962,7 @@ var quotes = [{
   quote: "The soul knows what the heart can’t understand.",
   source: "Rumi"
 }, {
-  quote: "Goodbyes are only for those who love with their eyes. For those who love with their heart and soul…no such thing as separation.",
+  quote: "Goodbyes are only for those who love with their eyes. For those who love with their heart and soul, there is no such thing as separation.",
   source: "Rumi"
 }, {
   quote: "Yesterday I was clever so I wanted to change the world. Today I am wise so I’m trying to change myself.",
@@ -998,7 +998,7 @@ var quotes = [{
   quote: "There are more things that frighten us than injure us, and we suffer more in imagination than in reality.",
   source: "Seneca"
 }, {
-  quote: "God, Grant me the serenity, To accept the things I cannot change, The courage\nTo change the things I can, And the wisdom\nTo know the difference",
+  quote: "God, Grant me the serenity, To accept the things I cannot change, The courage to change the things I can, And the wisdom to know the difference",
   source: "Serenity Prayer"
 }, {
   quote: "Optimism is the most important human trait, because it allows us to evolve our ideas, to improve our situation, and to hope for a better tomorrow.",
