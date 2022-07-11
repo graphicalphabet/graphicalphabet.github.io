@@ -656,7 +656,7 @@ var quotes = [{
   quote: "The happiness of your life depends on the quality of your thoughts.",
   source: "Marcus Aurelius"
 }, {
-  quote: "You have power over your mind — not outside events. Realise this, and you will find strength.",
+  quote: "You have power over your mind — not outside events. Realize this, and you will find strength.",
   source: "Marcus Aurelius"
 }, {
   quote: "Never doubt that a small group of thoughtful, committed citizens can change the world; indeed, it’s the only thing that ever has.",
@@ -719,19 +719,22 @@ var quotes = [{
   quote: "You are a child of the universe, no less than the trees and the stars; you have a right to be here. And whether or not it is clear to you, no doubt the universe is unfolding as it should.",
   source: "Max Ehrmann"
 }, {
-  quote: "Whatever you want to do, if you want to be great at it, you have to love it and be able to make sacrifices for it.",
-  source: "Maya Angelou"
-}, {
   quote: "A bird doesn’t sing because it has an answer, it sings because it has a song.",
   source: "Maya Angelou"
 }, {
   quote: "My mission in life is not merely to survive, but to thrive; and to do so with some passion, some compassion, some humor, and some style.",
   source: "Maya Angelou"
 }, {
-  quote: "When you don’t like a thing, change it. If you can’t change it, change the way you think about it.",
+  quote: "Nothing can dim the light which shines from within.",
   source: "Maya Angelou"
 }, {
   quote: "Prepare for the worst, hope for the best, and be unsurprised by everything in between.",
+  source: "Maya Angelou"
+}, {
+  quote: "Whatever you want to do, if you want to be great at it, you have to love it and be able to make sacrifices for it.",
+  source: "Maya Angelou"
+}, {
+  quote: "When you don’t like a thing, change it. If you can’t change it, change the way you think about it.",
   source: "Maya Angelou"
 }, {
   quote: "This too shall pass.",
@@ -1125,13 +1128,13 @@ var quotes = [{
   source: "Theodore Roosevelt"
 }, {
   quote: "Creativity breeds courage.",
-  source: "Thich Nhat Hanh"
+  source: "Thích Nhất Hạnh"
 }, {
   quote: "Letting go gives us freedom, and freedom is the only condition for happiness.",
-  source: "Thich Nhat Hanh"
+  source: "Thích Nhất Hạnh"
 }, {
   quote: "There is no way to happiness — happiness is the way.",
-  source: "Thich Nhat Hanh"
+  source: "Thích Nhất Hạnh"
 }, {
   quote: "To have a great idea, have a lot of them.",
   source: "Thomas Edison"
