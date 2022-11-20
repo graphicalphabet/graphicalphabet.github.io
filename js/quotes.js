@@ -245,6 +245,9 @@ var quotes = [{
   quote: "Ethics is not simply a matter of knowing. More important, it is about doing.",
   source: "Dalai Lama"
 }, {
+  quote: "The roots of all goodness lie in the soil of appreciation for goodness.",
+  source: "Dalai Lama"
+}, {
   quote: "When dealing with people, remember you are not dealing with creatures of logic, but creatures of emotion.",
   source: "Dale Carnegie"
 }, {
@@ -815,7 +818,7 @@ var quotes = [{
   quote: "Passion is energy. Feel the power that comes from focusing on what excites you. ",
   source: "Oprah Winfrey"
 }, {
-  quote: "The single greatest thing you can do to change your life today is to start being grateful for what you have right now.",
+  quote: "The single greatest thing you can do to change your life today, is to start being grateful for what you have right now.",
   source: "Oprah Winfrey"
 }, {
   quote: "Sometimes I think there are only two instructions we need to follow to develop and deepen our spiritual life: slow down and let go.",
