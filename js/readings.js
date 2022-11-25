@@ -1321,7 +1321,7 @@ var entry = [{
 }, {
 	readingdate: 'November 26',
 	readingtitle: 'Life Should Have Challenges',
-	readingbody: 'If you really want to overcome any feelings of negativity, think of the people who are not as fortunate as you. Many, many others are facing more and greater challenges. When you see that, you will feel that you are very lucky in what you have. Remember that ultimately there is one source, one power. If you trust in that completely and do what you can, help comes, strength comes, courage comes. God takes care of everything and everybody. Life should have challenges. Without challenges it would be a bore, It is only in challenging situations that you really learn. Never give up hope. If the mind is strong, anything can be achieved.'
+	readingbody: 'If you really want to overcome any feelings of negativity, think of the people who are not as fortunate as you. Many, many others are facing more and greater challenges. When you see that, you will feel that you are very lucky in what you have. Remember that ultimately there is one source, one power. If you trust in that completely and do what you can, help comes, strength comes, courage comes. God takes care of everything and everybody. Life should have challenges. Without challenges it would be a bore. It is only in challenging situations that you really learn. Never give up hope. If the mind is strong, anything can be achieved.'
 }, {
 	readingdate: 'November 27',
 	readingtitle: 'Am I Not God’s Beloved?',
