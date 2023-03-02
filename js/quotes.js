@@ -1244,6 +1244,9 @@ var quotes = [{
   quote: "One of the most responsible things you can do as an adult is to become more of a child.",
   source: "Wayne W. Dyer"
 }, {
+  quote: "Be joyful because it is humanly possible.",
+  source: "Wendell Berry"
+}, {
   quote: "You are what you repeatedly do.",
   source: "Will Durant"
 }, {
