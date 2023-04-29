@@ -1172,16 +1172,22 @@ var quotes = [{
   quote: "We’ll never know our full potential unless we push ourselves to find it.",
   source: "Travis Rice"
 }, {
-  quote: "The goal is to grow so strong on the inside, that nothing on the outside can affect your inner wellness without your conscious permission.",
+  quote: "Gratitude is not about what is received; it’s about how you receive what is there.",
   source: "Unknown"
 }, {
   quote: "Make your heart the most beautiful thing about you.",
   source: "Unknown"
 }, {
+  quote: "The goal is to grow so strong on the inside, that nothing on the outside can affect your inner wellness without your conscious permission.",
+  source: "Unknown"
+}, {
   quote: "The most engaged, yet least attached, wins.",
   source: "Unknown"
 }, {
-  quote: "Was Du erlebst, kann keine Macht der Welt Dir rauben. (What you have experienced, no power on earth can take from you.)",
+  quote: "Travel in grace knowing that you are protected by love.",
+  source: "Unknown"
+}, {
+  quote: "What you have experienced, no power on earth can take from you.",
   source: "Unknown"
 }, {
   quote: "Be anxious for nothing and grateful for all things.",
