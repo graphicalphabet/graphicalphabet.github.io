@@ -1172,6 +1172,9 @@ var quotes = [{
   quote: "We’ll never know our full potential unless we push ourselves to find it.",
   source: "Travis Rice"
 }, {
+  quote: "Be guided. Listen to the whispers of the universe.",
+  source: "Unknown"
+}, {
   quote: "Celebrate your successes and failures; both required great courage.",
   source: "Unknown"
 }, {
