@@ -1175,6 +1175,9 @@ var quotes = [{
   quote: "Be guided. Listen to the whispers of the universe.",
   source: "Unknown"
 }, {
+  quote: "Be kind to yourself.",
+  source: "Unknown"
+}, {
   quote: "Celebrate your successes and failures; both required great courage.",
   source: "Unknown"
 }, {
