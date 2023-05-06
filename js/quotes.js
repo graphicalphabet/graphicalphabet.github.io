@@ -1181,6 +1181,9 @@ var quotes = [{
   quote: "Celebrate your successes and failures; both required great courage.",
   source: "Unknown"
 }, {
+  quote: "Compassion is your strength.",
+  source: "Unknown"
+}, {
   quote: "Gratitude is not about what is received; it’s about how you receive what is there.",
   source: "Unknown"
 }, {
