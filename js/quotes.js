@@ -47,6 +47,9 @@ var quotes = [{
   quote: "Success is not the key to happiness. Happiness is the key to success. If you love what you are doing, you will be successful.",
   source: "Albert Schweitzer"
 }, {
+  quote: "The human experience is a symphony of countless voices, each singing its own song, creating a harmonious chorus of shared humanity.",
+  source: "Aldus Huxley"
+}, {
   quote: "You have a choice: to be a victim or to take responsibility for your life and show appreciation for everything that you have. You get to choose how to live your life.",
   source: "Alex Ikonn"
 }, {
