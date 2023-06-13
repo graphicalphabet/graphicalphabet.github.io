@@ -1115,6 +1115,9 @@ var quotes = [{
   quote: "Four things do not come back: the spoken word, the sped arrow, the past life, and the neglected opportunity.",
   source: "Ted Chiang"
 }, {
+  quote: "The difference between fear and awe is a matter of our eyes adjusting.",
+  source: "Terry Tempest Williams"
+}, {
   quote: "Have a healthy disregard for the impossible.",
   source: "The Innovators (Film)"
 }, {
