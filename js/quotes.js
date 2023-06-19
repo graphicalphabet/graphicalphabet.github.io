@@ -1193,6 +1193,9 @@ var quotes = [{
   quote: "Gratitude is not about what is received; it’s about how you receive what is there.",
   source: "Unknown"
 }, {
+  quote: "Life is best lived by focusing on your goals and dancing through all other distractions.",
+  source: "Unknown"
+}, {
   quote: "Make your heart the most beautiful thing about you.",
   source: "Unknown"
 }, {
@@ -1203,6 +1206,9 @@ var quotes = [{
   source: "Unknown"
 }, {
   quote: "Travel in grace knowing that you are protected by love.",
+  source: "Unknown"
+}, {
+  quote: "We all want to be understood, to be acknowledged, to be loved.",
   source: "Unknown"
 }, {
   quote: "What you have experienced, no power on earth can take from you.",
