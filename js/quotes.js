@@ -1193,6 +1193,9 @@ var quotes = [{
   quote: "Gratitude is not about what is received; it’s about how you receive what is there.",
   source: "Unknown"
 }, {
+  quote: "Laughter is the same in all languages.",
+  source: "Unknown"
+}, {
   quote: "Life is best lived by focusing on your goals and dancing through all other distractions.",
   source: "Unknown"
 }, {
