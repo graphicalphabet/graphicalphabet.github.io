@@ -62,6 +62,9 @@ var quotes = [{
   quote: "Every day might not be good. But there is something good in every day.",
   source: "Alice Morse Earle"
 }, {
+  quote: "Yesterday is history. Tomorrow is a mystery. Today is a gift. That is why we call it the present.",
+  source: "Alice Morse Earle"
+}, {
   quote: "At times of change, the learners are the ones who will inherit the world, while the knowers will be beautifully prepared for a world which no longer exists.",
   source: "Alistair Smith"
 }, {
