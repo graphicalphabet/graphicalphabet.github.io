@@ -1,4 +1,4 @@
 # graphicalphabet.github.io
-Personal website of <a href="http://graphicalphabet.com/" target="_blank">Nathan Paterson</a>. <br>
-Designer. Director of Learning at <a href="https://jp.ideo.com/" target="_blank">IDEO</a>. <br>
-Helping enable lifelong learning through design, creativity, and play.
+Personal website of <a href="https://www.linkedin.com/in/graphicalphabet/" target="_blank">Nathan Paterson</a><br>
+Executive Design Leader | ex-IDEO | ex-Disney | #AlwaysBeCurious<br>
+Helping people unleash their innate creativity for positive impact in their lives and the world
