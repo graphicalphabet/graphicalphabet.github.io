@@ -15,7 +15,7 @@ var quotes = [{
   source: "Adi Da"
 }, {
   quote: "Smooth seas do not make skillful sailors.",
-  source: "African Proverb"
+  source: "African Proverb" 
 }, {
   quote: "If you want to go fast, go alone. If you want to go far, go together.",
   source: "African Proverb"
@@ -931,6 +931,9 @@ var quotes = [{
 }, {
   quote: "To overcome fear, you must go through it, not around it.",
   source: "Richie Norton"
+}, {
+  quote: "Every nervous system creates its own ‘reality’ minute by minute — we live inside a ‘bubble’ of neural abstractions which we identify with reality. Make this neurological fact into conscious experience, and you will never be bored or depressed again.",
+  source: "Robert Anton Wilson"
 }, {
   quote: "Listen, smile, agree, then do whatever the fuck you were gonna do anyway.",
   source: "Robert Downey Jr."
