@@ -269,6 +269,9 @@ var quotes = [{
   quote: "Failure is a process.",
   source: "David Friedberg"
 }, {
+  quote: "Joy is the happiness that does not depend on what happens.",
+  source: "David Steindl-Rast"
+}, {
   quote: "Without a concise set of rules to follow we would probably all have to resort to common sense.",
   source: "David Thorne"
 }, {
