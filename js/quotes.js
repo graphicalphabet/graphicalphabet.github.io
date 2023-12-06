@@ -791,6 +791,9 @@ var quotes = [{
   quote: "Our generation has the ability and the responsibility to make our ever-more connected world a more hopeful, stable, and peaceful place.",
   source: "Natalie Portman"
 }, {
+  quote: "When you get older, you realize it’s a lot less about your place in the world but your place in you. It’s not how everyone views you, but how you view yourself.",
+  source: "Natalie Portman"
+}, {
   quote: "Life begins at the end of your comfort zone.",
   source: "Neale Donald Walsch"
 }, {
