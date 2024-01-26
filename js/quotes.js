@@ -308,6 +308,9 @@ var quotes = [{
   quote: "The universe is full of magical things waiting for our wits to grow sharper.",
   source: "Eden Phillpotts"
 }, {
+  quote: "Colors fade, temples crumble, empires fall, but wise words endure.",
+  source: "Edward Thorndike"
+}, {
   quote: "Great minds discuss ideas; average minds discuss events; small minds discuss people.",
   source: "Eleanor Roosevelt"
 }, {
