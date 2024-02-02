@@ -1028,6 +1028,9 @@ var quotes = [{
   quote: "Optimism is the most important human trait, because it allows us to evolve our ideas, to improve our situation, and to hope for a better tomorrow.",
   source: "Seth Godin"
 }, {
+  quote: "If a problem can be solved, what reason is there to be upset? If there is no possible solution, what use is there in being sad?",
+  source: "Shantideva"
+}, {
   quote: "When life is sweet, say ‘thank you’ and celebrate. When life is bitter, say ‘thank you’ and grow.",
   source: "Shauna Niequist"
 }, {
