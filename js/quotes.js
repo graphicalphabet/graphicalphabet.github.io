@@ -581,6 +581,9 @@ var quotes = [{
   quote: "Questioning is emptiness.",
   source: "Kenya Hara"
 }, {
+  quote: "If you have a great work ethic, then you need a great rest ethic.",
+  source: "Kevin Kelly"
+}, {
   quote: "Your work is love made visible.",
   source: "Khalil Gibran"
 }, {
