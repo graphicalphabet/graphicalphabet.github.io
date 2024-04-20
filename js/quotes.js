@@ -446,6 +446,9 @@ var quotes = [{
   quote: "NO stands for ‘Next Opportunity’.",
   source: "Iain Thackrah"
 }, {
+  quote: "Traveling gives you home in a thousand strange places, then leaves you a stranger in your own land.",
+  source: "Ibn Battuta"
+}, {
   quote: "You can rise up from anything. You have choices. You can learn something new. You can create new habits. All that matters is that you decide today and never look back.",
   source: "Idil Ahmed"
 }, {
@@ -931,6 +934,9 @@ var quotes = [{
 }, {
   quote: "You manage things; you lead people.",
   source: "Rear Admiral Grace Murray Hopper"
+}, {
+  quote: "Walking…is how the body measures itself against the earth.",
+  source: "Rebecca Solnit"
 }, {
   quote: "The key to success is to start before you are ready.",
   source: "Rich Litvin"
