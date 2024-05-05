@@ -698,6 +698,9 @@ var quotes = [{
   quote: "Anger is a sign that something needs to change.",
   source: "Mark Epstein"
 }, {
+  quote: "Competence is how good you are when there is something to gain. Character is how good you are when there is nothing to gain. People will reward you for competence. But people will only love you for your character.",
+  source: "Mark Manson"
+}, {
   quote: "Whenever you find yourself on the side of the majority, it’s time to pause and reflect.",
   source: "Mark Twain"
 }, {
