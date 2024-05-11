@@ -1034,7 +1034,7 @@ var quotes = [{
   quote: "There are more things that frighten us than injure us, and we suffer more in imagination than in reality.",
   source: "Seneca"
 }, {
-  quote: "God, Grant me the serenity, To accept the things I cannot change, The courage to change the things I can, And the wisdom to know the difference",
+  quote: "Grant me the serenity to accept the things I cannot change, the courage to change the things I can, and the wisdom to know the difference",
   source: "Serenity Prayer"
 }, {
   quote: "Optimism is the most important human trait, because it allows us to evolve our ideas, to improve our situation, and to hope for a better tomorrow.",
