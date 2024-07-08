@@ -959,6 +959,9 @@ var quotes = [{
   quote: "Listen, smile, agree, then do whatever the fuck you were gonna do anyway.",
   source: "Robert Downey Jr."
 }, {
+  quote: "The only way out is through.",
+  source: "Robert Frost"
+}, {
   quote: "Two roads diverged in a wood, and I — I took the one less traveled by, and that has made all the difference.",
   source: "Robert Frost"
 }, {
