@@ -287,6 +287,9 @@ var quotes = [{
   quote: "Goals are dreams with deadlines.",
   source: "Diana Scharf"
 }, {
+  quote: "If you can’t find the truth where you are, where else do you expect to find it?.",
+  source: "Dōgen Zenji"
+}, {
   quote: "Fear tricks us into living a boring life.",
   source: "Donald Miller"
 }, {
