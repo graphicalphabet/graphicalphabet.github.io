@@ -1214,6 +1214,9 @@ var quotes = [{
   quote: "We’ll never know our full potential unless we push ourselves to find it.",
   source: "Travis Rice"
 }, {
+  quote: "A river always finds its way.",
+  source: "Unknown"
+}, {
   quote: "Be guided. Listen to the whispers of the universe.",
   source: "Unknown"
 }, {
@@ -1251,6 +1254,9 @@ var quotes = [{
   source: "Unknown"
 }, {
   quote: "What you have experienced, no power on earth can take from you.",
+  source: "Unknown"
+}, {
+  quote: "When is an oak tree perfect?",
   source: "Unknown"
 }, {
   quote: "Be anxious for nothing and grateful for all things.",
