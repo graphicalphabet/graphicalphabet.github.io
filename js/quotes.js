@@ -545,6 +545,9 @@ var quotes = [{
   quote: "When we build, let us think that we build forever.",
   source: "John Ruskin"
 }, {
+  quote: "A ship in harbour is safe, but that is not what ships are built for.",
+  source: "John A. Shedd"
+}, {
   quote: "Things turn out best for the people who make the best of the way things turn out.",
   source: "John Wooden"
 }, {
