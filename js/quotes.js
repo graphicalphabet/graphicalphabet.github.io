@@ -212,7 +212,7 @@ var quotes = [{
   quote: "A lie will go round the world while truth is pulling its boots on.",
   source: "Charles Haddon Spurgeon"
 }, {
-  quote: "Life is 10% what happens to me and 90% how I react to it.",
+  quote: "Life is 10% what happens to you and 90% how you react to it.",
   source: "Charles Swindoll"
 }, {
   quote: "If you are patient in one moment of anger, you will avoid one hundred days of sorrow.",
