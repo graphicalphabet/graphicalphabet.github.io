@@ -1097,6 +1097,9 @@ var quotes = [{
   quote: "Fallor Ergo Sum. (I err therefore I am.)",
   source: "St. Augustine"
 }, {
+  quote: "Intelligence is the ability to adapt to change.",
+  source: "Stephen Hawking"
+}, {
   quote: "When the value is clear, the decision is easy.",
   source: "Steve Chandler"
 }, {
