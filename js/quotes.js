@@ -164,16 +164,19 @@ var quotes = [{
   quote: "When I am working on a problem I never think about beauty. I only think about how to solve the problem. But when I have finished, if the solution is not beautiful, I know it is wrong.",
   source: "Buckminster Fuller"
 }, {
-  quote: "We are what we think. All that we are arises with our thoughts. With our thoughts we make the world.",
+  quote: "Nothing is to be clung to as I, me, or mine.",
   source: "Buddha"
 }, {
   quote: "Peace comes from within. Do not seek it without.",
   source: "Buddha"
 }, {
-  quote: "You yourself must strive. The Buddhas only point the way.",
+  quote: "Three things cannot be long hidden: the sun, the moon, and the truth.",
   source: "Buddha"
 }, {
-  quote: "Three things cannot be long hidden: the sun, the moon, and the truth.",
+  quote: "We are what we think. All that we are arises with our thoughts. With our thoughts we make the world.",
+  source: "Buddha"
+}, {
+  quote: "You yourself must strive. The Buddhas only point the way.",
   source: "Buddha"
 }, {
   quote: "Every time you compare yourself to someone, you lose.",
@@ -331,6 +334,9 @@ var quotes = [{
 }, {
   quote: "You create beauty with your attitude, your behavior, your actions. It’s all up to you.",
   source: "Emma Stone"
+}, {
+  quote: "The best way to treat obstacles is to use them as stepping stones.",
+  source: "Enid Blyton"
 }, {
   quote: "People are disturbed not by things, but by the views they take of them.",
   source: "Epictetus"
@@ -1051,6 +1057,9 @@ var quotes = [{
 }, {
   quote: "Optimism is the most important human trait, because it allows us to evolve our ideas, to improve our situation, and to hope for a better tomorrow.",
   source: "Seth Godin"
+}, {
+  quote: "Compromise on small things but stand firm on important principles. By not sweating the small stuff, you build goodwill and save your influence for when it matters.",
+  source: "Shane Parrish"
 }, {
   quote: "If a problem can be solved, what reason is there to be upset? If there is no possible solution, what use is there in being sad?",
   source: "Shantideva"
