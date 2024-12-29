@@ -356,6 +356,9 @@ var quotes = [{
   quote: "Empathy. Curiosity. Patience.",
   source: "Esther Derby"
 }, {
+  quote: "The quality of your relationships determines the quality of your life.",
+  source: "Esther Perel"
+}, {
   quote: "Unless you learn to tame your dragons, you will never meet your angels.",
   source: "Father Richard Rhor"
 }, {
@@ -369,7 +372,7 @@ var quotes = [{
   source: "Frank Zappa"
 }, {
   quote: "One forgives to the degree one loves.",
-  source: "François de La Rochefoucauld"
+  source: "François de La Rochefoucauld"
 }, {
   quote: "What one programmer can do in one month, two programmers can do in two months.",
   source: "Fred Brooks"
