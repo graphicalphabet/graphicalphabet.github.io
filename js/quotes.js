@@ -263,6 +263,9 @@ var quotes = [{
   quote: "By understanding the context of the environment, people know which aspects of their social identity to perform.",
   source: "Danah Boyd"
 }, {
+  quote: "Nothing in life is as important as you think it is while you are thinking about it.",
+  source: "Daniel Kahneman"
+}, {
   quote: "All creative endeavors are fundamentally problem-solving: how do we create a novel and useful solution to whatever problem we’re facing?",
   source: "David Burkus"
 }, {
