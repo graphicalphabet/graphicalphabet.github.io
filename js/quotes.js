@@ -383,6 +383,9 @@ var quotes = [{
   quote: "There is generosity in giving, but gentleness in receiving.",
   source: "Freya Stark"
 }, {
+  quote: "The end of a melody is not its goal.",
+  source: "Friedrich Nietzsche"
+}, {
   quote: "What is great in man is that he is a bridge and not an end.",
   source: "Friedrich Nietzsche"
 }, {
