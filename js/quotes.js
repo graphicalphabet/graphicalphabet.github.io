@@ -1349,6 +1349,9 @@ var quotes = [{
   quote: "Be joyful because it is humanly possible.",
   source: "Wendell Berry"
 }, {
+  quote: "Success is being excited to go to work and being excited to come home.",
+  source: "Will Ahmed"
+}, {
   quote: "You are what you repeatedly do.",
   source: "Will Durant"
 }, {
