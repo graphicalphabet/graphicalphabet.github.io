@@ -488,6 +488,9 @@ var quotes = [{
   quote: "Start more books, quit most of them, read the great ones twice.",
   source: "James Clear"
 }, {
+  quote: "Your best performances will come when you are working in a way that is a full expression of you. The work becomes a natural display of your personality. This is when you not only get better results, but also love the activity — because in doing the craft, you feel alive.",
+  source: "James Clear"
+}, {
   quote: "Life is a long lesson in humility.",
   source: "James M. Barrie"
 }, {
@@ -706,6 +709,9 @@ var quotes = [{
 }, {
   quote: "Never doubt that a small group of thoughtful, committed citizens can change the world; indeed, it’s the only thing that ever has.",
   source: "Margaret Mead"
+}, {
+  quote: "The greatest sign of success for a teacher is to be able to say, ‘The children are now working as if I did not exist.’ But this holds true for leadership in general — give people space and they flourish.",
+  source: "Maria Montessori"
 }, {
   quote: "Love is what we are born with. Fear is what we learned.",
   source: "Marianne Williamson"
