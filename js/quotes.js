@@ -512,6 +512,9 @@ var quotes = [{
   quote: "Don’t fear the copies, fear the originals.",
   source: "Jason Fried"
 }, {
+  quote: "Preparation kills pressure.",
+  source: "Jason Mayden"
+}, {
   quote: "We live in a wonderful world that is full of beauty, charm, and adventure. There is no end to the adventures we can have if only we seek them with our eyes open.",
   source: "Jawaharlal Nehru"
 }, {
