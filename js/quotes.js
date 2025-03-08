@@ -260,9 +260,6 @@ var quotes = [{
   quote: "When dealing with people, remember you are not dealing with creatures of logic, but creatures of emotion.",
   source: "Dale Carnegie"
 }, {
-  quote: "By understanding the context of the environment, people know which aspects of their social identity to perform.",
-  source: "Danah Boyd"
-}, {
   quote: "Nothing in life is as important as you think it is while you are thinking about it.",
   source: "Daniel Kahneman"
 }, {
