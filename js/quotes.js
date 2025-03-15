@@ -449,7 +449,7 @@ var quotes = [{
   quote: "The past is just a story we tell ourselves.",
   source: "Her (Film)"
 }, {
-  quote: "To hold our tongues when everyone is gissiping, to smile without hostility at people and institutions, to compensate for the shortage of love in the world with more love of small, private matters; to be faithful in our work, to show greater patience, to forgo the cheap revenge obtainable from mockery and criticism: all these are things we can do.",
+  quote: "To hold our tongues when everyone is gossiping, to smile without hostility at people and institutions, to compensate for the shortage of love in the world with more love of small, private matters; to be faithful in our work, to show greater patience, to forgo the cheap revenge obtainable from mockery and criticism: all these are things we can do.",
   source: "Hermann Hesse"
 }, {
   quote: "Don’t worry about people stealing your ideas. If your ideas are any good, you’ll have to ram them down people’s throats.",
