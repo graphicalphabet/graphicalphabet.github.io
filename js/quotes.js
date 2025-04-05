@@ -488,6 +488,9 @@ var quotes = [{
   quote: "Start more books, quit most of them, read the great ones twice.",
   source: "James Clear"
 }, {
+  quote: "The reward is not always in winning, but in striving.",
+  source: "James Clear"
+}, {
   quote: "Your best performances will come when you are working in a way that is a full expression of you. The work becomes a natural display of your personality. This is when you not only get better results, but also love the activity — because in doing the craft, you feel alive.",
   source: "James Clear"
 }, {
