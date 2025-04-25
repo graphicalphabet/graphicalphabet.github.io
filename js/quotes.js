@@ -485,6 +485,9 @@ var quotes = [{
   quote: "Everything you want is on the other side of fear.",
   source: "Jack Cornfield"
 }, {
+  quote: "Some areas of life reward your best day. Others punish your worst day. Know which situation you’re in, and you can better decide when to be risky and when to play it safe.",
+  source: "James Clear"
+}, {
   quote: "Start more books, quit most of them, read the great ones twice.",
   source: "James Clear"
 }, {
