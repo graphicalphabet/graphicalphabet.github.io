@@ -233,6 +233,9 @@ var quotes = [{
   quote: "Leadership is getting someone to do what they don’t want to do, to achieve what they want to achieve.",
   source: "Coach Tom Landry"
 }, {
+  quote: "Simplify, then add lightness.",
+  source: "Colin Chapman"
+}, {
   quote: "Calm is contagious.",
   source: "Commander Rorke T. Denver"
 }, {
