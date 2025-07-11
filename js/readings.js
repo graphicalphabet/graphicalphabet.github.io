@@ -773,7 +773,7 @@ var entry = [{
 }, {
 	readingdate: 'July 12',
 	readingtitle: 'Train Your Eyes to See the Bright Side of Everything',
-	readingbody: 'Think well, you will be well. Think ill, you will be ill. It’s all your thought. Sometimes you might not be thinking ill of yourself, but you are thinking ill of others. Chat is still thinking ill. Whether it is about you or somebody else, that is what you are thinking. When you think of that, you will become that. That is why we say, “See no evil, hear no evil, speak no evil.” If you see evil, hear evil, speak evil, you will become evil. It’s not to save others that you are asked not to think ill, not to speak ill. You will not be hurting them, but you will be hurting yourself. In our lives we should always think well. Train your eyes to see the bright side of everything.'
+	readingbody: 'Think well, you will be well. Think ill, you will be ill. It’s all your thought. Sometimes you might not be thinking ill of yourself, but you are thinking ill of others. That is still thinking ill. Whether it is about you or somebody else, that is what you are thinking. When you think of that, you will become that. That is why we say, “See no evil, hear no evil, speak no evil.” If you see evil, hear evil, speak evil, you will become evil. It’s not to save others that you are asked not to think ill, not to speak ill. You will not be hurting them, but you will be hurting yourself. In our lives we should always think well. Train your eyes to see the bright side of everything.'
 }, {
 	readingdate: 'July 13',
 	readingtitle: 'A Perfect Act',
