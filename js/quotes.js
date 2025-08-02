@@ -260,6 +260,9 @@ var quotes = [{
   quote: "The roots of all goodness lie in the soil of appreciation for goodness.",
   source: "Dalai Lama"
 }, {
+  quote: "Success is getting what you want; happiness is wanting what you get.",
+  source: "Dale Carnegie"
+}, {
   quote: "When dealing with people, remember you are not dealing with creatures of logic, but creatures of emotion.",
   source: "Dale Carnegie"
 }, {
