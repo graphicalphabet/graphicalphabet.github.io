@@ -20,6 +20,9 @@ var quotes = [{
   quote: "If you want to go fast, go alone. If you want to go far, go together.",
   source: "African Proverb"
 }, {
+  quote: "The best way to predict the future is to invent it.",
+  source: "Alan Kay"
+}, {
   quote: "Fools ignore complexity. Pragmatists suffer it. Some can avoid it. Geniuses remove it.",
   source: "Alan Perlis"
 }, {
