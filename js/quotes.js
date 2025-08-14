@@ -950,6 +950,9 @@ var quotes = [{
   quote: "Abundance is the ability to do what you need to do when you need to do it.",
   source: "Peleg Top"
 }, {
+  quote: "Only to the extend that we expose ourselves over and over to annihilation can that which is indestructible in us be found.",
+  source: "Pema Chödron"
+}, {
   quote: "When you are not practicing, someone else is. When you meet him, he will win.",
   source: "Peter Bergman"
 }, {
