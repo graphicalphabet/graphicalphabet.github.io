@@ -1097,7 +1097,7 @@ var quotes = [{
   quote: "Compromise on small things but stand firm on important principles. By not sweating the small stuff, you build goodwill and save your influence for when it matters.",
   source: "Shane Parrish"
 }, {
-  quote: "The past is a teacher, not a judge. Your next move matters more than youor last mistake.",
+  quote: "The past is a teacher, not a judge. Your next move matters more than your last mistake.",
   source: "Shane Parrish"
 }, {
   quote: "If a problem can be solved, what reason is there to be upset? If there is no possible solution, what use is there in being sad?",
