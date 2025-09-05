@@ -965,10 +965,13 @@ var quotes = [{
   quote: "If you concentrate on finding whatever is good in every situation, you will discover that your life will suddenly be filled with gratitude, a feeling that nurtures the soul.",
   source: "Rabbi Harold Kushner"
 }, {
+  quote: "For every minute you are angry, you lose sixty seconds of happiness.",
+  source: "Ralph Waldo Emerson"
+}, {
   quote: "Make your own Bible.",
   source: "Ralph Waldo Emerson"
 }, {
-  quote: "For every minute you are angry, you lose sixty seconds of happiness.",
+  quote: "Once you make a decision, the universe conspires to make it happen.",
   source: "Ralph Waldo Emerson"
 }, {
   quote: "To be yourself in a world which is constantly trying to make you something else is the greatest accomplishment.",
