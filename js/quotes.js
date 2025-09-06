@@ -902,19 +902,19 @@ var quotes = [{
   quote: "Courage is a love affair with the unknown.",
   source: "Osho"
 }, {
-  quote: "Every child is an artist. The problem is to remain an artist when we grow up.",
+  quote: "Action is the foundational key to all success.",
   source: "Pablo Picasso"
 }, {
   quote: "Every act of creation is first an act of destruction.",
   source: "Pablo Picasso"
 }, {
+  quote: "Every child is an artist. The problem is how to remain an artist when we grow up.",
+  source: "Pablo Picasso"
+}, {
+  quote: "Inspiration exists, but it has to find us working.",
+  source: "Pablo Picasso"
+}, {
   quote: "When I was the age of these children I could draw like Raphael, but it took me a lifetime to learn how to draw like these children.",
-  source: "Pablo Picasso"
-}, {
-  quote: "Action is the foundational key to all success.",
-  source: "Pablo Picasso"
-}, {
-  quote: "Every child is an artist. The problem is how to remain an artist once we grow up.",
   source: "Pablo Picasso"
 }, {
   quote: "There is a magnet in your heart that will attract true friends. That magnet is unselfishness, thinking of others first. When you learn to love for others, they will live for you.",
