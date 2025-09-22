@@ -329,6 +329,9 @@ var quotes = [{
   quote: "You are what you repeatedly do.",
   source: "Will Durant"
 }, {
+  quote: "Let us ask the gods not for possessions, but for things to do; happiness is in making things rather than in consuming them.",
+  source: "Will Durant"
+}, {
   quote: "Abundance is not something we acquire. It is something we tune into.",
   source: "Wayne W. Dyer"
 }, {
