@@ -41,7 +41,7 @@
 
     <main class="pb5">
 
-      <button class="accordion pv3 ph0 w-100 tl f4 fw7 ttu tracked-mega red bg-transparent b--none">Mindfulness</button>
+      <button id="mindfulness" class="accordion pv3 ph0 w-100 tl f4 fw7 ttu tracked-mega red bg-transparent b--none">Mindfulness</button>
       <div class="panel ph1 pt3 bt b--dark-gray bw-1">
 
         <!-- Mindfulness (10 min) -->
@@ -58,7 +58,7 @@
 
       </div>
 
-      <button class="accordion pv3 ph0 w-100 tl f4 fw7 ttu tracked-mega red bg-transparent b--none">Loving Kindness</button>
+      <button id="loving-kindness" class="accordion pv3 ph0 w-100 tl f4 fw7 ttu tracked-mega red bg-transparent b--none">Loving Kindness</button>
       <div class="panel ph1 pt3 bt b--dark-gray bw-1">
 
         <!-- Loving Kindness (10 min) -->
@@ -75,7 +75,7 @@
 
       </div>
 
-      <button class="accordion pv3 ph0 w-100 tl f4 fw7 ttu tracked-mega red bg-transparent b--none">Emotional Inquiry</button>
+      <button id="emotional-inquiry" class="accordion pv3 ph0 w-100 tl f4 fw7 ttu tracked-mega red bg-transparent b--none">Emotional Inquiry</button>
       <div class="panel ph1 pt3 bt b--dark-gray bw-1">
 
         <!-- Emotional Inquiry (15 min) -->
@@ -86,7 +86,7 @@
 
       </div>
 
-      <button class="accordion pv3 ph0 w-100 tl f4 fw7 ttu tracked-mega red bg-transparent b--none">Heart Nourishment</button>
+      <button id="heart-nourishment" class="accordion pv3 ph0 w-100 tl f4 fw7 ttu tracked-mega red bg-transparent b--none">Heart Nourishment</button>
       <div class="panel ph1 pt3 bt b--dark-gray bw-1">
 
         <!-- Emotional Inquiry (15 min) -->
@@ -97,7 +97,7 @@
 
       </div>
 
-      <button class="accordion pv3 ph0 w-100 tl f4 fw7 ttu tracked-mega red bg-transparent b--none">For Children</button>
+      <button id="for-children" class="accordion pv3 ph0 w-100 tl f4 fw7 ttu tracked-mega red bg-transparent b--none">For Children</button>
       <div class="panel ph1 pt3 bt b--dark-gray bw-1">
 
         <!-- Mindful Hearing (5 min) -->
@@ -168,7 +168,7 @@
 
       </div>
 
-      <button class="accordion pv3 ph0 w-100 tl f4 fw7 ttu tracked-mega red bg-transparent b--none">Yoga Nidra</button>
+      <button id="yoga-nidra" class="accordion pv3 ph0 w-100 tl f4 fw7 ttu tracked-mega red bg-transparent b--none">Yoga Nidra</button>
       <div class="panel ph1 pt3 bt b--dark-gray bw-1">
 
         <!-- Yoga Nidra (15 min) -->
@@ -185,7 +185,7 @@
 
       </div>
 
-      <button class="accordion pv3 ph0 w-100 tl f4 fw7 ttu tracked-mega red bg-transparent b--none">Unguided</button>
+      <button id="unguided" class="accordion pv3 ph0 w-100 tl f4 fw7 ttu tracked-mega red bg-transparent b--none">Unguided</button>
       <div class="panel ph1 pt3 bt b--dark-gray bw-1">
 
         <!-- Unguided (10 min) -->
@@ -202,7 +202,7 @@
 
       </div>
 
-      <button class="accordion pv3 ph0 w-100 tl f4 fw7 ttu tracked-mega red bg-transparent b--none">Right on Time</button>
+      <button id="right-on-time" class="accordion pv3 ph0 w-100 tl f4 fw7 ttu tracked-mega red bg-transparent b--none">Right on Time</button>
       <div class="panel ph1 pt3 bt b--dark-gray bw-1">
 
         <!-- Right on Time (15 min) -->
@@ -263,16 +263,91 @@
       var i; 
       for (i = 0; i < acc.length; i++) { 
         acc[i].onclick=function() { 
+          // Close all other accordions first
+          var j;
+          for (j = 0; j < acc.length; j++) {
+            if (acc[j] !== this) {
+              acc[j].classList.remove("active");
+              acc[j].nextElementSibling.style.maxHeight = null;
+            }
+          }
+          
+          // Toggle current accordion
           this.classList.toggle ("active"); 
           var panel=this.nextElementSibling; 
           if (panel.style.maxHeight){ 
             panel.style.maxHeight=null; 
+            // Clear the anchor from URL when closing accordion
+            if (window.history.replaceState) {
+              window.history.replaceState(null, null, window.location.pathname);
+            }
           } else { 
               panel.style.maxHeight=panel.scrollHeight + "px" ; 
-              this.scrollIntoView ({behavior:"smooth"}); 
+              // Update URL with anchor when opening accordion
+              if (window.history.replaceState) {
+                window.history.replaceState(null, null, window.location.pathname + '#' + this.id);
+              }
+              // Scroll to position the accordion button at the top of the browser window
+              // Wait for the CSS transition to complete (0.3s from global.css)
+              setTimeout(function() {
+                this.scrollIntoView({
+                  behavior: 'smooth',
+                  block: 'start'
+                });
+              }.bind(this), 400); // Optimized delay - enough for transition + buffer
             } 
-          } 
+          }
         }
+
+        // Function to open accordion by ID
+        function openAccordionById(accordionId) {
+          var accordion = document.getElementById(accordionId);
+          if (accordion) {
+            // Close all other accordions first
+            var acc = document.getElementsByClassName("accordion");
+            var j;
+            for (j = 0; j < acc.length; j++) {
+              if (acc[j] !== accordion) {
+                acc[j].classList.remove("active");
+                acc[j].nextElementSibling.style.maxHeight = null;
+              }
+            }
+            
+            // Open the target accordion
+            accordion.classList.add("active");
+            var panel = accordion.nextElementSibling;
+            panel.style.maxHeight = panel.scrollHeight + "px";
+            
+            // Update URL with anchor
+            if (window.history.replaceState) {
+              window.history.replaceState(null, null, window.location.pathname + '#' + accordionId);
+            }
+            
+            // Scroll to the accordion after a delay
+            setTimeout(function() {
+              accordion.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+              });
+            }, 400);
+          }
+        }
+
+        // Check for anchor on page load
+        window.addEventListener('load', function() {
+          var hash = window.location.hash.substring(1); // Remove the # symbol
+          if (hash) {
+            openAccordionById(hash);
+          }
+        });
+
+        // Listen for hash changes (when user navigates with anchors)
+        window.addEventListener('hashchange', function() {
+          var hash = window.location.hash.substring(1); // Remove the # symbol
+          if (hash) {
+            openAccordionById(hash);
+          }
+        });
     </script>
 
   </body>
