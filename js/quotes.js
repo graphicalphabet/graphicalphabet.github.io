@@ -158,6 +158,9 @@ var quotes = [{
   quote: "Follow your bliss and the universe will open doors where there were only walls.",
   source: "Joseph Campbell"
 }, {
+  quote: "If you are falling… dive.",
+  source: "Joseph Campbell"
+}, {
   quote: "Lead based on first principles.",
   source: "Bill Campbell"
 }, {
