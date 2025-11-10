@@ -1328,6 +1328,9 @@ var quotes = [{
   quote: "My father gave me the greatest gift anyone could give another person, he believed in me.",
   source: "Jim Valvano"
 }, {
+  quote: "Anything one man can imagine, others can make real.",
+  source: "Jules Verne"
+}, {
   quote: "Styles come and go. Good design is a language, not a style.",
   source: "Massimo Vignelli"
 }, {
