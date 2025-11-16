@@ -419,6 +419,9 @@ var quotes = [{
   quote: "Anger is a sign that something needs to change.",
   source: "Mark Epstein"
 }, {
+  quote: "Above all, be the heroine of your life, not the victim.",
+  source: "Nora Ephron"
+}, {
   quote: "Logic will take you from point A to B. Creativity will take you everywhere else.",
   source: "Dr. Pinki Feinstein"
 }, {
@@ -695,7 +698,10 @@ var quotes = [{
   quote: "There is nothing with which every man is so afraid as getting to know how enormously much he is capable of doing and becoming.",
   source: "Soren Kierkegaard"
 }, {
-  quote: "Remember, we all stumble, every one of us. That’s why it’s a comfort to go hand in hand.",
+  quote: "We act as though comfort and luxury were the chief requirements of life, when all that we need to make us happy is something to be enthusiastic about.",
+  source: "Charles Kingsley"
+}, {
+  quote: "Remember, we all stumble, every one of us. That's why it's a comfort to go hand in hand.",
   source: "Emily Kimbrough"
 }, {
   quote: "Before you finish eating breakfast this morning, you’ve depended on more than half the world. This is the way our universe is structured. We aren’t going to have peace on earth until we recognize this fact.",
