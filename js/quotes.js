@@ -1079,7 +1079,10 @@ var quotes = [{
   quote: "Goodbyes are only for those who love with their eyes. For those who love with their heart and soul, there is no such thing as separation.",
   source: "Rumi"
 }, {
-  quote: "The soul knows what the heart can’t understand.",
+  quote: "If you feel pain within yourself, it is a sign that you are still alive. But if you feel the pain someone else feels, it is a sign that you are human.",
+  source: "Rumi"
+}, {
+  quote: "The soul knows what the heart can't understand.",
   source: "Rumi"
 }, {
   quote: "Yesterday I was clever so I wanted to change the world. Today I am wise so I’m trying to change myself.",
