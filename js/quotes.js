@@ -1097,6 +1097,9 @@ var quotes = [{
   quote: "The problem with the world is that the stupid are cocksure and the intelligent are full of doubt.",
   source: "Bertrand Russell"
 }, {
+  quote: "Stay light, stay free, stay kind. What is meant for you will stay, even if you’re not holding it tightly.",
+  source: "Dr. Kamal Sabran"
+}, {
   quote: "If you wish to make an apple pie from scratch, you must first invent the universe.",
   source: "Carl Sagan"
 }, {
