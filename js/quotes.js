@@ -59,6 +59,9 @@ var quotes = [{
   quote: "The fear of facing your fears is harder to overcome than the fear itself.",
   source: "Anonymous"
 }, {
+  quote: "The operation of the intellect demands a previous operation of the senses.",
+  source: "Thomas Aquinas"
+}, {
   quote: "Routine, in an intelligent man, is a sign of ambition.",
   source: "W. H. Auden"
 }, {
