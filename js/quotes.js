@@ -761,6 +761,9 @@ var quotes = [{
   quote: "Being deeply loved by someone gives you strength, while loving someone deeply gives you courage.",
   source: "Lao Tzu"
 }, {
+  quote: "He who knows he has enough is rich.",
+  source: "Lao Tzu"
+}, {
   quote: "Knowing others is intelligence. Knowing yourself is wisdom.",
   source: "Lao Tzu"
 }, {
