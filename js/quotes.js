@@ -992,6 +992,9 @@ var quotes = [{
   quote: "What we have done for ourselves dies with us; what we have done for others and the world remains and is immortal.",
   source: "Albert Pike"
 }, {
+  quote: "Be kind, for everyone you meet is fighting a great battle.",
+  source: "Philo of Alexandria"
+}, {
   quote: "Wise men speak because they have something to say; Fools because they have to say something.",
   source: "Plato"
 }, {
