@@ -158,12 +158,39 @@
 
                     <div>
                         <label class="block text-sm font-medium mb-1">Category</label>
-                        <input type="text" id="category" class="w-full p-2 border rounded" />
+                        <select id="category" class="w-full p-2 border rounded">
+                            <option>General</option>
+                            <option>Food & Dining</option>
+                            <option>Groceries</option>
+                            <option>Transport</option>
+                            <option>Shopping</option>
+                            <option>Entertainment</option>
+                            <option>Health</option>
+                            <option>Travel</option>
+                            <option>Utilities</option>
+                            <option>Business</option>
+                        </select>
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium mb-1">Total (£)</label>
+                        <label class="block text-sm font-medium mb-1">Currency</label>
+                        <select id="currency" class="w-full p-2 border rounded">
+                            <option value="GBP">£ GBP</option>
+                            <option value="USD">$ USD</option>
+                            <option value="EUR">€ EUR</option>
+                            <option value="JPY">¥ JPY</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Total</label>
                         <input type="number" step="0.01" id="total" class="w-full p-2 border rounded" />
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Total (JPY)</label>
+                        <input type="number" step="1" id="totalJPY" class="w-full p-2 border rounded bg-gray-50" readonly />
+                        <p class="text-xs text-gray-500 mt-1">Auto-calculated from exchange rate</p>
                     </div>
                 </div>
 
@@ -329,6 +356,43 @@
             document.getElementById('signin').classList.remove('hidden');
         }
 
+        async function updateJPYTotal() {
+            const total = parseFloat(document.getElementById('total').value) || 0;
+            const currency = document.getElementById('currency').value;
+            
+            if (currency === 'JPY') {
+                document.getElementById('totalJPY').value = Math.round(total);
+                return;
+            }
+
+            try {
+                // Use exchangerate-api for conversion
+                const response = await fetch(`https://api.exchangerate-api.com/v4/latest/${currency}`);
+                const data = await response.json();
+                const rate = data.rates.JPY;
+                const jpy = Math.round(total * rate);
+                document.getElementById('totalJPY').value = jpy;
+            } catch (err) {
+                console.error('Currency conversion failed:', err);
+                document.getElementById('totalJPY').value = '0';
+            }
+        }
+
+        // Update JPY when total or currency changes
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const totalInput = document.getElementById('total');
+                const currencyInput = document.getElementById('currency');
+                if (totalInput) {
+                    totalInput.addEventListener('input', updateJPYTotal);
+                    totalInput.addEventListener('change', updateJPYTotal);
+                }
+                if (currencyInput) {
+                    currencyInput.addEventListener('change', updateJPYTotal);
+                }
+            }, 1000);
+        });
+
         async function handleImage(event) {
             const file = event.target.files[0];
             if (!file) return;
@@ -352,6 +416,224 @@
                     document.getElementById('paymentMethod').value = parsed.paymentMethod;
                     document.getElementById('category').value = parsed.category;
                     document.getElementById('total').value = parsed.total;
+                    
+                    // Set currency and calculate JPY
+                    const currencyMap = { '£': 'GBP', '
+                    console.error(err);
+                    showMessage('Failed to process image', 'error');
+                    document.getElementById('processing').classList.add('hidden');
+                    document.getElementById('scanner').classList.remove('hidden');
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function parseReceipt(text) {
+            const lines = text.split('\n').filter(line => line.trim());
+            
+            // Extract date - look for various formats
+            let date = new Date().toISOString().split('T')[0];
+            const datePatterns = [
+                /(\d{4}[\.\-\/]\d{1,2}[\.\-\/]\d{1,2})/,  // 2025.12.04 or 2025-12-04
+                /(\d{1,2}[\.\-\/]\d{1,2}[\.\-\/]\d{4})/,  // 04.12.2025 or 04/12/2025
+                /(\d{1,2}[\.\-\/]\d{1,2}[\.\-\/]\d{2})/   // 04.12.25
+            ];
+            for (const pattern of datePatterns) {
+                const match = text.match(pattern);
+                if (match) {
+                    let dateStr = match[1];
+                    // Convert to YYYY-MM-DD format
+                    if (dateStr.match(/^\d{4}/)) {
+                        date = dateStr.replace(/\./g, '-').replace(/\//g, '-');
+                    } else {
+                        // Try to parse and format
+                        const parts = dateStr.split(/[\.\-\/]/);
+                        if (parts.length === 3) {
+                            const year = parts[2].length === 2 ? '20' + parts[2] : parts[2];
+                            date = `${year}-${parts[1].padStart(2, '0')}-${parts[0].padStart(2, '0')}`;
+                        }
+                    }
+                    break;
+                }
+            }
+
+            // Extract merchant - clean up common OCR noise
+            let merchant = '';
+            for (let i = 0; i < Math.min(5, lines.length); i++) {
+                const line = lines[i].trim();
+                // Skip lines that are too short, too long, or contain numbers/prices
+                if (line.length > 3 && line.length < 40 && !line.match(/[\d£$¥€]{2,}/)) {
+                    merchant = line;
+                    break;
+                }
+            }
+            // Clean merchant name - remove common OCR artifacts
+            merchant = merchant
+                .replace(/\$[A-Z]+$/, '')  // Remove trailing $XXX
+                .replace(/[^\w\s\-&]/g, '') // Remove special chars except word chars, spaces, hyphens, &
+                .trim();
+
+            // Extract total - look for common total patterns
+            let total = '';
+            let currency = '£'; // Default to GBP
+            const totalPatterns = [
+                /total[:\s]*([£$¥€])?\s*(\d+[\.,]\d{2})/i,
+                /amount[:\s]*([£$¥€])?\s*(\d+[\.,]\d{2})/i,
+                /([£$¥€])\s*(\d+[\.,]\d{2})\s*total/i,
+                /balance[:\s]*([£$¥€])?\s*(\d+[\.,]\d{2})/i,
+                /([£$¥€])\s*(\d+[\.,]\d{2})\s*$/m  // Currency symbol followed by amount at end of line
+            ];
+            
+            for (const pattern of totalPatterns) {
+                const match = text.match(pattern);
+                if (match) {
+                    currency = match[1] || '£';
+                    total = match[2].replace(',', '.');
+                    break;
+                }
+            }
+
+            // If still no total, look for the largest number that looks like money
+            if (!total) {
+                const amounts = text.match(/([£$¥€])\s*(\d+[\.,]\d{2})/g);
+                if (amounts && amounts.length > 0) {
+                    const largest = amounts
+                        .map(a => {
+                            const m = a.match(/([£$¥€])\s*(\d+[\.,]\d{2})/);
+                            return { currency: m[1], amount: parseFloat(m[2].replace(',', '.')) };
+                        })
+                        .sort((a, b) => b.amount - a.amount)[0];
+                    currency = largest.currency;
+                    total = largest.amount.toString();
+                }
+            }
+
+            // Extract items - lines with prices
+            const items = [];
+            const itemPattern = /(.+?)[:\s]+([£$¥€])\s*(\d+[\.,]?\d*)/;
+            for (const line of lines) {
+                const match = line.match(itemPattern);
+                if (match && match[3] !== total) {
+                    const itemName = match[1].trim();
+                    const itemPrice = match[3].replace(',', '.');
+                    if (itemName.length > 2 && itemName.length < 50) {
+                        items.push(`${itemName}: ${match[2]}${itemPrice}`);
+                    }
+                }
+            }
+
+            return {
+                date,
+                merchant: merchant || 'Unknown',
+                items: items.slice(0, 5).join(', ') || 'See receipt',  // Limit to first 5 items
+                paymentMethod: 'Card',
+                category: 'General',
+                total: total || '0',
+                currency
+            };
+        }
+
+        async function saveToSheets() {
+            const data = {
+                date: document.getElementById('date').value,
+                merchant: document.getElementById('merchant').value,
+                items: document.getElementById('items').value,
+                paymentMethod: document.getElementById('paymentMethod').value,
+                category: document.getElementById('category').value,
+                currency: document.getElementById('currency').value,
+                total: document.getElementById('total').value,
+                totalJPY: document.getElementById('totalJPY').value
+            };
+
+            try {
+                // Get current data
+                const getResponse = await fetch(
+                    `https://sheets.googleapis.com/v4/spreadsheets/${state.spreadsheetId}/values/Sheet1!A:H`,
+                    {
+                        headers: { 'Authorization': `Bearer ${state.accessToken}` }
+                    }
+                );
+                
+                if (!getResponse.ok) {
+                    if (getResponse.status === 401) {
+                        throw new Error('Session expired. Please sign in again.');
+                    }
+                    throw new Error('Failed to read spreadsheet. Check your Spreadsheet ID and permissions.');
+                }
+
+                const getData = await getResponse.json();
+                const rows = getData.values || [];
+                
+                const lastBalance = rows.length > 1 ? parseFloat(rows[rows.length - 1][7]) || 0 : 0;
+                const newBalance = lastBalance - parseFloat(data.totalJPY);
+
+                const newRow = [
+                    data.date,
+                    data.merchant,
+                    data.items,
+                    data.paymentMethod,
+                    data.category,
+                    `${data.total} ${data.currency}`,
+                    data.totalJPY,
+                    newBalance.toFixed(0)
+                ];
+
+                // Append row
+                const appendResponse = await fetch(
+                    `https://sheets.googleapis.com/v4/spreadsheets/${state.spreadsheetId}/values/Sheet1!A:H:append?valueInputOption=USER_ENTERED`,
+                    {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${state.accessToken}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ values: [newRow] })
+                    }
+                );
+
+                if (!appendResponse.ok) {
+                    if (appendResponse.status === 401) {
+                        throw new Error('Session expired. Please sign in again.');
+                    }
+                    throw new Error('Failed to save to spreadsheet');
+                }
+
+                showMessage('Receipt saved successfully!', 'success');
+                setTimeout(() => {
+                    cancelReview();
+                }, 1500);
+            } catch (err) {
+                console.error(err);
+                showMessage(err.message, 'error');
+                if (err.message.includes('Session expired')) {
+                    setTimeout(() => signOut(), 2000);
+                }
+            }
+        }
+
+        function cancelReview() {
+            document.getElementById('review').classList.add('hidden');
+            document.getElementById('scanner').classList.remove('hidden');
+            document.getElementById('fileInput').value = '';
+        }
+
+        function showMessage(text, type) {
+            const msg = document.getElementById('message');
+            msg.textContent = text;
+            msg.className = type === 'error' 
+                ? 'flex items-center gap-2 text-red-600 text-sm bg-red-50 p-3 rounded'
+                : 'flex items-center gap-2 text-green-600 text-sm bg-green-50 p-3 rounded';
+            msg.classList.remove('hidden');
+            
+            setTimeout(() => {
+                msg.classList.add('hidden');
+            }, 5000);
+        }
+    </script>
+</body>
+</html>: 'USD', '€': 'EUR', '¥': 'JPY' };
+                    document.getElementById('currency').value = currencyMap[parsed.currency] || 'GBP';
+                    await updateJPYTotal();
 
                     document.getElementById('processing').classList.add('hidden');
                     document.getElementById('review').classList.remove('hidden');
@@ -368,56 +650,105 @@
         function parseReceipt(text) {
             const lines = text.split('\n').filter(line => line.trim());
             
+            // Extract date - look for various formats
             let date = new Date().toISOString().split('T')[0];
             const datePatterns = [
-                /(\d{1,2}[\/\-\.]\d{1,2}[\/\-\.]\d{2,4})/,
-                /(\d{4}[\/\-\.]\d{1,2}[\/\-\.]\d{1,2})/
+                /(\d{4}[\.\-\/]\d{1,2}[\.\-\/]\d{1,2})/,  // 2025.12.04 or 2025-12-04
+                /(\d{1,2}[\.\-\/]\d{1,2}[\.\-\/]\d{4})/,  // 04.12.2025 or 04/12/2025
+                /(\d{1,2}[\.\-\/]\d{1,2}[\.\-\/]\d{2})/   // 04.12.25
             ];
             for (const pattern of datePatterns) {
                 const match = text.match(pattern);
                 if (match) {
-                    date = match[1];
+                    let dateStr = match[1];
+                    // Convert to YYYY-MM-DD format
+                    if (dateStr.match(/^\d{4}/)) {
+                        date = dateStr.replace(/\./g, '-').replace(/\//g, '-');
+                    } else {
+                        // Try to parse and format
+                        const parts = dateStr.split(/[\.\-\/]/);
+                        if (parts.length === 3) {
+                            const year = parts[2].length === 2 ? '20' + parts[2] : parts[2];
+                            date = `${year}-${parts[1].padStart(2, '0')}-${parts[0].padStart(2, '0')}`;
+                        }
+                    }
                     break;
                 }
             }
 
-            let merchant = lines[0] || '';
-            for (let i = 0; i < Math.min(3, lines.length); i++) {
-                if (lines[i].length > merchant.length && lines[i].length < 50) {
-                    merchant = lines[i];
+            // Extract merchant - clean up common OCR noise
+            let merchant = '';
+            for (let i = 0; i < Math.min(5, lines.length); i++) {
+                const line = lines[i].trim();
+                // Skip lines that are too short, too long, or contain numbers/prices
+                if (line.length > 3 && line.length < 40 && !line.match(/[\d£$¥€]{2,}/)) {
+                    merchant = line;
+                    break;
                 }
             }
+            // Clean merchant name - remove common OCR artifacts
+            merchant = merchant
+                .replace(/\$[A-Z]+$/, '')  // Remove trailing $XXX
+                .replace(/[^\w\s\-&]/g, '') // Remove special chars except word chars, spaces, hyphens, &
+                .trim();
 
+            // Extract total - look for common total patterns
             let total = '';
+            let currency = '£'; // Default to GBP
             const totalPatterns = [
-                /total[:\s]*£?(\d+\.?\d*)/i,
-                /amount[:\s]*£?(\d+\.?\d*)/i,
-                /£(\d+\.?\d*)/
+                /total[:\s]*([£$¥€])?\s*(\d+[\.,]\d{2})/i,
+                /amount[:\s]*([£$¥€])?\s*(\d+[\.,]\d{2})/i,
+                /([£$¥€])\s*(\d+[\.,]\d{2})\s*total/i,
+                /balance[:\s]*([£$¥€])?\s*(\d+[\.,]\d{2})/i,
+                /([£$¥€])\s*(\d+[\.,]\d{2})\s*$/m  // Currency symbol followed by amount at end of line
             ];
+            
             for (const pattern of totalPatterns) {
                 const match = text.match(pattern);
                 if (match) {
-                    total = match[1];
+                    currency = match[1] || '£';
+                    total = match[2].replace(',', '.');
                     break;
                 }
             }
 
+            // If still no total, look for the largest number that looks like money
+            if (!total) {
+                const amounts = text.match(/([£$¥€])\s*(\d+[\.,]\d{2})/g);
+                if (amounts && amounts.length > 0) {
+                    const largest = amounts
+                        .map(a => {
+                            const m = a.match(/([£$¥€])\s*(\d+[\.,]\d{2})/);
+                            return { currency: m[1], amount: parseFloat(m[2].replace(',', '.')) };
+                        })
+                        .sort((a, b) => b.amount - a.amount)[0];
+                    currency = largest.currency;
+                    total = largest.amount.toString();
+                }
+            }
+
+            // Extract items - lines with prices
             const items = [];
-            const itemPattern = /(.+?)\s+£?(\d+\.?\d*)/;
+            const itemPattern = /(.+?)[:\s]+([£$¥€])\s*(\d+[\.,]?\d*)/;
             for (const line of lines) {
                 const match = line.match(itemPattern);
-                if (match && match[2] !== total) {
-                    items.push(`${match[1].trim()}: £${match[2]}`);
+                if (match && match[3] !== total) {
+                    const itemName = match[1].trim();
+                    const itemPrice = match[3].replace(',', '.');
+                    if (itemName.length > 2 && itemName.length < 50) {
+                        items.push(`${itemName}: ${match[2]}${itemPrice}`);
+                    }
                 }
             }
 
             return {
                 date,
-                merchant: merchant.trim(),
-                items: items.join(', ') || 'See receipt',
+                merchant: merchant || 'Unknown',
+                items: items.slice(0, 5).join(', ') || 'See receipt',  // Limit to first 5 items
                 paymentMethod: 'Card',
                 category: 'General',
-                total: total || '0'
+                total: total || '0',
+                currency
             };
         }
 
