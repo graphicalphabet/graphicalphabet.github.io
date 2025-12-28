@@ -339,6 +339,7 @@
         function parseReceipt(text) {
             const lines = text.split('\n').filter(line => line.trim());
             
+            // Extract date
             let date = new Date().toISOString().split('T')[0];
             const datePatterns = [
                 /(\d{4}[\.\-\/]\d{1,2}[\.\-\/]\d{1,2})/,
@@ -362,6 +363,7 @@
                 }
             }
 
+            // Extract merchant
             let merchant = '';
             for (let i = 0; i < Math.min(5, lines.length); i++) {
                 const line = lines[i].trim();
@@ -372,47 +374,76 @@
             }
             merchant = merchant.replace(/\$[A-Z]+$/, '').replace(/[^\w\s\-&]/g, '').trim();
 
+            // Extract total - improved to handle Japanese yen format
             let total = '';
-            let currency = '£';
-            const totalPatterns = [
-                /total[:\s]*([£$¥€])?\s*(\d+[\.,]\d{2})/i,
-                /amount[:\s]*([£$¥€])?\s*(\d+[\.,]\d{2})/i,
-                /([£$¥€])\s*(\d+[\.,]\d{2})\s*total/i,
-                /balance[:\s]*([£$¥€])?\s*(\d+[\.,]\d{2})/i
-            ];
+            let currency = '¥'; // Default for Japanese receipts
             
-            for (const pattern of totalPatterns) {
-                const match = text.match(pattern);
-                if (match) {
-                    currency = match[1] || '£';
-                    total = match[2].replace(',', '.');
-                    break;
+            // Look for Japanese yen amounts (¥39,800 or ¥39.800)
+            const yenPattern = /¥\s*(\d{1,3}(?:[,\.]\d{3})+)/;
+            const yenMatch = text.match(yenPattern);
+            if (yenMatch) {
+                currency = '¥';
+                total = yenMatch[1].replace(/[,\.]/g, ''); // Remove separators for yen
+            } else {
+                // Look for other currencies
+                const totalPatterns = [
+                    /total[:\s]*([£$€])?\s*(\d+[\.,]\d{2})/i,
+                    /amount[:\s]*([£$€])?\s*(\d+[\.,]\d{2})/i,
+                    /([£$€])\s*(\d+[\.,]\d{2})/
+                ];
+                
+                for (const pattern of totalPatterns) {
+                    const match = text.match(pattern);
+                    if (match) {
+                        currency = match[1] || '£';
+                        total = match[2].replace(',', '.');
+                        break;
+                    }
                 }
             }
 
+            // If still no total, find largest amount
             if (!total) {
-                const amounts = text.match(/([£$¥€])\s*(\d+[\.,]\d{2})/g);
+                const amounts = text.match(/([£$¥€])\s*(\d+(?:[,\.]\d{3})*(?:[\.,]\d{2})?)/g);
                 if (amounts && amounts.length > 0) {
                     const largest = amounts
                         .map(a => {
-                            const m = a.match(/([£$¥€])\s*(\d+[\.,]\d{2})/);
-                            return { currency: m[1], amount: parseFloat(m[2].replace(',', '.')) };
+                            const m = a.match(/([£$¥€])\s*(\d+(?:[,\.]\d{3})*(?:[\.,]\d{2})?)/);
+                            const curr = m[1];
+                            let amt = m[2];
+                            // Handle yen (no decimals) vs others
+                            if (curr === '¥') {
+                                amt = amt.replace(/[,\.]/g, '');
+                            } else {
+                                amt = amt.replace(',', '.');
+                            }
+                            return { currency: curr, amount: parseFloat(amt), original: m[2] };
                         })
                         .sort((a, b) => b.amount - a.amount)[0];
                     currency = largest.currency;
-                    total = largest.amount.toString();
+                    total = largest.currency === '¥' ? largest.original.replace(/[,\.]/g, '') : largest.original.replace(',', '.');
                 }
             }
 
+            // Extract items - focus on product names only
             const items = [];
-            const itemPattern = /(.+?)[:\s]+([£$¥€])\s*(\d+[\.,]?\d*)/;
+            const itemPatterns = [
+                /^([A-Za-z][A-Za-z\s]+\d*)[:\s]+[¥£$€]\s*\d+/,  // Product name followed by price
+                /^([A-Z][a-z]+(?:\s+[A-Z][a-z]+)*)[:\s]+/        // Capitalized words
+            ];
+            
             for (const line of lines) {
-                const match = line.match(itemPattern);
-                if (match && match[3] !== total) {
-                    const itemName = match[1].trim();
-                    const itemPrice = match[3].replace(',', '.');
-                    if (itemName.length > 2 && itemName.length < 50) {
-                        items.push(`${itemName}: ${match[2]}${itemPrice}`);
+                // Skip lines with too much noise
+                if (line.match(/CREDIT|DEBIT|VISA|MASTER|HXIEE|sess/i)) continue;
+                
+                for (const pattern of itemPatterns) {
+                    const match = line.match(pattern);
+                    if (match) {
+                        const itemName = match[1].trim();
+                        if (itemName.length > 2 && itemName.length < 40 && !items.includes(itemName)) {
+                            items.push(itemName);
+                            break;
+                        }
                     }
                 }
             }
@@ -420,7 +451,7 @@
             return {
                 date,
                 merchant: merchant || 'Unknown',
-                items: items.slice(0, 5).join(', ') || 'See receipt',
+                items: items.slice(0, 3).join(', ') || 'See receipt',
                 paymentMethod: 'Card',
                 category: 'General',
                 total: total || '0',
