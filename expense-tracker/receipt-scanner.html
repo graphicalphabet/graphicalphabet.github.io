@@ -200,16 +200,28 @@
 
         // Initialize
         window.addEventListener('DOMContentLoaded', () => {
+            console.log('Page loaded');
+            
             // Check for OAuth callback
-            const params = new URLSearchParams(window.location.hash.substring(1));
+            const hash = window.location.hash.substring(1);
+            console.log('Hash:', hash);
+            
+            const params = new URLSearchParams(hash);
             const token = params.get('access_token');
             
+            console.log('Token:', token ? 'Found' : 'Not found');
+            
             if (token) {
+                console.log('Processing OAuth token');
                 state.accessToken = token;
                 localStorage.setItem('accessToken', token);
                 localStorage.setItem('tokenTimestamp', Date.now().toString());
-                getUserInfo(token);
+                
+                // Clean URL immediately
                 window.history.replaceState({}, document.title, window.location.pathname);
+                
+                // Skip getUserInfo and go straight to setup
+                showSetup();
                 return;
             }
 
@@ -217,19 +229,18 @@
             const savedToken = localStorage.getItem('accessToken');
             const tokenTimestamp = localStorage.getItem('tokenTimestamp');
             
+            console.log('Saved token:', savedToken ? 'Found' : 'Not found');
+            
             if (savedToken && tokenTimestamp) {
                 const tokenAge = Date.now() - parseInt(tokenTimestamp);
+                console.log('Token age (minutes):', Math.floor(tokenAge / 60000));
+                
                 if (tokenAge < 50 * 60 * 1000) {
                     state.accessToken = savedToken;
-                    const savedEmail = localStorage.getItem('userEmail');
-                    if (savedEmail) {
-                        state.userEmail = savedEmail;
-                        showSetup();
-                    } else {
-                        getUserInfo(savedToken);
-                    }
+                    showSetup();
                     return;
                 } else {
+                    console.log('Token expired, clearing');
                     localStorage.removeItem('accessToken');
                     localStorage.removeItem('tokenTimestamp');
                     localStorage.removeItem('userEmail');
@@ -237,6 +248,7 @@
             }
 
             // Show sign in
+            console.log('Showing sign in screen');
             document.getElementById('signin').classList.remove('hidden');
         });
 
@@ -270,12 +282,12 @@
         }
 
         function showSetup() {
+            console.log('Showing setup screen');
             document.getElementById('signin').classList.add('hidden');
             document.getElementById('setup').classList.remove('hidden');
             
-            if (state.userEmail) {
-                document.getElementById('userEmail').textContent = `Signed in as ${state.userEmail}`;
-            }
+            // Just show "Signed in" without email
+            document.getElementById('userEmail').textContent = 'Signed in successfully';
             
             if (state.spreadsheetId) {
                 document.getElementById('spreadsheetId').value = state.spreadsheetId;
@@ -283,6 +295,7 @@
 
             // Auto-continue if spreadsheet ID is already saved
             if (state.spreadsheetId) {
+                console.log('Auto-continuing to scanner');
                 showScanner();
             }
         }
