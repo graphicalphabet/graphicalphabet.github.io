@@ -238,9 +238,13 @@
                 document.getElementById('processing').classList.remove('hidden');
 
                 try {
-                    const result = await Tesseract.recognize(imageData, 'eng');
-                    const text = result.data.text;
-                    const parsed = parseReceipt(text);
+                    // Configure Tesseract for better receipt OCR accuracy
+                    const { data: { text } } = await Tesseract.recognize(imageData, 'eng', {
+                        tessedit_pageseg_mode: '6', // Uniform block of text (good for receipts)
+                    });
+                    
+                    const normalizedText = normalizeOCRText(text);
+                    const parsed = parseReceipt(normalizedText);
                     
                     document.getElementById('date').value = parsed.date;
                     document.getElementById('merchant').value = parsed.merchant;
@@ -265,6 +269,25 @@
                 }
             };
             reader.readAsDataURL(file);
+        }
+
+        function normalizeOCRText(text) {
+            // Fix common OCR character recognition errors
+            let normalized = text;
+            
+            // Normalize whitespace first
+            normalized = normalized.replace(/\s+/g, ' ');
+            
+            // Fix currency symbol confusion (be conservative - only in specific contexts)
+            // Y followed immediately by number is often ¥ (when not part of a word)
+            normalized = normalized.replace(/(?:^|\s)Y(\d)/g, ' ¥$1');
+            // Clean up extra spaces
+            normalized = normalized.replace(/\s+/g, ' ');
+            
+            // Note: We'll handle decimal point OCR errors (O/o/I/l/|) during parsing
+            // rather than globally, to avoid corrupting merchant names that contain these letters
+            
+            return normalized;
         }
 
         function parseReceipt(text) {
@@ -339,12 +362,16 @@
                     if (!line.match(/[a-zA-Z]/)) continue;
                     
                     // Clean and validate merchant name
-                    const cleaned = line.replace(/[^\w\s\-&'\.]/g, '').trim();
+                    let cleaned = line.replace(/[^\w\s\-&'\.]/g, '').trim();
+                    // Fix common OCR errors in merchant names (conservative - only obvious cases)
+                    // Don't fix numbers that might be part of merchant names
                     if (cleaned && cleaned.length > 2 && cleaned.match(/[a-zA-Z]/)) {
                         // Additional validation: should have more letters than numbers
                         const letterCount = (cleaned.match(/[a-zA-Z]/g) || []).length;
                         const digitCount = (cleaned.match(/\d/g) || []).length;
                         if (letterCount > digitCount && letterCount > 2) {
+                            // Clean up common OCR artifacts while preserving legitimate characters
+                            cleaned = cleaned.replace(/\s+/g, ' '); // Normalize spaces
                             merchant = cleaned;
                             break;
                         }
@@ -368,14 +395,15 @@
                 currency = '€';
             }
             
+            // Patterns that account for OCR errors (O/o/0 for decimal, I/l/| for decimal)
             const totalPatterns = [
-                /total[:\s]*(?:inr|₹|rs\.?)?\s*(\d{1,}[\.,]?\d*)/i,
-                /amount[:\s]*(?:inr|₹|rs\.?)?\s*(\d{1,}[\.,]?\d*)/i,
-                /grand\s+total[:\s]*(?:inr|₹|rs\.?)?\s*(\d{1,}[\.,]?\d*)/i,
-                /(?:inr|₹|rs\.?)\s*(\d{1,}[\.,]?\d+)/i,
-                /[¥₹]\s*(\d{1,}(?:[,\.]\d{3})*(?:[,\.]\d{2})?)/,
-                /([£$€])\s*(\d{1,}(?:[,\.]\d{3})*[,\.]\d{2})/,
-                /([£$€])\s*(\d+[\.,]\d{2})/
+                /total[:\s]*(?:inr|₹|rs\.?)?\s*(\d{1,}[Oo0.,Il|]?\d*)/i,
+                /amount[:\s]*(?:inr|₹|rs\.?)?\s*(\d{1,}[Oo0.,Il|]?\d*)/i,
+                /grand\s+total[:\s]*(?:inr|₹|rs\.?)?\s*(\d{1,}[Oo0.,Il|]?\d*)/i,
+                /(?:inr|₹|rs\.?)\s*(\d{1,}[Oo0.,Il|]?\d+)/i,
+                /[¥₹]\s*(\d{1,}(?:[,\.Oo0]\d{3})*(?:[,\.Oo0Il|]\d{2})?)/,
+                /([£$€])\s*(\d{1,}(?:[,\.Oo0]\d{3})*[,\.Oo0Il|]\d{2})/,
+                /([£$€])\s*(\d+[Oo0.,Il|]\d{2})/
             ];
             
             for (const pattern of totalPatterns) {
@@ -385,12 +413,18 @@
                         currency = match[1];
                         total = match[2];
                     } else {
-                        total = match[1] || match[2] || match[0].replace(/[^\d\.,]/g, '');
+                        total = match[1] || match[2] || match[0].replace(/[^\d\.,Oo0Il|]/g, '');
                     }
+                    // Fix OCR errors in total: convert O/o/I/l/| to decimal separators
+                    // O/o between digits (usually means decimal point)
+                    total = total.replace(/(\d)\s*[Oo0]\s*(\d{1,2})\b/g, '$1.$2');
+                    // I/l/| between digits (often misread as decimal)
+                    total = total.replace(/(\d)\s*[Il|]\s*(\d{1,2})\b/g, '$1.$2');
+                    
                     // Handle decimal positions properly
                     if (currency === '¥' || currency === '₹') {
                         // JPY/INR: no decimals, remove all separators
-                        total = total.replace(/[.,]/g, '');
+                        total = total.replace(/[.,Oo0Il|]/g, '');
                     } else {
                         // USD/GBP/EUR: handle thousands separators vs decimal point
                         // Check if it looks like US format (comma for thousands, dot for decimals): 1,234.56
@@ -434,24 +468,29 @@
             }
 
             if (!total || parseFloat(total) < 1) {
-                const amounts = text.match(/(?:INR|₹|Rs\.?|¥|£|\$|€)\s*(\d{1,}(?:[,\.]\d{3})*(?:[,\.]\d{2})?)/gi);
+                // Match amounts with OCR error tolerance (O/o/0, I/l/| for decimals, Y for ¥)
+                const amounts = text.match(/(?:INR|₹|Rs\.?|¥|£|\$|€|Y)\s*(\d{1,}(?:[,\.Oo0]\d{3})*(?:[,\.Oo0Il|]\d{2})?)/gi);
                 if (amounts && amounts.length > 0) {
                     const largest = amounts
                         .map(a => {
-                            const m = a.match(/(INR|₹|Rs\.?|¥|£|\$|€)\s*(\d{1,}(?:[,\.]\d{3})*(?:[,\.]\d{2})?)/i);
+                            const m = a.match(/(INR|₹|Rs\.?|¥|£|\$|€|Y)\s*(\d{1,}(?:[,\.Oo0]\d{3})*(?:[,\.Oo0Il|]\d{2})?)/i);
                             if (!m) return null;
                             const curr = m[1];
                             let currSymbol = '₹';
                             if (curr.match(/₹|INR|Rs/i)) currSymbol = '₹';
-                            else if (curr.match(/¥/)) currSymbol = '¥';
+                            else if (curr.match(/¥|Y/)) currSymbol = '¥';
                             else if (curr.match(/\$/)) currSymbol = '$';
                             else if (curr.match(/£/)) currSymbol = '£';
                             else if (curr.match(/€/)) currSymbol = '€';
                             
                             let amt = m[2];
+                            // Fix OCR errors: convert O/o/I/l/| to decimal separators
+                            amt = amt.replace(/(\d)\s*[Oo0]\s*(\d{1,2})\b/g, '$1.$2');
+                            amt = amt.replace(/(\d)\s*[Il|]\s*(\d{1,2})\b/g, '$1.$2');
+                            
                             if (currSymbol === '¥' || currSymbol === '₹') {
                                 // JPY/INR: no decimals, remove all separators
-                                amt = amt.replace(/[,\.]/g, '');
+                                amt = amt.replace(/[.,Oo0Il|]/g, '');
                             } else {
                                 // USD/GBP/EUR: handle thousands separators vs decimal point
                                 // Check if it looks like US format (comma for thousands, dot for decimals): 1,234.56
