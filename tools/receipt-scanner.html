@@ -247,24 +247,22 @@
 
             let merchant = '';
             const merchantPatterns = [
-                /Apple/i, /Starbucks/i, /McDonald/i, /Amazon/i, /Walmart/i,
-                /Visa/i, /Mastercard/i, /Amex/i, /American\s+Express/i,
-                /^([A-Z][A-Z\s&]{2,25})$/m
+                /Apple/i, /Starbucks/i, /McDonald/i, /Amazon/i, /Walmart/i
             ];
             for (const pattern of merchantPatterns) {
                 const match = text.match(pattern);
                 if (match) {
-                    merchant = match[0] || match[1];
-                    merchant = merchant.replace(/[^\w\s&]/g, '').trim();
+                    merchant = match[0];
                     break;
                 }
             }
             if (!merchant) {
-                for (let i = 0; i < Math.min(8, lines.length); i++) {
+                for (let i = 0; i < Math.min(10, lines.length); i++) {
                     const line = lines[i].trim();
-                    if (line.length > 3 && line.length < 35 && !line.match(/[\d¥£$€₹]/)) {
+                    if (line.match(/visa|mastercard|amex|credit|debit|card\s*no/i)) continue;
+                    if (line.length > 5 && line.length < 50 && !line.match(/^\d/) && !line.match(/[\d¥£$€₹]\s*\d/)) {
                         const cleaned = line.replace(/[^\w\s\-&]/g, '').trim();
-                        if (cleaned && cleaned.length > 3) {
+                        if (cleaned && cleaned.length > 5 && cleaned.match(/[a-zA-Z]/)) {
                             merchant = cleaned;
                             break;
                         }
@@ -280,55 +278,410 @@
             } else if (text.match(/JPY|¥|Yen/i)) {
                 currency = '¥';
             } else if (text.match(/USD|\$|Dollar/i)) {
-                currency = '$';
+                currency = '
+
+            const items = [];
+            const productPatterns = [/AirPods[^,\n]*/i, /iPhone[^,\n]*/i, /iPad[^,\n]*/i, /MacBook[^,\n]*/i, /Apple\s+Watch[^,\n]*/i];
+            for (const pattern of productPatterns) {
+                const match = text.match(pattern);
+                if (match) {
+                    let item = match[0].trim();
+                    item = item.replace(/[¥£$€₹]\s*\d+.*$/, '').trim();
+                    if (!item.match(/CREDIT|VISA|Nathan|Paterson/i) && item.length > 3) {
+                        if (!items.includes(item)) {
+                            items.push(item);
+                        }
+                    }
+                }
+            }
+
+            return {
+                date,
+                merchant: merchant || 'Unknown',
+                items: items.slice(0, 2).join(', ') || 'See receipt',
+                paymentMethod: 'Card',
+                category: 'General',
+                total: total || '0',
+                currency
+            };
+        }
+
+        function formatNumber(num, currency) {
+            const n = parseFloat(num);
+            if (isNaN(n)) return num;
+            if (currency === 'JPY' || currency === 'INR') {
+                return Math.round(n).toLocaleString('en-US');
+            } else if (currency === 'GBP' || currency === 'USD' || currency === 'EUR') {
+                return n.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            }
+            return num;
+        }
+
+        async function updateJPYTotal() {
+            const totalStr = document.getElementById('total').value.replace(/,/g, '');
+            const total = parseFloat(totalStr) || 0;
+            const currency = document.getElementById('currency').value;
+            const dateStr = document.getElementById('date').value;
+            
+            if (currency === 'JPY') {
+                document.getElementById('totalJPY').value = formatNumber(total, 'JPY');
+                return;
+            }
+
+            try {
+                let rate;
+                if (dateStr) {
+                    const date = new Date(dateStr);
+                    const formattedDate = date.toISOString().split('T')[0];
+                    try {
+                        const historicalResponse = await fetch(`https://api.exchangerate-api.com/v4/history/${currency}/${formattedDate}`);
+                        if (historicalResponse.ok) {
+                            const historicalData = await historicalResponse.json();
+                            rate = historicalData.rates && historicalData.rates.JPY;
+                        }
+                    } catch (histErr) {
+                        console.log('Historical rate not available, using current rate');
+                    }
+                }
+                
+                if (!rate) {
+                    const response = await fetch(`https://api.exchangerate-api.com/v4/latest/${currency}`);
+                    const data = await response.json();
+                    rate = data.rates.JPY;
+                }
+                
+                const jpy = Math.round(total * rate);
+                document.getElementById('totalJPY').value = formatNumber(jpy, 'JPY');
+            } catch (err) {
+                console.error('Currency conversion failed:', err);
+                document.getElementById('totalJPY').value = '0';
+            }
+        }
+
+        async function saveToSheets() {
+            const totalStr = document.getElementById('total').value.replace(/,/g, '');
+            const totalJPYStr = document.getElementById('totalJPY').value.replace(/,/g, '');
+            
+            const data = {
+                date: document.getElementById('date').value,
+                merchant: document.getElementById('merchant').value,
+                items: document.getElementById('items').value,
+                paymentMethod: document.getElementById('paymentMethod').value,
+                category: document.getElementById('category').value,
+                currency: document.getElementById('currency').value,
+                total: totalStr,
+                totalJPY: totalJPYStr
+            };
+
+            try {
+                const getResponse = await fetch(
+                    `https://sheets.googleapis.com/v4/spreadsheets/${state.spreadsheetId}/values/Sheet1!A:I`,
+                    {headers: {'Authorization': `Bearer ${state.accessToken}`}}
+                );
+                
+                if (!getResponse.ok) {
+                    if (getResponse.status === 401) {
+                        throw new Error('Session expired. Please sign in again.');
+                    }
+                    throw new Error('Failed to read spreadsheet.');
+                }
+
+                const getData = await getResponse.json();
+                const rows = getData.values || [];
+                const lastBalance = rows.length > 1 ? parseFloat(rows[rows.length - 1][8].replace(/,/g, '')) || 0 : 0;
+                const newBalance = lastBalance - parseFloat(data.totalJPY);
+
+                const newRow = [
+                    data.date,
+                    data.merchant,
+                    data.items,
+                    data.paymentMethod,
+                    data.category,
+                    data.currency,
+                    formatNumber(data.total, data.currency),
+                    formatNumber(data.totalJPY, 'JPY'),
+                    formatNumber(newBalance, 'JPY')
+                ];
+
+                const appendResponse = await fetch(
+                    `https://sheets.googleapis.com/v4/spreadsheets/${state.spreadsheetId}/values/Sheet1!A:I:append?valueInputOption=USER_ENTERED`,
+                    {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${state.accessToken}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({values: [newRow]})
+                    }
+                );
+
+                if (!appendResponse.ok) {
+                    throw new Error('Failed to save to spreadsheet');
+                }
+
+                showMessage('Receipt saved successfully!', 'success');
+                setTimeout(() => cancelReview(), 1500);
+            } catch (err) {
+                console.error(err);
+                showMessage(err.message, 'error');
+                if (err.message.includes('Session expired')) {
+                    setTimeout(() => signOut(), 2000);
+                }
+            }
+        }
+
+        function cancelReview() {
+            document.getElementById('review').classList.add('hidden');
+            document.getElementById('scanner').classList.remove('hidden');
+            document.getElementById('fileInput').value = '';
+        }
+
+        function showMessage(text, type) {
+            const msg = document.getElementById('message');
+            msg.textContent = text;
+            msg.className = type === 'error' 
+                ? 'flex items-center gap-2 text-red-600 text-sm bg-red-50 p-3 rounded'
+                : 'flex items-center gap-2 text-green-600 text-sm bg-green-50 p-3 rounded';
+            msg.classList.remove('hidden');
+            setTimeout(() => msg.classList.add('hidden'), 5000);
+        }
+    </script>
+</body>
+</html>;
             } else if (text.match(/GBP|£|Pound/i)) {
                 currency = '£';
             } else if (text.match(/EUR|€|Euro/i)) {
                 currency = '€';
             }
             
-            const currencyPattern = /[¥₹]\s*(\d{1,}(?:[,\.]\d{3})*(?:[,\.]\d{2})?)/;
-            const currencyMatch = text.match(currencyPattern);
-            if (currencyMatch) {
-                currency = currencyMatch[0].match(/[¥₹]/)[0];
-                total = currencyMatch[1].replace(/\./g, '').replace(/,/g, '');
-            } else {
-                const totalPatterns = [
-                    /total[:\s]*([£$€])?\s*(\d+[\.,]\d{2,})/i,
-                    /amount[:\s]*([£$€])?\s*(\d+[\.,]\d{2,})/i,
-                    /grand\s+total[:\s]*([£$€₹¥])?\s*(\d+[\.,]\d{2,})/i,
-                    /([£$€])\s*(\d+[\.,]\d{2})/
-                ];
-                for (const pattern of totalPatterns) {
-                    const match = text.match(pattern);
-                    if (match) {
-                        if (match[1]) currency = match[1];
-                        total = match[2].replace(',', '.');
-                        break;
+            const totalPatterns = [
+                /total[:\s]*(?:inr|₹|rs\.?)?\s*(\d{1,}[\.,]?\d*)/i,
+                /amount[:\s]*(?:inr|₹|rs\.?)?\s*(\d{1,}[\.,]?\d*)/i,
+                /grand\s+total[:\s]*(?:inr|₹|rs\.?)?\s*(\d{1,}[\.,]?\d*)/i,
+                /(?:inr|₹|rs\.?)\s*(\d{1,}[\.,]?\d+)/i,
+                /[¥₹]\s*(\d{1,}(?:[,\.]\d{3})*(?:[,\.]\d{2})?)/,
+                /([£$€])\s*(\d+[\.,]\d{2})/
+            ];
+            
+            for (const pattern of totalPatterns) {
+                const match = text.match(pattern);
+                if (match) {
+                    if (match[1] && match[2]) {
+                        currency = match[1];
+                        total = match[2];
+                    } else {
+                        total = match[1] || match[2] || match[0].replace(/[^\d\.,]/g, '');
+                    }
+                    if (currency === '¥' || currency === '₹') {
+                        total = total.replace(/\./g, '').replace(/,/g, '');
+                    } else {
+                        total = total.replace(',', '.');
+                    }
+                    break;
+                }
+            }
+
+            if (!total || parseFloat(total) < 1) {
+                const amounts = text.match(/(?:INR|₹|Rs\.?|¥|£|\$|€)\s*(\d{1,}(?:[,\.]\d{3})*(?:[,\.]\d{2})?)/gi);
+                if (amounts && amounts.length > 0) {
+                    const largest = amounts
+                        .map(a => {
+                            const m = a.match(/(INR|₹|Rs\.?|¥|£|\$|€)\s*(\d{1,}(?:[,\.]\d{3})*(?:[,\.]\d{2})?)/i);
+                            if (!m) return null;
+                            const curr = m[1];
+                            let currSymbol = '₹';
+                            if (curr.match(/₹|INR|Rs/i)) currSymbol = '₹';
+                            else if (curr.match(/¥/)) currSymbol = '¥';
+                            else if (curr.match(/\$/)) currSymbol = '
+
+            const items = [];
+            const productPatterns = [/AirPods[^,\n]*/i, /iPhone[^,\n]*/i, /iPad[^,\n]*/i, /MacBook[^,\n]*/i, /Apple\s+Watch[^,\n]*/i];
+            for (const pattern of productPatterns) {
+                const match = text.match(pattern);
+                if (match) {
+                    let item = match[0].trim();
+                    item = item.replace(/[¥£$€₹]\s*\d+.*$/, '').trim();
+                    if (!item.match(/CREDIT|VISA|Nathan|Paterson/i) && item.length > 3) {
+                        if (!items.includes(item)) {
+                            items.push(item);
+                        }
                     }
                 }
             }
 
-            if (!total) {
-                const amounts = text.match(/([£$¥€₹])\s*(\d+(?:[,\.]\d{3})*(?:[\.,]\d{2})?)/g);
-                if (amounts && amounts.length > 0) {
-                    const largest = amounts
-                        .map(a => {
-                            const m = a.match(/([£$¥€₹])\s*(\d+(?:[,\.]\d{3})*(?:[\.,]\d{2})?)/);
-                            const curr = m[1];
+            return {
+                date,
+                merchant: merchant || 'Unknown',
+                items: items.slice(0, 2).join(', ') || 'See receipt',
+                paymentMethod: 'Card',
+                category: 'General',
+                total: total || '0',
+                currency
+            };
+        }
+
+        function formatNumber(num, currency) {
+            const n = parseFloat(num);
+            if (isNaN(n)) return num;
+            if (currency === 'JPY' || currency === 'INR') {
+                return Math.round(n).toLocaleString('en-US');
+            } else if (currency === 'GBP' || currency === 'USD' || currency === 'EUR') {
+                return n.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            }
+            return num;
+        }
+
+        async function updateJPYTotal() {
+            const totalStr = document.getElementById('total').value.replace(/,/g, '');
+            const total = parseFloat(totalStr) || 0;
+            const currency = document.getElementById('currency').value;
+            const dateStr = document.getElementById('date').value;
+            
+            if (currency === 'JPY') {
+                document.getElementById('totalJPY').value = formatNumber(total, 'JPY');
+                return;
+            }
+
+            try {
+                let rate;
+                if (dateStr) {
+                    const date = new Date(dateStr);
+                    const formattedDate = date.toISOString().split('T')[0];
+                    try {
+                        const historicalResponse = await fetch(`https://api.exchangerate-api.com/v4/history/${currency}/${formattedDate}`);
+                        if (historicalResponse.ok) {
+                            const historicalData = await historicalResponse.json();
+                            rate = historicalData.rates && historicalData.rates.JPY;
+                        }
+                    } catch (histErr) {
+                        console.log('Historical rate not available, using current rate');
+                    }
+                }
+                
+                if (!rate) {
+                    const response = await fetch(`https://api.exchangerate-api.com/v4/latest/${currency}`);
+                    const data = await response.json();
+                    rate = data.rates.JPY;
+                }
+                
+                const jpy = Math.round(total * rate);
+                document.getElementById('totalJPY').value = formatNumber(jpy, 'JPY');
+            } catch (err) {
+                console.error('Currency conversion failed:', err);
+                document.getElementById('totalJPY').value = '0';
+            }
+        }
+
+        async function saveToSheets() {
+            const totalStr = document.getElementById('total').value.replace(/,/g, '');
+            const totalJPYStr = document.getElementById('totalJPY').value.replace(/,/g, '');
+            
+            const data = {
+                date: document.getElementById('date').value,
+                merchant: document.getElementById('merchant').value,
+                items: document.getElementById('items').value,
+                paymentMethod: document.getElementById('paymentMethod').value,
+                category: document.getElementById('category').value,
+                currency: document.getElementById('currency').value,
+                total: totalStr,
+                totalJPY: totalJPYStr
+            };
+
+            try {
+                const getResponse = await fetch(
+                    `https://sheets.googleapis.com/v4/spreadsheets/${state.spreadsheetId}/values/Sheet1!A:I`,
+                    {headers: {'Authorization': `Bearer ${state.accessToken}`}}
+                );
+                
+                if (!getResponse.ok) {
+                    if (getResponse.status === 401) {
+                        throw new Error('Session expired. Please sign in again.');
+                    }
+                    throw new Error('Failed to read spreadsheet.');
+                }
+
+                const getData = await getResponse.json();
+                const rows = getData.values || [];
+                const lastBalance = rows.length > 1 ? parseFloat(rows[rows.length - 1][8].replace(/,/g, '')) || 0 : 0;
+                const newBalance = lastBalance - parseFloat(data.totalJPY);
+
+                const newRow = [
+                    data.date,
+                    data.merchant,
+                    data.items,
+                    data.paymentMethod,
+                    data.category,
+                    data.currency,
+                    formatNumber(data.total, data.currency),
+                    formatNumber(data.totalJPY, 'JPY'),
+                    formatNumber(newBalance, 'JPY')
+                ];
+
+                const appendResponse = await fetch(
+                    `https://sheets.googleapis.com/v4/spreadsheets/${state.spreadsheetId}/values/Sheet1!A:I:append?valueInputOption=USER_ENTERED`,
+                    {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${state.accessToken}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({values: [newRow]})
+                    }
+                );
+
+                if (!appendResponse.ok) {
+                    throw new Error('Failed to save to spreadsheet');
+                }
+
+                showMessage('Receipt saved successfully!', 'success');
+                setTimeout(() => cancelReview(), 1500);
+            } catch (err) {
+                console.error(err);
+                showMessage(err.message, 'error');
+                if (err.message.includes('Session expired')) {
+                    setTimeout(() => signOut(), 2000);
+                }
+            }
+        }
+
+        function cancelReview() {
+            document.getElementById('review').classList.add('hidden');
+            document.getElementById('scanner').classList.remove('hidden');
+            document.getElementById('fileInput').value = '';
+        }
+
+        function showMessage(text, type) {
+            const msg = document.getElementById('message');
+            msg.textContent = text;
+            msg.className = type === 'error' 
+                ? 'flex items-center gap-2 text-red-600 text-sm bg-red-50 p-3 rounded'
+                : 'flex items-center gap-2 text-green-600 text-sm bg-green-50 p-3 rounded';
+            msg.classList.remove('hidden');
+            setTimeout(() => msg.classList.add('hidden'), 5000);
+        }
+    </script>
+</body>
+</html>;
+                            else if (curr.match(/£/)) currSymbol = '£';
+                            else if (curr.match(/€/)) currSymbol = '€';
+                            
                             let amt = m[2];
-                            if (curr === '¥' || curr === '₹') {
+                            if (currSymbol === '¥' || currSymbol === '₹') {
                                 amt = amt.replace(/[,\.]/g, '');
                             } else {
                                 amt = amt.replace(',', '.');
                             }
-                            return {currency: curr, amount: parseFloat(amt), original: m[2]};
+                            return {currency: currSymbol, amount: parseFloat(amt), original: m[2]};
                         })
+                        .filter(x => x !== null)
                         .sort((a, b) => b.amount - a.amount)[0];
-                    currency = largest.currency;
-                    total = (largest.currency === '¥' || largest.currency === '₹') 
-                        ? largest.original.replace(/[,\.]/g, '') 
-                        : largest.original.replace(',', '.');
+                    
+                    if (largest) {
+                        currency = largest.currency;
+                        total = (largest.currency === '¥' || largest.currency === '₹') 
+                            ? largest.original.replace(/[,\.]/g, '') 
+                            : largest.original.replace(',', '.');
+                    }
                 }
             }
 
