@@ -294,7 +294,7 @@
                 }
             }
 
-            // Extract merchant - skip credit card terms
+            // Extract merchant - skip credit card terms and bank names
             let merchant = '';
             const merchantPatterns = [
                 /Apple/i, /Starbucks/i, /McDonald/i, /Amazon/i, /Walmart/i
@@ -307,12 +307,44 @@
                 }
             }
             if (!merchant) {
-                for (let i = 0; i < Math.min(10, lines.length); i++) {
+                // Skip patterns that indicate bank/card info, not merchant names
+                const skipPatterns = [
+                    /visa|mastercard|amex|discover|diners|credit|debit|card\s*no|card\s*#|card\s*number/i,
+                    /account\s*no|account\s*#|account\s*number|a\/c\s*no/i,
+                    /bank|chase|citibank|wells\s*fargo|bank\s*of\s*america|hsbc|barclays/i,
+                    /transaction\s*id|auth\s*code|approval|ref\s*no|reference/i,
+                    /exp\s*date|expiry|valid\s*thru|valid\s*through/i,
+                    /^\d{4,}$|^\d{4}[\s\-]\d{4}[\s\-]\d{4}[\s\-]\d{4}$/, // Card numbers
+                    /^\d{1,2}[\/\-]\d{2,4}$/, // Dates at start of line
+                    /^[\d\s\-\(\)]+$/, // Phone numbers or IDs
+                    /www\.|http|\.com|\.net|\.org|email|@/i, // URLs and emails
+                    /receipt|invoice|bill\s*of\s*sale|transaction/i
+                ];
+                
+                // Focus on first 8 lines (merchant name is usually at the top)
+                for (let i = 0; i < Math.min(8, lines.length); i++) {
                     const line = lines[i].trim();
-                    if (line.match(/visa|mastercard|amex|credit|debit|card\s*no/i)) continue;
-                    if (line.length > 5 && line.length < 50 && !line.match(/^\d/) && !line.match(/[\d¥£$€₹]\s*\d/)) {
-                        const cleaned = line.replace(/[^\w\s\-&]/g, '').trim();
-                        if (cleaned && cleaned.length > 5 && cleaned.match(/[a-zA-Z]/)) {
+                    
+                    // Skip if matches any skip pattern
+                    if (skipPatterns.some(pattern => line.match(pattern))) continue;
+                    
+                    // Skip lines that are mostly numbers, dates, or amounts
+                    if (line.match(/^\d/) || line.match(/[\d¥£$€₹]\s*\d/)) continue;
+                    if (line.match(/^\d{1,2}[\/\-\.]\d{1,2}[\/\-\.]\d{2,4}/)) continue; // Dates
+                    
+                    // Skip very short or very long lines
+                    if (line.length < 3 || line.length > 60) continue;
+                    
+                    // Must contain letters
+                    if (!line.match(/[a-zA-Z]/)) continue;
+                    
+                    // Clean and validate merchant name
+                    const cleaned = line.replace(/[^\w\s\-&'\.]/g, '').trim();
+                    if (cleaned && cleaned.length > 2 && cleaned.match(/[a-zA-Z]/)) {
+                        // Additional validation: should have more letters than numbers
+                        const letterCount = (cleaned.match(/[a-zA-Z]/g) || []).length;
+                        const digitCount = (cleaned.match(/\d/g) || []).length;
+                        if (letterCount > digitCount && letterCount > 2) {
                             merchant = cleaned;
                             break;
                         }
@@ -342,6 +374,7 @@
                 /grand\s+total[:\s]*(?:inr|₹|rs\.?)?\s*(\d{1,}[\.,]?\d*)/i,
                 /(?:inr|₹|rs\.?)\s*(\d{1,}[\.,]?\d+)/i,
                 /[¥₹]\s*(\d{1,}(?:[,\.]\d{3})*(?:[,\.]\d{2})?)/,
+                /([£$€])\s*(\d{1,}(?:[,\.]\d{3})*[,\.]\d{2})/,
                 /([£$€])\s*(\d+[\.,]\d{2})/
             ];
             
@@ -354,10 +387,47 @@
                     } else {
                         total = match[1] || match[2] || match[0].replace(/[^\d\.,]/g, '');
                     }
+                    // Handle decimal positions properly
                     if (currency === '¥' || currency === '₹') {
-                        total = total.replace(/\./g, '').replace(/,/g, '');
+                        // JPY/INR: no decimals, remove all separators
+                        total = total.replace(/[.,]/g, '');
                     } else {
-                        total = total.replace(',', '.');
+                        // USD/GBP/EUR: handle thousands separators vs decimal point
+                        // Check if it looks like US format (comma for thousands, dot for decimals): 1,234.56
+                        if (total.match(/^\d{1,3}(,\d{3})*\.\d{2}$/)) {
+                            // US format: remove commas, keep dot
+                            total = total.replace(/,/g, '');
+                        }
+                        // Check if it looks like European format (dot for thousands, comma for decimals): 1.234,56
+                        else if (total.match(/^\d{1,3}(\.\d{3})*,\d{2}$/)) {
+                            // European format: remove dots, replace comma with dot
+                            total = total.replace(/\./g, '').replace(',', '.');
+                        }
+                        // If it has both comma and dot, assume comma is thousands separator
+                        else if (total.includes(',') && total.includes('.')) {
+                            // Determine which is decimal: usually the one with 1-2 digits after it
+                            const lastComma = total.lastIndexOf(',');
+                            const lastDot = total.lastIndexOf('.');
+                            if (lastDot > lastComma) {
+                                // Dot is decimal: remove commas
+                                total = total.replace(/,/g, '');
+                            } else {
+                                // Comma is decimal: remove dots, replace comma with dot
+                                total = total.replace(/\./g, '').replace(',', '.');
+                            }
+                        }
+                        // If only comma, check if it's likely decimal (2 digits after) or thousands
+                        else if (total.includes(',') && !total.includes('.')) {
+                            const parts = total.split(',');
+                            if (parts.length === 2 && parts[1].length === 2) {
+                                // Likely decimal: replace comma with dot
+                                total = total.replace(',', '.');
+                            } else {
+                                // Likely thousands separator: remove comma
+                                total = total.replace(/,/g, '');
+                            }
+                        }
+                        // If only dot, keep it (it's the decimal point)
                     }
                     break;
                 }
@@ -380,20 +450,51 @@
                             
                             let amt = m[2];
                             if (currSymbol === '¥' || currSymbol === '₹') {
+                                // JPY/INR: no decimals, remove all separators
                                 amt = amt.replace(/[,\.]/g, '');
                             } else {
-                                amt = amt.replace(',', '.');
+                                // USD/GBP/EUR: handle thousands separators vs decimal point
+                                // Check if it looks like US format (comma for thousands, dot for decimals): 1,234.56
+                                if (amt.match(/^\d{1,3}(,\d{3})*\.\d{2}$/)) {
+                                    amt = amt.replace(/,/g, '');
+                                }
+                                // Check if it looks like European format (dot for thousands, comma for decimals): 1.234,56
+                                else if (amt.match(/^\d{1,3}(\.\d{3})*,\d{2}$/)) {
+                                    amt = amt.replace(/\./g, '').replace(',', '.');
+                                }
+                                // If it has both comma and dot, assume comma is thousands separator
+                                else if (amt.includes(',') && amt.includes('.')) {
+                                    const lastComma = amt.lastIndexOf(',');
+                                    const lastDot = amt.lastIndexOf('.');
+                                    if (lastDot > lastComma) {
+                                        amt = amt.replace(/,/g, '');
+                                    } else {
+                                        amt = amt.replace(/\./g, '').replace(',', '.');
+                                    }
+                                }
+                                // If only comma, check if it's likely decimal (2 digits after) or thousands
+                                else if (amt.includes(',') && !amt.includes('.')) {
+                                    const parts = amt.split(',');
+                                    if (parts.length === 2 && parts[1].length === 2) {
+                                        amt = amt.replace(',', '.');
+                                    } else {
+                                        amt = amt.replace(/,/g, '');
+                                    }
+                                }
                             }
-                            return {currency: currSymbol, amount: parseFloat(amt), original: m[2]};
+                            return {
+                                currency: currSymbol, 
+                                amount: parseFloat(amt), 
+                                original: m[2],
+                                formatted: amt  // Store the properly formatted amount string
+                            };
                         })
                         .filter(x => x !== null)
                         .sort((a, b) => b.amount - a.amount)[0];
                     
                     if (largest) {
                         currency = largest.currency;
-                        total = (largest.currency === '¥' || largest.currency === '₹') 
-                            ? largest.original.replace(/[,\.]/g, '') 
-                            : largest.original.replace(',', '.');
+                        total = largest.formatted;  // Use the properly formatted amount
                     }
                 }
             }
