@@ -1106,6 +1106,9 @@ var quotes = [{
   quote: "The problem with the world is that the stupid are cocksure and the intelligent are full of doubt.",
   source: "Bertrand Russell"
 }, {
+  quote: "In the end, the work is not the lesson. The lesson is who you become while making it.",
+  source: "Dr. Kamal Sabran"
+}, {
   quote: "Stay light, stay free, stay kind. What is meant for you will stay, even if you’re not holding it tightly.",
   source: "Dr. Kamal Sabran"
 }, {
