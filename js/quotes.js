@@ -1,6 +1,9 @@
 var quotes = [{
-  quote: "It’s not about time, it’s about choices. How are you spending your choices?",
+  quote: "It's not about time, it's about choices. How are you spending your choices?",
   source: "Beverly Adamo"
+}, {
+  quote: "I love deadlines. I love the whooshing sound they make as they go by.",
+  source: "Douglas Adams"
 }, {
   quote: "Success is being excited to go to work and being excited to come home.",
   source: "Will Ahmed"
