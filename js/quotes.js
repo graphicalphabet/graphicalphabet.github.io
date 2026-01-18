@@ -86,6 +86,9 @@ var quotes = [{
   quote: "If you get tired, learn to rest, not to quit.",
   source: "Banksy"
 }, {
+  quote: "If you're in a place in life you don’t want to be, it’s up to you to make it better. To reframe it by focusing on the positive, and approaching it with enthusiasm. In the end, your positivity and enthusiasm will contribute to creating the outcome you’re after. Once you apply this mindset to all aspects of your life, you corner fear. Fear basically has nowhere to go.",
+  source: "Tom Brady"
+}, {
   quote: "Though no one can go back and make a brand new start, anyone can start from now and make a brand new ending.",
   source: "Carl Bard"
 }, {
