@@ -797,6 +797,9 @@ var quotes = [{
   quote: "Mistakes are always forgivable, if one has the courage to admit them.",
   source: "Bruce Lee"
 }, {
+  quote: "The great mistake is to anticipate the outcome of the engagement; you ought not to be thinking of whether it ends in victory or in defeat.",
+  source: "Bruce Lee"
+}, {
   quote: "Love is the flower you’ve got to let grow.",
   source: "John Lennon"
 }, {
@@ -1120,6 +1123,9 @@ var quotes = [{
 }, {
   quote: "If you wish to make an apple pie from scratch, you must first invent the universe.",
   source: "Carl Sagan"
+}, {
+  quote: "A designer knows he has achieved perfection not when there is nothing left to add, but when there is nothing left to take away.",
+  source: "Antoine de Saint-Exupéry"
 }, {
   quote: "If you want to build a ship, don’t herd people together to collect wood and don’t assign them tasks and work, but rather teach them to long for the endless immensity of the sea.",
   source: "Antoine de Saint-Exupéry"
