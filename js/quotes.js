@@ -1253,6 +1253,12 @@ var quotes = [{
   quote: "Life is 10% what happens to you and 90% how you react to it.",
   source: "Charles Swindoll"
 }, {
+  quote: "Do not be a slave to others when God has created you free.",
+  source: "Ali ibn Abi Talib"
+}, {
+  quote: "Do not speak unless your words are more beautiful than silence.",
+  source: "Ali ibn Abi Talib"
+}, {
   quote: "The secret of life is enjoying the passage of time.",
   source: "James Taylor"
 }, {
