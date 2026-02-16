@@ -1373,6 +1373,9 @@ var quotes = [{
   quote: "Anything one man can imagine, others can make real.",
   source: "Jules Verne"
 }, {
+  quote: "Audentes Fortuna iuvat. Fortune favours the bold.",
+  source: "Virgil"
+}, {
   quote: "Styles come and go. Good design is a language, not a style.",
   source: "Massimo Vignelli"
 }, {
