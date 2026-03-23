@@ -227,6 +227,9 @@ var quotes = [{
   quote: "Only to the extend that we expose ourselves over and over to annihilation can that which is indestructible in us be found.",
   source: "Pema Chödron"
 }, {
+  quote: "If you’re having fun, you’re dangerous. You’re hard to compete with.",
+  source: "James Clear"
+}, {
   quote: "Some areas of life reward your best day. Others punish your worst day. Know which situation you’re in, and you can better decide when to be risky and when to play it safe.",
   source: "James Clear"
 }, {
