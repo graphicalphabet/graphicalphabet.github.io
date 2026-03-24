@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>TETRIS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lekton:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/tetris.css">
+  </head>
+
+  <body>
+    <h1>TETRIS</h1>
+    <p class="tagline">Stack. Clear. Survive.</p>
+
+    <div class="game-wrapper">
+      <!-- Left panel: Score / Lines / Level / Controls -->
+      <div class="panel-left">
+        <div class="stat-box">
+          <div class="stat-label">Score</div>
+          <div class="stat-value" id="scoreDisplay">0</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Lines</div>
+          <div class="stat-value" id="linesDisplay">0</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Level</div>
+          <div class="stat-value" id="levelDisplay">1</div>
+        </div>
+        <div class="stat-box controls-box">
+          <div class="stat-label" style="margin-bottom: 6px;">Controls</div>
+          <span class="k">&#8592; &#8594;</span> Move<br>
+          <span class="k">&#8593;</span> Rotate<br>
+          <span class="k">&#8595;</span> Soft drop<br>
+          <span class="k">Spc</span> Hard drop<br>
+          <span class="k">P</span> Pause
+        </div>
+      </div>
+
+      <!-- Canvas -->
+      <div class="canvas-container" id="canvasWrap">
+        <canvas id="gameCanvas"></canvas>
+
+        <div class="overlay" id="overlayStart">
+          <div class="overlay-title" style="color: var(--yellow);">TETRIS</div>
+          <div class="overlay-sub">Stack the blocks.<br>Clear the lines.<br>Beat the board.</div>
+          <button class="btn" id="btnStart">Start Game</button>
+        </div>
+
+        <div class="overlay" id="overlayPause" style="display: none;">
+          <div class="overlay-title" style="color: var(--blue);">PAUSED</div>
+          <button class="btn" id="btnResume">Resume</button>
+        </div>
+
+        <div class="overlay" id="overlayGameOver" style="display: none;">
+          <div class="overlay-title" style="color: var(--red);">GAME OVER</div>
+          <div class="overlay-score" id="finalScore">0</div>
+          <div id="newHighMsg" style="font-size: 0.65rem; color: var(--green); letter-spacing: 0.15em; display: none;">&#10022; NEW HIGH SCORE &#10022;</div>
+          <input
+            class="name-input"
+            id="playerName"
+            type="text"
+            maxlength="14"
+            placeholder="Your name..."
+            autocomplete="off"
+            spellcheck="false"
+          >
+          <button class="btn" id="btnSave">Save Score</button>
+          <button class="btn btn-ghost" id="btnSkip">Skip</button>
+          <button class="btn btn-ghost" id="btnAgain" style="display: none;">Play Again</button>
+        </div>
+      </div>
+
+      <!-- Right panel: Next piece / Best -->
+      <div class="panel-right">
+        <div class="stat-box">
+          <div class="stat-label">Next</div>
+          <canvas id="nextCanvas"></canvas>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Best</div>
+          <div class="stat-value" id="bestDisplay">0</div>
+        </div>
+      </div>
+    </div>
+    <!-- /.game-wrapper -->
+
+    <!-- Touch controls (shown on mobile) -->
+    <div class="mobile-controls" id="mobileControls">
+      <div class="mobile-row">
+        <button class="mbtn" id="mLeft">&#8592;</button>
+        <button class="mbtn" id="mDown">&#8595;</button>
+        <button class="mbtn" id="mRight">&#8594;</button>
+      </div>
+      <div class="mobile-row">
+        <button class="mbtn" id="mRotate">&#8635;</button>
+        <button class="mbtn mbtn-wide" id="mDrop">HARD DROP</button>
+      </div>
+    </div>
+
+    <div class="leaderboard">
+      <div class="lb-title">Leaderboard</div>
+      <div id="lbList"></div>
+    </div>
+
+    <script src="../js/tetris.js"></script>
+  </body>
+</html>
