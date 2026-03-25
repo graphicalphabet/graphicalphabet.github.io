@@ -1,33 +1,35 @@
-/* ── Reset & base ─────────────────────────────────────────────────────────── */
+/* ── Reset & tokens ──────────────────────────────────────────────────────────── */
 :root {
-  --black:  #000000;
-  --blue:   #2E59A7;
-  --yellow: #FFEA00;
-  --red:    #E94B3C;
-  --orange: #FBA922;
-  --green:  #88B04B;
-  --pink:   #F9A7B0;
-  --white:  #F2F2F2;
-  --border: #1a1a1a;
-  --panel:  #0d0d0d;
+  --black:    #000000;
+  --blue:     #2E59A7;
+  --yellow:   #FFEA00;
+  --red:      #E94B3C;
+  --orange:   #FBA922;
+  --green:    #88B04B;
+  --pink:     #F9A7B0;
+  --white:    #F2F2F2;
+  --border:   #1a1a1a;
+  --panel:    #0d0d0d;
   /* Layout tokens — overridden per breakpoint */
-  --panel-w: 120px;
-  --gap:     14px;
-  --stat-fs: 1.4rem;
+  --panel-w:  120px;
+  --gap:      14px;
+  --stat-fs:  1.4rem;
   --label-fs: 0.55rem;
-  --ctrl-fs: 0.52rem;
+  --ctrl-fs:  0.52rem;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; }
+
 body {
   background: var(--black);
   color: var(--white);
-  font-family: 'Lekton', monospace;
+  font-family: 'Atkinson Hyperlegible Mono', monospace;
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  /* safe-area insets for notched phones */
+  /* Safe-area insets for notched phones */
   padding: max(16px, env(safe-area-inset-top))
            max(10px, env(safe-area-inset-right))
            max(24px, env(safe-area-inset-bottom))
@@ -35,7 +37,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Scanline */
+/* Scanline overlay */
 body::before {
   content: '';
   position: fixed;
@@ -49,7 +51,7 @@ body::before {
   z-index: 200;
 }
 
-/* ── Header ───────────────────────────────────────────────────────────────── */
+/* ── Header ──────────────────────────────────────────────────────────────────── */
 h1 {
   font-weight: 700;
   font-size: clamp(1.6rem, 5vw, 3rem);
@@ -60,6 +62,7 @@ h1 {
   line-height: 1;
   text-align: center;
 }
+
 .tagline {
   font-size: clamp(0.5rem, 1.5vw, 0.65rem);
   letter-spacing: 0.3em;
@@ -69,7 +72,7 @@ h1 {
   text-align: center;
 }
 
-/* ── Main game wrapper ────────────────────────────────────────────────────── */
+/* ── Game wrapper ────────────────────────────────────────────────────────────── */
 .game-wrapper {
   display: flex;
   flex-direction: row;
@@ -80,8 +83,9 @@ h1 {
   max-width: 900px;
 }
 
-/* ── Side panels ──────────────────────────────────────────────────────────── */
-.panel-left, .panel-right {
+/* ── Side panels ─────────────────────────────────────────────────────────────── */
+.panel-left,
+.panel-right {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -90,6 +94,7 @@ h1 {
   min-width: 0;
 }
 
+/* ── Stat boxes ──────────────────────────────────────────────────────────────── */
 .stat-box {
   background: var(--panel);
   border: 1px solid var(--border);
@@ -97,6 +102,7 @@ h1 {
   position: relative;
   overflow: hidden;
 }
+
 .stat-box::before {
   content: '';
   position: absolute;
@@ -104,6 +110,7 @@ h1 {
   height: 2px;
   background: var(--yellow);
 }
+
 .stat-label {
   font-size: var(--label-fs);
   letter-spacing: 0.18em;
@@ -112,6 +119,7 @@ h1 {
   margin-bottom: 3px;
   white-space: nowrap;
 }
+
 .stat-value {
   font-weight: 700;
   font-size: var(--stat-fs);
@@ -120,28 +128,31 @@ h1 {
   word-break: break-all;
 }
 
-/* Controls hint — hidden below tablet */
+/* ── Controls hint ───────────────────────────────────────────────────────────── */
 .controls-box {
   font-size: var(--ctrl-fs);
   color: #444;
   line-height: 1.9;
   letter-spacing: 0.03em;
 }
+
 .controls-box .k { color: var(--white); }
 
-/* ── Canvas container ─────────────────────────────────────────────────────── */
+/* ── Canvas container ────────────────────────────────────────────────────────── */
 .canvas-container {
   position: relative;
   flex-shrink: 0;
-  /* width/height set by JS */
+  /* Width/height set by JS */
 }
+
 #gameCanvas {
   display: block;
   border: 1px solid var(--border);
 }
+
 #nextCanvas { display: block; }
 
-/* ── Overlays ─────────────────────────────────────────────────────────────── */
+/* ── Overlays ────────────────────────────────────────────────────────────────── */
 .overlay {
   position: absolute;
   inset: 0;
@@ -153,6 +164,7 @@ h1 {
   gap: 10px;
   z-index: 10;
 }
+
 .overlay-title {
   font-weight: 700;
   font-size: clamp(1.2rem, 4vw, 1.9rem);
@@ -160,6 +172,7 @@ h1 {
   line-height: 1;
   text-align: center;
 }
+
 .overlay-sub {
   font-size: clamp(0.5rem, 1.5vw, 0.62rem);
   letter-spacing: 0.14em;
@@ -168,6 +181,7 @@ h1 {
   text-align: center;
   line-height: 2;
 }
+
 .overlay-score {
   font-weight: 700;
   font-size: clamp(1.5rem, 5vw, 2.2rem);
@@ -175,7 +189,7 @@ h1 {
   line-height: 1;
 }
 
-/* ── Buttons ──────────────────────────────────────────────────────────────── */
+/* ── Buttons ─────────────────────────────────────────────────────────────────── */
 .btn {
   background: var(--yellow);
   color: var(--black);
@@ -190,8 +204,10 @@ h1 {
   transition: background 0.15s, transform 0.1s;
   white-space: nowrap;
 }
+
 .btn:hover  { background: var(--white); transform: translateY(-1px); }
 .btn:active { transform: translateY(0); }
+
 .btn-ghost {
   background: transparent;
   color: var(--white);
@@ -199,9 +215,10 @@ h1 {
   font-size: clamp(0.55rem, 1.6vw, 0.65rem);
   padding: 7px 16px;
 }
+
 .btn-ghost:hover { background: #111; border-color: #555; transform: none; }
 
-/* ── Name input ───────────────────────────────────────────────────────────── */
+/* ── Name input ──────────────────────────────────────────────────────────────── */
 .name-input {
   background: #0d0d0d;
   border: 1px solid var(--blue);
@@ -214,9 +231,10 @@ h1 {
   letter-spacing: 0.1em;
   outline: none;
 }
+
 .name-input:focus { border-color: var(--yellow); }
 
-/* ── Leaderboard ──────────────────────────────────────────────────────────── */
+/* ── Leaderboard ─────────────────────────────────────────────────────────────── */
 .leaderboard {
   background: var(--panel);
   border: 1px solid var(--border);
@@ -226,6 +244,7 @@ h1 {
   margin-top: 14px;
   position: relative;
 }
+
 .leaderboard::before {
   content: '';
   position: absolute;
@@ -233,6 +252,7 @@ h1 {
   height: 2px;
   background: var(--red);
 }
+
 .lb-title {
   font-weight: 700;
   font-size: 0.72rem;
@@ -241,6 +261,7 @@ h1 {
   text-transform: uppercase;
   margin-bottom: 10px;
 }
+
 .lb-entry {
   display: flex;
   align-items: center;
@@ -249,7 +270,9 @@ h1 {
   border-bottom: 1px solid var(--border);
   font-size: 0.62rem;
 }
+
 .lb-entry:last-child { border-bottom: none; }
+
 .lb-rank  { font-weight: 700; width: 18px; text-align: center; flex-shrink: 0; }
 .rank-1   { color: var(--yellow); }
 .rank-2   { color: var(--white);  }
@@ -260,16 +283,18 @@ h1 {
 .lb-score { font-weight: 700; color: var(--yellow); flex-shrink: 0; text-align: right; min-width: 58px; }
 .lb-empty { font-size: 0.6rem; color: #333; text-align: center; padding: 16px 0; letter-spacing: 0.1em; }
 
-/* ── Mobile touch controls ─────────────────────────────────────────────────── */
+/* ── Touch controls ──────────────────────────────────────────────────────────── */
 .mobile-controls {
-  display: none; /* shown by JS when needed */
+  display: none; /* Visibility controlled by JS based on touch capability */
   flex-direction: column;
   gap: 8px;
   margin-top: 12px;
   align-items: center;
   width: 100%;
 }
+
 .mobile-row { display: flex; gap: 8px; justify-content: center; }
+
 .mbtn {
   background: var(--panel);
   border: 1px solid var(--border);
@@ -287,68 +312,90 @@ h1 {
   transition: background 0.08s;
   border-radius: 2px;
 }
+
 .mbtn:active { background: #222; }
 .mbtn-wide   { width: 136px; font-size: 0.65rem; letter-spacing: 0.1em; font-weight: 700; }
 
-/* ── Responsive: tablet (≤ 768px) ─────────────────────────────────────────── */
+/* ── Responsive: tablet (≤ 768 px) ──────────────────────────────────────────── */
 @media (max-width: 768px) {
   :root {
-    --panel-w: 100px;
-    --gap:     10px;
-    --stat-fs: 1.2rem;
+    --panel-w:  100px;
+    --gap:      10px;
+    --stat-fs:  1.2rem;
     --label-fs: 0.5rem;
     --ctrl-fs:  0.48rem;
   }
 }
 
-/* ── Responsive: mobile (≤ 560px) — stack layout ──────────────────────────── */
+/* ── Responsive: mobile (≤ 560 px) — stacked layout ─────────────────────────── */
 @media (max-width: 560px) {
   :root {
-    --panel-w: auto;
-    --gap: 8px;
-    --stat-fs: 1rem;
+    --panel-w:  auto;
+    --gap:      8px;
+    --stat-fs:  1rem;
     --label-fs: 0.48rem;
   }
+
   .game-wrapper {
     flex-direction: column;
     align-items: center;
   }
+
+  /* Stat boxes become a horizontal strip above the canvas */
   .panel-left {
-    /* Horizontal strip above canvas */
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
     justify-content: center;
     gap: 6px;
   }
+
   .panel-left .stat-box {
     flex: 1;
     min-width: 70px;
     max-width: 100px;
     padding: 8px 10px;
   }
-  /* Hide keyboard controls on mobile */
+
+  /* Hide keyboard hint on mobile — touch controls take over */
   .panel-left .controls-box { display: none; }
-  /* Right panel: horizontal strip below canvas */
+
+  /* Right panel becomes a horizontal strip below the canvas */
   .panel-right {
     flex-direction: row;
     width: 100%;
     justify-content: center;
     gap: 6px;
   }
+
   .panel-right .stat-box {
     flex: 1;
     min-width: 80px;
     max-width: 140px;
     padding: 8px 10px;
   }
-  /* Show touch buttons */
-  .mobile-controls { display: flex; }
 }
 
-/* ── Extra-small (≤ 360px) ────────────────────────────────────────────────── */
+/* ── Responsive: extra-small (≤ 360 px) ─────────────────────────────────────── */
 @media (max-width: 360px) {
   :root { --stat-fs: 0.9rem; }
   .mbtn      { width: 56px; height: 56px; font-size: 1.2rem; }
   .mbtn-wide { width: 120px; }
 }
+
+/* ── Mute button ─────────────────────────────────────────────────────────────── */
+.mute-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--blue);
+  font-family: var(--font, 'Atkinson Hyperlegible Mono', monospace);
+  font-size: 0.85rem;
+  padding: 4px 10px;
+  cursor: pointer;
+  margin-bottom: 14px;
+  letter-spacing: 0.1em;
+  transition: color 0.15s, border-color 0.15s;
+  border-radius: 2px;
+}
+.mute-btn:hover { color: var(--yellow); border-color: var(--yellow); }
+.mute-btn.muted { color: #333; border-color: #222; }

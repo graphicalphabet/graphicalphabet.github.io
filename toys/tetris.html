@@ -6,16 +6,17 @@
     <title>TETRIS</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lekton:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/tetris.css">
   </head>
 
   <body>
     <h1>TETRIS</h1>
     <p class="tagline">Stack. Clear. Survive.</p>
+    <button id="btnMute" class="mute-btn" aria-label="Toggle sound">♪</button>
 
     <div class="game-wrapper">
-      <!-- Left panel: Score / Lines / Level / Controls -->
+      <!-- Left panel: Score / Lines / Level / Keyboard controls -->
       <div class="panel-left">
         <div class="stat-box">
           <div class="stat-label">Score</div>
@@ -35,29 +36,35 @@
           <span class="k">&#8593;</span> Rotate<br>
           <span class="k">&#8595;</span> Soft drop<br>
           <span class="k">Spc</span> Hard drop<br>
-          <span class="k">P</span> Pause
+          <span class="k">P</span> Pause &amp; save
         </div>
       </div>
 
-      <!-- Canvas -->
+      <!-- Game canvas + overlays -->
       <div class="canvas-container" id="canvasWrap">
         <canvas id="gameCanvas"></canvas>
 
+        <!-- Start screen -->
         <div class="overlay" id="overlayStart">
           <div class="overlay-title" style="color: var(--yellow);">TETRIS</div>
           <div class="overlay-sub">Stack the blocks.<br>Clear the lines.<br>Beat the board.</div>
           <button class="btn" id="btnStart">Start Game</button>
         </div>
 
+        <!-- Pause screen -->
         <div class="overlay" id="overlayPause" style="display: none;">
           <div class="overlay-title" style="color: var(--blue);">PAUSED</div>
           <button class="btn" id="btnResume">Resume</button>
+          <button class="btn btn-ghost" id="btnNewGame">New Game</button>
         </div>
 
+        <!-- Game over screen -->
         <div class="overlay" id="overlayGameOver" style="display: none;">
           <div class="overlay-title" style="color: var(--red);">GAME OVER</div>
           <div class="overlay-score" id="finalScore">0</div>
-          <div id="newHighMsg" style="font-size: 0.65rem; color: var(--green); letter-spacing: 0.15em; display: none;">&#10022; NEW HIGH SCORE &#10022;</div>
+          <div id="newHighMsg" style="font-size: 0.65rem; color: var(--green); letter-spacing: 0.15em; display: none;">
+            &#10022; NEW HIGH SCORE &#10022;
+          </div>
           <input
             class="name-input"
             id="playerName"
@@ -73,7 +80,7 @@
         </div>
       </div>
 
-      <!-- Right panel: Next piece / Best -->
+      <!-- Right panel: Next piece preview / Best score -->
       <div class="panel-right">
         <div class="stat-box">
           <div class="stat-label">Next</div>
@@ -84,10 +91,9 @@
           <div class="stat-value" id="bestDisplay">0</div>
         </div>
       </div>
-    </div>
-    <!-- /.game-wrapper -->
+    </div><!-- /.game-wrapper -->
 
-    <!-- Touch controls (shown on mobile) -->
+    <!-- Touch controls — visibility set by JS based on device capability -->
     <div class="mobile-controls" id="mobileControls">
       <div class="mobile-row">
         <button class="mbtn" id="mLeft">&#8592;</button>
@@ -100,11 +106,13 @@
       </div>
     </div>
 
+    <!-- Leaderboard -->
     <div class="leaderboard">
       <div class="lb-title">Leaderboard</div>
       <div id="lbList"></div>
     </div>
 
+    <script src="../js/tetris-audio.js"></script>
     <script src="../js/tetris.js"></script>
   </body>
 </html>
