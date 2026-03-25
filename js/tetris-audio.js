@@ -45,10 +45,19 @@ var TetrisAudio = (function () {
     
     /* ── Init (must be called from a user gesture) ───────────────────────────────── */
     function init() {
-      if (ready) return;
+      if (ready) {
+        try {
+          if (ac && ac.state === 'suspended' && ac.resume) ac.resume();
+        } catch (e) {}
+        return;
+      }
       try {
         ac = new (window.AudioContext || window.webkitAudioContext)();
       } catch (e) { return; }
+
+      try {
+        if (ac && ac.state === 'suspended' && ac.resume) ac.resume();
+      } catch (e) {}
     
       masterGain = ac.createGain();
       masterGain.gain.value = 0.85;
@@ -415,6 +424,9 @@ var TetrisAudio = (function () {
     /* ── Public music controls ───────────────────────────────────────────────────── */
     function start() {
       if (!ready) return;
+      try {
+        if (ac && ac.state === 'suspended' && ac.resume) ac.resume();
+      } catch (e) {}
       stop();
       musicActive  = true;
       beatIndex    = 0;
@@ -447,6 +459,9 @@ var TetrisAudio = (function () {
     
     function resume() {
       if (!ready) return;
+      try {
+        if (ac && ac.state === 'suspended' && ac.resume) ac.resume();
+      } catch (e) {}
       musicActive  = true;
       nextBeatTime = now() + 0.05;
       musicGain.gain.cancelScheduledValues(now());
