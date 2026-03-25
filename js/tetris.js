@@ -599,7 +599,10 @@
     showEl('btnAgain');
   });
   
-  document.getElementById('btnAgain').addEventListener('click', startGame);
+  document.getElementById('btnAgain').addEventListener('click', function () {
+    TetrisAudio.init();
+    startGame();
+  });
   
   document.getElementById('playerName').addEventListener('keydown', function (e) {
     if (e.key === 'Enter') document.getElementById('btnSave').click();
@@ -672,4 +675,4 @@
     drawBg(); /* Draw blank grid before the first game starts */
   }
   
-  }());  
+  }());
