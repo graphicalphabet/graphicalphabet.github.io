@@ -79,6 +79,12 @@ var TetrisAudio = (function () {
   
   /* ── Utility ─────────────────────────────────────────────────────────────────── */
   function now() { return ac ? ac.currentTime : 0; }
+
+  /* On iOS, ac.currentTime stays at 0 for a brief moment after resume().
+     Any note scheduled at or before 0 is silently dropped. safeNow() ensures
+     we always schedule at least 50 ms ahead, so the first batch of notes
+     always lands in the future regardless of context state. */
+  function safeNow() { return now() + 0.05; }
   
   function bpm() {
     /* 90 BPM at level 1, ramps to 138 BPM at level 12, capped there */
@@ -431,7 +437,7 @@ var TetrisAudio = (function () {
       stop();
       musicActive  = true;
       beatIndex    = 0;
-      nextBeatTime = now() + 0.1;
+      nextBeatTime = safeNow();
       musicGain.gain.setValueAtTime(0, now());
       musicGain.gain.linearRampToValueAtTime(0.72, now() + 1.5);
       scheduleAhead();
@@ -468,7 +474,7 @@ var TetrisAudio = (function () {
     if (!ready) return;
     var doResume = function () {
       musicActive  = true;
-      nextBeatTime = now() + 0.05;
+      nextBeatTime = safeNow();
       musicGain.gain.cancelScheduledValues(now());
       musicGain.gain.setValueAtTime(musicGain.gain.value, now());
       musicGain.gain.linearRampToValueAtTime(0.72, now() + 0.4);
@@ -499,19 +505,20 @@ var TetrisAudio = (function () {
   
     rotate: function () {
       if (!ready) return;
+      var t = safeNow();
       var osc = ac.createOscillator();
       var g   = ac.createGain();
       osc.type = 'square';
-      osc.frequency.setValueAtTime(520, now());
-      osc.frequency.linearRampToValueAtTime(640, now() + 0.04);
-      env(g, now(), 0.001, 0, 0.06, 0.18);
+      osc.frequency.setValueAtTime(520, t);
+      osc.frequency.linearRampToValueAtTime(640, t + 0.04);
+      env(g, t, 0.001, 0, 0.06, 0.18);
       chain([osc, g], sfxGain);
-      osc.start(now()); osc.stop(now() + 0.1);
+      osc.start(t); osc.stop(t + 0.1);
     },
   
     drop: function () {
       if (!ready) return;
-      var t   = now();
+      var t   = safeNow();
       var osc = ac.createOscillator();
       var g   = ac.createGain();
       osc.type = 'sine';
@@ -525,7 +532,7 @@ var TetrisAudio = (function () {
     lineClear: function (n) {
       if (!ready) return;
       /* Escalate character from single to Tetris */
-      var t = now();
+      var t = safeNow();
       if (n >= 4) {
         /* Tetris — handled separately */
         sfx.tetris();
@@ -553,7 +560,7 @@ var TetrisAudio = (function () {
     tetris: function () {
       if (!ready) return;
       /* Four staccato rising notes + impact */
-      var t   = now();
+      var t   = safeNow();
       var bd  = 0.07;
       [523, 659, 784, 1047].forEach(function (freq, i) {
         var osc = ac.createOscillator();
@@ -579,7 +586,7 @@ var TetrisAudio = (function () {
   
     levelUp: function () {
       if (!ready) return;
-      var t  = now();
+      var t  = safeNow();
       var bd = 0.06;
       [392, 523, 659, 784, 1047].forEach(function (freq, i) {
         var osc = ac.createOscillator();
@@ -596,7 +603,7 @@ var TetrisAudio = (function () {
     gameOver: function () {
       if (!ready) return;
       /* Descending chromatic doom */
-      var t  = now();
+      var t  = safeNow();
       var bd = 0.12;
       [392, 370, 349, 330, 311, 294, 262].forEach(function (freq, i) {
         var osc = ac.createOscillator();
@@ -622,7 +629,7 @@ var TetrisAudio = (function () {
   
     pause: function () {
       if (!ready) return;
-      var t = now();
+      var t = safeNow();
       [660, 440].forEach(function (freq, i) {
         var osc = ac.createOscillator();
         var g   = ac.createGain();
@@ -637,7 +644,7 @@ var TetrisAudio = (function () {
   
     resume: function () {
       if (!ready) return;
-      var t = now();
+      var t = safeNow();
       [440, 660].forEach(function (freq, i) {
         var osc = ac.createOscillator();
         var g   = ac.createGain();
@@ -652,7 +659,7 @@ var TetrisAudio = (function () {
   
     newGame: function () {
       if (!ready) return;
-      var t  = now();
+      var t  = safeNow();
       var bd = 0.055;
       /* Upward arp */
       [330, 392, 494, 660].forEach(function (freq, i) {
