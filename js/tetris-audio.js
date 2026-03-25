@@ -45,33 +45,36 @@ var TetrisAudio = (function () {
   
   /* ── Init (must be called from a user gesture) ───────────────────────────────── */
   function init() {
+    /* Always returns a Promise so callers can await the context being running */
     if (ready) {
-      try {
-        if (ac && ac.state === 'suspended' && ac.resume) ac.resume();
-      } catch (e) {}
-      return;
+      if (ac && ac.state === 'suspended') {
+        return ac.resume().catch(function () {});
+      }
+      return Promise.resolve();
     }
     try {
       ac = new (window.AudioContext || window.webkitAudioContext)();
-    } catch (e) { return; }
+    } catch (e) { return Promise.resolve(); }
 
-    try {
-      if (ac && ac.state === 'suspended' && ac.resume) ac.resume();
-    } catch (e) {}
-  
     masterGain = ac.createGain();
     masterGain.gain.value = 0.85;
     masterGain.connect(ac.destination);
-  
+
     musicGain = ac.createGain();
     musicGain.gain.value = 0.72;
     musicGain.connect(masterGain);
-  
+
     sfxGain = ac.createGain();
     sfxGain.gain.value = 1.0;
     sfxGain.connect(masterGain);
-  
+
     ready = true;
+
+    /* iOS always starts the context suspended — must resume before scheduling */
+    if (ac.state === 'suspended') {
+      return ac.resume().catch(function () {});
+    }
+    return Promise.resolve();
   }
   
   /* ── Utility ─────────────────────────────────────────────────────────────────── */
@@ -424,16 +427,20 @@ var TetrisAudio = (function () {
   /* ── Public music controls ───────────────────────────────────────────────────── */
   function start() {
     if (!ready) return;
-    try {
-      if (ac && ac.state === 'suspended') ac.resume();
-    } catch (e) {}
-    stop();
-    musicActive  = true;
-    beatIndex    = 0;
-    nextBeatTime = now() + 0.1;
-    musicGain.gain.setValueAtTime(0, now());
-    musicGain.gain.linearRampToValueAtTime(0.72, now() + 1.5);
-    scheduleAhead();
+    var doStart = function () {
+      stop();
+      musicActive  = true;
+      beatIndex    = 0;
+      nextBeatTime = now() + 0.1;
+      musicGain.gain.setValueAtTime(0, now());
+      musicGain.gain.linearRampToValueAtTime(0.72, now() + 1.5);
+      scheduleAhead();
+    };
+    if (ac && ac.state === 'suspended') {
+      ac.resume().then(doStart).catch(doStart);
+    } else {
+      doStart();
+    }
   }
   
   function stop() {
@@ -459,15 +466,19 @@ var TetrisAudio = (function () {
   
   function resume() {
     if (!ready) return;
-    try {
-      if (ac && ac.state === 'suspended' && ac.resume) ac.resume();
-    } catch (e) {}
-    musicActive  = true;
-    nextBeatTime = now() + 0.05;
-    musicGain.gain.cancelScheduledValues(now());
-    musicGain.gain.setValueAtTime(musicGain.gain.value, now());
-    musicGain.gain.linearRampToValueAtTime(0.72, now() + 0.4);
-    scheduleAhead();
+    var doResume = function () {
+      musicActive  = true;
+      nextBeatTime = now() + 0.05;
+      musicGain.gain.cancelScheduledValues(now());
+      musicGain.gain.setValueAtTime(musicGain.gain.value, now());
+      musicGain.gain.linearRampToValueAtTime(0.72, now() + 0.4);
+      scheduleAhead();
+    };
+    if (ac && ac.state === 'suspended') {
+      ac.resume().then(doResume).catch(doResume);
+    } else {
+      doResume();
+    }
   }
   
   function setLevel(n) {

@@ -574,16 +574,13 @@
   
   /* ── Button wiring ───────────────────────────────────────────────────────────── */
   document.getElementById('btnStart').addEventListener('click', function() {
-    TetrisAudio.init();
-    startGame();
+    TetrisAudio.init().then(function () { startGame(); });
   });
   document.getElementById('btnNewGame').addEventListener('click', function() {
-    TetrisAudio.init();
-    startGame();
+    TetrisAudio.init().then(function () { startGame(); });
   });
   document.getElementById('btnResume').addEventListener('click', function() {
-    TetrisAudio.init();
-    togglePause();
+    TetrisAudio.init().then(function () { togglePause(); });
   });
   
   document.getElementById('btnSave').addEventListener('click', function () {
@@ -600,8 +597,7 @@
   });
   
   document.getElementById('btnAgain').addEventListener('click', function () {
-    TetrisAudio.init();
-    startGame();
+    TetrisAudio.init().then(function () { startGame(); });
   });
   
   document.getElementById('playerName').addEventListener('keydown', function (e) {
@@ -653,11 +649,12 @@
   var muteBtn = document.getElementById('btnMute');
   if (muteBtn) {
     muteBtn.addEventListener('click', function () {
-      TetrisAudio.init();
-      var isMuted = TetrisAudio.mute();
-      muteBtn.textContent = isMuted ? '♪̶' : '♪';
-      muteBtn.classList.toggle('muted', isMuted);
-      muteBtn.setAttribute('aria-label', isMuted ? 'Unmute sound' : 'Mute sound');
+      TetrisAudio.init().then(function () {
+        var isMuted = TetrisAudio.mute();
+        muteBtn.textContent = isMuted ? '♪̶' : '♪';
+        muteBtn.classList.toggle('muted', isMuted);
+        muteBtn.setAttribute('aria-label', isMuted ? 'Unmute sound' : 'Mute sound');
+      });
     });
   }
   
