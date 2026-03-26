@@ -4,15 +4,24 @@
   Procedural hip-hop / trap audio engine for Tetris.
   Built entirely on the Web Audio API — zero dependencies, no samples.
 
+  iOS SILENT MODE STRATEGY
+  ─────────────────────────
+  Web Audio API output is routed through a MediaStreamDestination node into
+  a real HTML5 <audio> element (playsinline, muted=false). iOS plays <audio>
+  elements through the media channel, which ignores the hardware silent switch.
+  Web Audio acts purely as a synthesis engine; the <audio> element is the actual
+  output device iOS sees. This is the only approach that works reliably across
+  all iOS versions.
+
   PUBLIC API
   ──────────
-  TetrisAudio.init()          — call once on first user interaction
-  TetrisAudio.start()         — begin music (new game)
-  TetrisAudio.stop()          — stop music + kill scheduled notes
-  TetrisAudio.pause()         — duck music to near-silence
-  TetrisAudio.resume()        — restore music after pause
-  TetrisAudio.setLevel(n)     — update tempo + intensity for level n (1–12+)
-  TetrisAudio.mute()          — toggle mute; returns new muted state (bool)
+  TetrisAudio.init()           — call once on first user interaction
+  TetrisAudio.start()          — begin music (new game)
+  TetrisAudio.stop()           — stop music + kill scheduled notes
+  TetrisAudio.pause()          — duck music to near-silence
+  TetrisAudio.resume()         — restore music after pause
+  TetrisAudio.setLevel(n)      — update tempo + intensity for level n (1–12+)
+  TetrisAudio.mute()           — toggle mute; returns new muted state (bool)
   TetrisAudio.sfx.rotate()
   TetrisAudio.sfx.drop()
   TetrisAudio.sfx.lineClear(n) — n = lines cleared (1–4)
@@ -27,80 +36,80 @@ var TetrisAudio = (function () {
   'use strict';
   
   /* ── State ───────────────────────────────────────────────────────────────────── */
-  var ac          = null;   /* AudioContext                  */
-  var masterGain  = null;   /* master volume node            */
-  var musicGain   = null;   /* music sub-bus                 */
-  var sfxGain     = null;   /* sfx  sub-bus                  */
-  var ready       = false;
-  var muted       = false;
-  var musicActive = false;
+  var ac           = null;   /* AudioContext                  */
+  var masterGain   = null;   /* master volume node            */
+  var musicGain    = null;   /* music sub-bus                 */
+  var sfxGain      = null;   /* sfx  sub-bus                  */
+  var audioEl      = null;   /* <audio> element — iOS output  */
+  var ready        = false;
+  var muted        = false;
+  var musicActive  = false;
   var currentLevel = 1;
   
   /* Scheduler state */
-  var scheduleTimer  = null;
-  var nextBeatTime   = 0;
-  var beatIndex      = 0;
-  var beatsPerBar    = 16;   /* 16 sub-beats per bar (16th notes) */
-  var totalBeats     = 64;   /* 4 bars before pattern loops       */
-  
-  /* ── iOS silent-mode unlock ──────────────────────────────────────────────────── */
-  /*
-    On iOS, the Web Audio API honours the hardware silent switch, but HTML5
-    <audio> elements with `playsinline` do not — they route through the media
-    channel, which ignores silent mode.
-  
-    The trick: play a tiny silent MP3 via an HTML5 <audio> element inside the
-    user gesture. This registers the page as an active media session with iOS,
-    which then allows the Web Audio API's AudioContext to also play through the
-    media channel — bypassing the silent switch for all subsequent audio.
-  
-    The silent MP3 is the shortest valid MPEG frame (< 100 bytes) encoded as
-    a base64 data URI so no network request is needed.
-  */
-  var SILENT_MP3 =
-    'data:audio/mpeg;base64,' +
-    'SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4LjI5LjEwMAAAAAAAAAAAAAAA' +
-    '//tQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAA' +
-    'CAAADhgCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA' +
-    'gICAgICAgICAgICAgICAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' +
-    'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' +
-    'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
-  
-  var iosUnlocked = false;
-  
-  function unlockiOS() {
-    if (iosUnlocked) return;
-    try {
-      var el = document.createElement('audio');
-      el.src = SILENT_MP3;
-      el.volume = 0.001;   /* near-zero but not zero — some iOS versions need this */
-      el.setAttribute('playsinline', '');
-      el.setAttribute('webkit-playsinline', '');
-      var p = el.play();
-      if (p && typeof p.catch === 'function') p.catch(function() {});
-      iosUnlocked = true;
-    } catch (e) {}
-  }
+  var scheduleTimer = null;
+  var nextBeatTime  = 0;
+  var beatIndex     = 0;
+  var totalBeats    = 64;    /* 4 bars × 16 steps before pattern loops */
   
   /* ── Init (must be called from a user gesture) ───────────────────────────────── */
   function init() {
     if (ready) return;
   
-    /* Unlock iOS silent mode before creating the AudioContext */
-    unlockiOS();
-  
     try {
       ac = new (window.AudioContext || window.webkitAudioContext)();
     } catch (e) { return; }
   
-    /* On iOS, resume() is required after context creation inside a gesture */
+    /* Resume context — required on iOS even inside a gesture */
     if (ac.state === 'suspended') {
-      ac.resume().catch(function() {});
+      ac.resume().catch(function () {});
+    }
+  
+    /* ── iOS silent-mode fix ─────────────────────────────────────────────────────
+       Route all Web Audio output through a MediaStreamDestination → <audio>.
+       iOS plays <audio playsinline> through the media channel, which is NOT
+       affected by the hardware silent switch. Web Audio on its own uses the
+       ringer channel and IS muted by the switch. By making <audio> the actual
+       output device, we bypass silent mode entirely on all iOS versions.
+    ─────────────────────────────────────────────────────────────────────────── */
+    var streamDest;
+    try {
+      streamDest = ac.createMediaStreamDestination();
+    } catch (e) {
+      /* Browser doesn't support MediaStreamDestination — fall back to direct output */
+      streamDest = null;
     }
   
     masterGain = ac.createGain();
     masterGain.gain.value = 0.85;
-    masterGain.connect(ac.destination);
+  
+    if (streamDest) {
+      /* Web Audio → masterGain → MediaStream → <audio> element */
+      masterGain.connect(streamDest);
+  
+      audioEl = document.createElement('audio');
+      audioEl.srcObject   = streamDest.stream;
+      audioEl.playsinline = true;
+      audioEl.setAttribute('playsinline', '');
+      audioEl.setAttribute('webkit-playsinline', '');
+      audioEl.volume = 1.0;
+      audioEl.muted  = false;
+  
+      /* play() must be called inside the user gesture — we're still in init() */
+      var playPromise = audioEl.play();
+      if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(function () {
+          /* Autoplay blocked — try again on next interaction */
+          document.addEventListener('touchstart', function retry() {
+            audioEl.play().catch(function () {});
+            document.removeEventListener('touchstart', retry);
+          }, { once: true, passive: true });
+        });
+      }
+    } else {
+      /* Non-iOS fallback: connect directly to speakers */
+      masterGain.connect(ac.destination);
+    }
   
     musicGain = ac.createGain();
     musicGain.gain.value = 0.72;
@@ -118,8 +127,7 @@ var TetrisAudio = (function () {
   
   function bpm() {
     /* 90 BPM at level 1, ramps to 138 BPM at level 12, capped there */
-    var b = 90 + Math.min(11, currentLevel - 1) * 4.4;
-    return Math.round(b);
+    return Math.round(90 + Math.min(11, currentLevel - 1) * 4.4);
   }
   
   function beatDur() {
@@ -127,12 +135,11 @@ var TetrisAudio = (function () {
     return (60 / bpm()) / 4;
   }
   
-  /* intensity 0–1 based on level */
   function intensity() {
+    /* 0–1 based on level */
     return Math.min(1, (currentLevel - 1) / 10);
   }
   
-  /* Create a simple gain-envelope utility */
   function env(gainNode, at, attack, hold, release, peak) {
     peak = peak || 1;
     gainNode.gain.setValueAtTime(0, at);
@@ -141,7 +148,6 @@ var TetrisAudio = (function () {
     gainNode.gain.exponentialRampToValueAtTime(0.0001, at + attack + hold + release);
   }
   
-  /* Connect a node chain to a destination */
   function chain(nodes, dest) {
     for (var i = 0; i < nodes.length - 1; i++) nodes[i].connect(nodes[i + 1]);
     nodes[nodes.length - 1].connect(dest);
@@ -151,13 +157,11 @@ var TetrisAudio = (function () {
   /* ── Synthesised drum voices ─────────────────────────────────────────────────── */
   
   function kick(t, vel) {
-    /* 808-style sine sweep: starts at ~150 Hz, drops to ~40 Hz */
     vel = vel || 1;
-    var osc = ac.createOscillator();
-    var g   = ac.createGain();
+    var osc  = ac.createOscillator();
+    var g    = ac.createGain();
     var dist = ac.createWaveShaper();
   
-    /* Mild saturation on the kick */
     var curve = new Float32Array(256);
     for (var i = 0; i < 256; i++) {
       var x = (i * 2) / 256 - 1;
@@ -169,7 +173,6 @@ var TetrisAudio = (function () {
     osc.frequency.setValueAtTime(150, t);
     osc.frequency.exponentialRampToValueAtTime(42, t + 0.06);
     osc.frequency.exponentialRampToValueAtTime(38, t + 0.22);
-  
     g.gain.setValueAtTime(0, t);
     g.gain.linearRampToValueAtTime(vel * 1.4, t + 0.003);
     g.gain.exponentialRampToValueAtTime(0.0001, t + 0.55);
@@ -181,15 +184,14 @@ var TetrisAudio = (function () {
   
   function snare(t, vel) {
     vel = vel || 1;
-    /* Tonal body */
-    var body = ac.createOscillator();
+  
+    var body  = ac.createOscillator();
     var bodyG = ac.createGain();
     body.type = 'triangle';
     body.frequency.setValueAtTime(200, t);
     body.frequency.exponentialRampToValueAtTime(100, t + 0.08);
     env(bodyG, t, 0.002, 0, 0.12, vel * 0.4);
   
-    /* Noise snap */
     var bufLen = Math.floor(ac.sampleRate * 0.25);
     var buf    = ac.createBuffer(1, bufLen, ac.sampleRate);
     var data   = buf.getChannelData(0);
@@ -198,15 +200,15 @@ var TetrisAudio = (function () {
     var noise  = ac.createBufferSource();
     var noiseF = ac.createBiquadFilter();
     var noiseG = ac.createGain();
-    noise.buffer = buf;
-    noiseF.type = 'bandpass';
+    noise.buffer    = buf;
+    noiseF.type     = 'bandpass';
     noiseF.frequency.value = 2800;
-    noiseF.Q.value = 0.9;
+    noiseF.Q.value  = 0.9;
     env(noiseG, t, 0.001, 0, 0.14, vel * 0.55);
   
     chain([body, bodyG], musicGain);
     chain([noise, noiseF, noiseG], musicGain);
-    body.start(t); body.stop(t + 0.25);
+    body.start(t);  body.stop(t + 0.25);
     noise.start(t); noise.stop(t + 0.25);
   }
   
@@ -217,34 +219,34 @@ var TetrisAudio = (function () {
     var data   = buf.getChannelData(0);
     for (var i = 0; i < bufLen; i++) data[i] = Math.random() * 2 - 1;
   
-    var noise  = ac.createBufferSource();
-    var filt   = ac.createBiquadFilter();
-    var g      = ac.createGain();
-    noise.buffer = buf;
-    filt.type = 'highpass';
+    var noise = ac.createBufferSource();
+    var filt  = ac.createBiquadFilter();
+    var g     = ac.createGain();
+    noise.buffer       = buf;
+    filt.type          = 'highpass';
     filt.frequency.value = 7000;
     env(g, t, 0.001, 0, open ? 0.25 : 0.04, vel * 0.28);
   
     chain([noise, filt, g], musicGain);
-    noise.start(t); noise.stop(t + (open ? 0.35 : 0.08));
+    noise.start(t);
+    noise.stop(t + (open ? 0.35 : 0.08));
   }
   
   function clap(t, vel) {
     vel = vel || 1;
-    /* Two slightly offset noise bursts for that clap doubling */
-    [0, 0.012].forEach(function(offset) {
+    [0, 0.012].forEach(function (offset) {
       var bufLen = Math.floor(ac.sampleRate * 0.15);
       var buf    = ac.createBuffer(1, bufLen, ac.sampleRate);
       var data   = buf.getChannelData(0);
       for (var i = 0; i < bufLen; i++) data[i] = Math.random() * 2 - 1;
   
-      var noise  = ac.createBufferSource();
-      var filt   = ac.createBiquadFilter();
-      var g      = ac.createGain();
-      noise.buffer = buf;
-      filt.type = 'bandpass';
+      var noise = ac.createBufferSource();
+      var filt  = ac.createBiquadFilter();
+      var g     = ac.createGain();
+      noise.buffer       = buf;
+      filt.type          = 'bandpass';
       filt.frequency.value = 1200;
-      filt.Q.value = 0.6;
+      filt.Q.value       = 0.6;
       env(g, t + offset, 0.001, 0, 0.15, vel * 0.35);
   
       chain([noise, filt, g], musicGain);
@@ -253,13 +255,9 @@ var TetrisAudio = (function () {
     });
   }
   
-  /* ── 808 bass line ───────────────────────────────────────────────────────────── */
-  /*
-    Notes encoded as MIDI numbers. Pattern shifts by level group.
-    We use three bass patterns and crossfade between them by intensity.
-  */
+  /* ── Bass line ───────────────────────────────────────────────────────────────── */
   var BASS_NOTES = [
-    /* Pattern A — dark and minimal (early levels) */
+    /* Pattern A — sparse, dark (early levels) */
     [36,0,0,0, 0,0,36,0, 39,0,0,0, 0,0,39,0,
      36,0,0,0, 0,36,0,0, 41,0,0,0, 0,0,41,0,
      36,0,0,0, 0,0,36,0, 39,0,0,0, 0,0,39,0,
@@ -269,7 +267,7 @@ var TetrisAudio = (function () {
      36,0,0,36, 0,0,41,0, 41,0,41,0, 0,0,41,0,
      36,0,36,0, 0,0,39,0, 39,0,0,0, 0,39,0,0,
      36,0,0,36, 0,0,43,0, 43,0,0,43, 0,0,43,0],
-    /* Pattern C — busy trap bass (high levels) */
+    /* Pattern C — busy trap (high levels) */
     [36,0,36,36, 0,39,0,36, 39,0,39,0, 39,0,0,39,
      36,36,0,36, 0,41,36,0, 41,0,41,41, 0,41,0,41,
      36,0,36,36, 0,39,0,36, 39,0,39,0, 39,0,0,39,
@@ -281,35 +279,31 @@ var TetrisAudio = (function () {
   }
   
   function bass808(t, midi, dur) {
-    var freq = midiToHz(midi);
-    var osc  = ac.createOscillator();
-    var filt = ac.createBiquadFilter();
-    var dist = ac.createWaveShaper();
-    var g    = ac.createGain();
+    var freq  = midiToHz(midi);
+    var osc   = ac.createOscillator();
+    var filt  = ac.createBiquadFilter();
+    var dist  = ac.createWaveShaper();
+    var g     = ac.createGain();
+    var ints  = intensity();
   
-    /* Waveform mix: sawtooth for harmonic richness */
     osc.type = 'sawtooth';
-    osc.frequency.setValueAtTime(freq, t);
-    /* Slight pitch slide */
     osc.frequency.setValueAtTime(freq * 1.04, t);
     osc.frequency.exponentialRampToValueAtTime(freq, t + 0.04);
   
-    /* Low-pass filter — opens up with intensity */
-    filt.type = 'lowpass';
-    filt.frequency.value = 280 + intensity() * 600;
-    filt.Q.value = 4 + intensity() * 8;
+    filt.type          = 'lowpass';
+    filt.frequency.value = 280 + ints * 600;
+    filt.Q.value       = 4 + ints * 8;
   
-    /* Soft clip */
     var sc = new Float32Array(256);
     for (var i = 0; i < 256; i++) {
       var x = (i * 2) / 256 - 1;
-      sc[i] = Math.tanh(x * (1.5 + intensity() * 2));
+      sc[i] = Math.tanh(x * (1.5 + ints * 2));
     }
     dist.curve = sc;
   
     var hold    = Math.max(0.01, dur - 0.06);
-    var release = 0.18 + (1 - intensity()) * 0.3;
-    env(g, t, 0.006, hold, release, 0.55 + intensity() * 0.3);
+    var release = 0.18 + (1 - ints) * 0.3;
+    env(g, t, 0.006, hold, release, 0.55 + ints * 0.3);
   
     chain([osc, filt, dist, g], musicGain);
     osc.start(t);
@@ -317,40 +311,35 @@ var TetrisAudio = (function () {
   }
   
   /* ── Atmospheric pad ─────────────────────────────────────────────────────────── */
-  /*
-    Slow chord stabs using detuned oscillators.
-    Chord root shifts from Am feel (early) to diminished/tense (late).
-  */
   var PAD_CHORDS = [
-    [57, 60, 64],   /* Am  — calm  */
-    [55, 59, 62],   /* G   — warm  */
-    [53, 57, 60],   /* F   — neutral */
-    [50, 53, 57],   /* Dm  — darker */
-    [56, 59, 62],   /* G#m — tense */
-    [56, 59, 63]    /* G#m7 — very tense */
+    [57, 60, 64],  /* Am  */
+    [55, 59, 62],  /* G   */
+    [53, 57, 60],  /* F   */
+    [50, 53, 57],  /* Dm  */
+    [56, 59, 62],  /* G#m */
+    [56, 59, 63]   /* G#m7 */
   ];
   
   function pad(t, chordIdx) {
-    var ints = intensity();
-    /* Pads are quiet at low levels, barely present at high (drums take over) */
+    var ints   = intensity();
     var padVol = 0.12 * (1 - ints * 0.6);
     if (padVol < 0.02) return;
   
     var chord = PAD_CHORDS[Math.min(chordIdx, PAD_CHORDS.length - 1)];
-    chord.forEach(function(midi, i) {
-      var freq  = midiToHz(midi);
-      var osc1  = ac.createOscillator();
-      var osc2  = ac.createOscillator();
-      var filt  = ac.createBiquadFilter();
-      var g     = ac.createGain();
+    chord.forEach(function (midi, i) {
+      var freq = midiToHz(midi);
+      var osc1 = ac.createOscillator();
+      var osc2 = ac.createOscillator();
+      var filt = ac.createBiquadFilter();
+      var g    = ac.createGain();
   
       osc1.type = 'sawtooth';
       osc2.type = 'sawtooth';
       osc1.frequency.value = freq;
-      osc2.frequency.value = freq * 1.006; /* slight detune */
-      filt.type = 'lowpass';
+      osc2.frequency.value = freq * 1.006;
+      filt.type          = 'lowpass';
       filt.frequency.value = 900 + i * 200;
-      filt.Q.value = 1;
+      filt.Q.value       = 1;
   
       var dur = beatDur() * 16;
       env(g, t, 0.08, dur - 0.2, 0.25, padVol * (i === 1 ? 1 : 0.65));
@@ -363,67 +352,31 @@ var TetrisAudio = (function () {
   }
   
   /* ── Drum patterns ───────────────────────────────────────────────────────────── */
-  /*
-    16-step pattern per bar. Each step is [kick, snare, hihat, clap].
-    Two patterns — A (relaxed) and B (busy trap) — blend by intensity.
-  */
   var DRUM_A = [
-    /* k  s  h  c */
-    [1, 0, 1, 0],   /* 1  */
-    [0, 0, 0, 0],   /* 2  */
-    [0, 0, 1, 0],   /* 3  */
-    [0, 0, 0, 0],   /* 4  */
-    [0, 1, 1, 1],   /* 5  — snare + clap */
-    [0, 0, 0, 0],   /* 6  */
-    [0, 0, 1, 0],   /* 7  */
-    [0, 0, 0, 0],   /* 8  */
-    [1, 0, 1, 0],   /* 9  */
-    [0, 0, 0, 0],   /* 10 */
-    [1, 0, 1, 0],   /* 11 — ghost kick */
-    [0, 0, 0, 0],   /* 12 */
-    [0, 1, 1, 1],   /* 13 — snare + clap */
-    [0, 0, 0, 0],   /* 14 */
-    [0, 0, 1, 0],   /* 15 */
-    [0, 0, 0, 0]    /* 16 */
+    [1,0,1,0],[0,0,0,0],[0,0,1,0],[0,0,0,0],
+    [0,1,1,1],[0,0,0,0],[0,0,1,0],[0,0,0,0],
+    [1,0,1,0],[0,0,0,0],[1,0,1,0],[0,0,0,0],
+    [0,1,1,1],[0,0,0,0],[0,0,1,0],[0,0,0,0]
   ];
   
   var DRUM_B = [
-    /* k  s  h  c  — busier trap pattern */
-    [1, 0, 1, 0],
-    [0, 0, 1, 0],
-    [0, 0, 1, 0],
-    [1, 0, 1, 0],   /* ghost kick */
-    [0, 1, 1, 1],
-    [0, 0, 1, 0],
-    [1, 0, 1, 0],
-    [0, 0, 1, 0],
-    [1, 0, 1, 0],
-    [0, 0, 1, 0],
-    [1, 0, 1, 0],
-    [0, 0, 1, 0],
-    [0, 1, 1, 1],
-    [0, 0, 1, 0],
-    [1, 0, 1, 0],
-    [0, 0, 1, 0]
+    [1,0,1,0],[0,0,1,0],[0,0,1,0],[1,0,1,0],
+    [0,1,1,1],[0,0,1,0],[1,0,1,0],[0,0,1,0],
+    [1,0,1,0],[0,0,1,0],[1,0,1,0],[0,0,1,0],
+    [0,1,1,1],[0,0,1,0],[1,0,1,0],[0,0,1,0]
   ];
   
   /* ── Scheduler ───────────────────────────────────────────────────────────────── */
-  var LOOKAHEAD_MS  = 100;   /* Schedule this far ahead */
-  var SCHEDULE_SEC  = 0.20;  /* Schedule notes within this window */
+  var LOOKAHEAD_MS = 100;
+  var SCHEDULE_SEC = 0.20;
   
   function scheduleBeat(beatTime, beat) {
-    var step  = beat % 16;        /* Which 16th-note step in the bar */
-    var bar   = Math.floor(beat / 16); /* Which bar (0–3) */
+    var step  = beat % 16;
+    var bar   = Math.floor(beat / 16);
     var ints  = intensity();
-  
-    /* Interpolate between drum patterns */
-    var patA = DRUM_A[step];
-    var patB = DRUM_B[step];
-    var useB = Math.random() < ints;
-    var pat  = useB ? patB : patA;
-  
-    /* Velocity scales with level — louder at higher levels */
-    var vel = 0.65 + ints * 0.35;
+    var useB  = Math.random() < ints;
+    var pat   = useB ? DRUM_B[step] : DRUM_A[step];
+    var vel   = 0.65 + ints * 0.35;
   
     if (pat[0]) kick(beatTime, vel * (useB ? 1 : 0.85));
     if (pat[1]) snare(beatTime, vel * 0.75);
@@ -431,21 +384,15 @@ var TetrisAudio = (function () {
       var openHat = (step === 6 || step === 14) && ints > 0.4;
       hihat(beatTime, vel * (ints > 0.5 ? 0.45 : 0.3), openHat);
     }
-    /* Clap only at higher intensities to keep early levels spacious */
     if (pat[3] && ints > 0.2) clap(beatTime, vel * 0.6);
   
-    /* Bass: pick pattern based on intensity */
     var bassPatIdx = ints < 0.35 ? 0 : (ints < 0.7 ? 1 : 2);
-    var bassPat    = BASS_NOTES[bassPatIdx];
-    var bassNote   = bassPat[beat % bassPat.length];
+    var bassNote   = BASS_NOTES[bassPatIdx][beat % BASS_NOTES[bassPatIdx].length];
     if (bassNote) bass808(beatTime, bassNote, beatDur() * 0.9);
   
-    /* Pad stab at the start of each bar */
     if (step === 0) {
       var chordIdx = Math.min(5, Math.floor(ints * 6));
-      /* Alternate chord root by bar for movement */
-      var barChord = (chordIdx + bar) % PAD_CHORDS.length;
-      pad(beatTime, barChord);
+      pad(beatTime, (chordIdx + bar) % PAD_CHORDS.length);
     }
   }
   
@@ -464,6 +411,10 @@ var TetrisAudio = (function () {
   function start() {
     if (!ready) return;
     stop();
+    /* Re-trigger <audio> playback in case it stalled (iOS sometimes pauses it) */
+    if (audioEl && audioEl.paused) {
+      audioEl.play().catch(function () {});
+    }
     musicActive  = true;
     beatIndex    = 0;
     nextBeatTime = now() + 0.1;
@@ -475,7 +426,6 @@ var TetrisAudio = (function () {
   function stop() {
     musicActive = false;
     clearTimeout(scheduleTimer);
-    /* Fade out */
     if (musicGain) {
       musicGain.gain.cancelScheduledValues(now());
       musicGain.gain.setValueAtTime(musicGain.gain.value, now());
@@ -495,6 +445,9 @@ var TetrisAudio = (function () {
   
   function resume() {
     if (!ready) return;
+    if (audioEl && audioEl.paused) {
+      audioEl.play().catch(function () {});
+    }
     musicActive  = true;
     nextBeatTime = now() + 0.05;
     musicGain.gain.cancelScheduledValues(now());
@@ -510,6 +463,7 @@ var TetrisAudio = (function () {
   function mute() {
     if (!ready) return muted;
     muted = !muted;
+    if (audioEl) audioEl.volume = muted ? 0 : 1.0;
     masterGain.gain.cancelScheduledValues(now());
     masterGain.gain.setValueAtTime(masterGain.gain.value, now());
     masterGain.gain.linearRampToValueAtTime(muted ? 0 : 0.85, now() + 0.08);
@@ -521,14 +475,15 @@ var TetrisAudio = (function () {
   
     rotate: function () {
       if (!ready) return;
+      var t   = now();
       var osc = ac.createOscillator();
       var g   = ac.createGain();
       osc.type = 'square';
-      osc.frequency.setValueAtTime(520, now());
-      osc.frequency.linearRampToValueAtTime(640, now() + 0.04);
-      env(g, now(), 0.001, 0, 0.06, 0.18);
+      osc.frequency.setValueAtTime(520, t);
+      osc.frequency.linearRampToValueAtTime(640, t + 0.04);
+      env(g, t, 0.001, 0, 0.06, 0.18);
       chain([osc, g], sfxGain);
-      osc.start(now()); osc.stop(now() + 0.1);
+      osc.start(t); osc.stop(t + 0.1);
     },
   
     drop: function () {
@@ -546,14 +501,8 @@ var TetrisAudio = (function () {
   
     lineClear: function (n) {
       if (!ready) return;
-      /* Escalate character from single to Tetris */
-      var t = now();
-      if (n >= 4) {
-        /* Tetris — handled separately */
-        sfx.tetris();
-        return;
-      }
-      /* 1–3 lines: rising tone sweep, brighter with more lines */
+      if (n >= 4) { sfx.tetris(); return; }
+      var t         = now();
       var freqStart = 300 + n * 60;
       var freqEnd   = 600 + n * 120;
       var dur       = 0.08 + n * 0.03;
@@ -574,9 +523,8 @@ var TetrisAudio = (function () {
   
     tetris: function () {
       if (!ready) return;
-      /* Four staccato rising notes + impact */
-      var t   = now();
-      var bd  = 0.07;
+      var t  = now();
+      var bd = 0.07;
       [523, 659, 784, 1047].forEach(function (freq, i) {
         var osc = ac.createOscillator();
         var g   = ac.createGain();
@@ -584,10 +532,8 @@ var TetrisAudio = (function () {
         osc.frequency.value = freq;
         env(g, t + i * bd, 0.002, 0, 0.09, 0.45);
         chain([osc, g], sfxGain);
-        osc.start(t + i * bd);
-        osc.stop(t + i * bd + 0.12);
+        osc.start(t + i * bd); osc.stop(t + i * bd + 0.12);
       });
-      /* Big impact at the end */
       var impact = ac.createOscillator();
       var ig     = ac.createGain();
       impact.type = 'sawtooth';
@@ -595,8 +541,7 @@ var TetrisAudio = (function () {
       impact.frequency.exponentialRampToValueAtTime(60, t + 4 * bd + 0.25);
       env(ig, t + 4 * bd, 0.001, 0, 0.35, 0.7);
       chain([impact, ig], sfxGain);
-      impact.start(t + 4 * bd);
-      impact.stop(t + 4 * bd + 0.4);
+      impact.start(t + 4 * bd); impact.stop(t + 4 * bd + 0.4);
     },
   
     levelUp: function () {
@@ -610,14 +555,12 @@ var TetrisAudio = (function () {
         osc.frequency.value = freq;
         env(g, t + i * bd, 0.003, 0, 0.1, 0.3 + i * 0.04);
         chain([osc, g], sfxGain);
-        osc.start(t + i * bd);
-        osc.stop(t + i * bd + 0.14);
+        osc.start(t + i * bd); osc.stop(t + i * bd + 0.14);
       });
     },
   
     gameOver: function () {
       if (!ready) return;
-      /* Descending chromatic doom */
       var t  = now();
       var bd = 0.12;
       [392, 370, 349, 330, 311, 294, 262].forEach(function (freq, i) {
@@ -627,10 +570,8 @@ var TetrisAudio = (function () {
         osc.frequency.value = freq;
         env(g, t + i * bd, 0.004, 0, 0.2, 0.28 - i * 0.02);
         chain([osc, g], sfxGain);
-        osc.start(t + i * bd);
-        osc.stop(t + i * bd + 0.3);
+        osc.start(t + i * bd); osc.stop(t + i * bd + 0.3);
       });
-      /* Low impact boom */
       var boom = ac.createOscillator();
       var bg   = ac.createGain();
       boom.type = 'sine';
@@ -638,8 +579,7 @@ var TetrisAudio = (function () {
       boom.frequency.exponentialRampToValueAtTime(30, t + 7 * bd + 0.6);
       env(bg, t + 7 * bd, 0.002, 0, 0.8, 0.9);
       chain([boom, bg], sfxGain);
-      boom.start(t + 7 * bd);
-      boom.stop(t + 7 * bd + 1.0);
+      boom.start(t + 7 * bd); boom.stop(t + 7 * bd + 1.0);
     },
   
     pause: function () {
@@ -652,8 +592,7 @@ var TetrisAudio = (function () {
         osc.frequency.value = freq;
         env(g, t + i * 0.08, 0.003, 0, 0.1, 0.22);
         chain([osc, g], sfxGain);
-        osc.start(t + i * 0.08);
-        osc.stop(t + i * 0.08 + 0.14);
+        osc.start(t + i * 0.08); osc.stop(t + i * 0.08 + 0.14);
       });
     },
   
@@ -667,8 +606,7 @@ var TetrisAudio = (function () {
         osc.frequency.value = freq;
         env(g, t + i * 0.08, 0.003, 0, 0.1, 0.22);
         chain([osc, g], sfxGain);
-        osc.start(t + i * 0.08);
-        osc.stop(t + i * 0.08 + 0.14);
+        osc.start(t + i * 0.08); osc.stop(t + i * 0.08 + 0.14);
       });
     },
   
@@ -676,7 +614,6 @@ var TetrisAudio = (function () {
       if (!ready) return;
       var t  = now();
       var bd = 0.055;
-      /* Upward arp */
       [330, 392, 494, 660].forEach(function (freq, i) {
         var osc = ac.createOscillator();
         var g   = ac.createGain();
@@ -684,8 +621,7 @@ var TetrisAudio = (function () {
         osc.frequency.value = freq;
         env(g, t + i * bd, 0.002, 0, 0.08, 0.25);
         chain([osc, g], sfxGain);
-        osc.start(t + i * bd);
-        osc.stop(t + i * bd + 0.12);
+        osc.start(t + i * bd); osc.stop(t + i * bd + 0.12);
       });
     }
   };
