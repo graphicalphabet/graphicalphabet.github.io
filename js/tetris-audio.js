@@ -25,7 +25,7 @@
 
 var TetrisAudio = (function () {
   'use strict';
-
+  
   /* ── State ───────────────────────────────────────────────────────────────────── */
   var ac          = null;   /* AudioContext                  */
   var masterGain  = null;   /* master volume node            */
@@ -43,48 +43,78 @@ var TetrisAudio = (function () {
   var beatsPerBar    = 16;   /* 16 sub-beats per bar (16th notes) */
   var totalBeats     = 64;   /* 4 bars before pattern loops       */
   
+  /* ── iOS silent-mode unlock ──────────────────────────────────────────────────── */
+  /*
+    On iOS, the Web Audio API honours the hardware silent switch, but HTML5
+    <audio> elements with `playsinline` do not — they route through the media
+    channel, which ignores silent mode.
+  
+    The trick: play a tiny silent MP3 via an HTML5 <audio> element inside the
+    user gesture. This registers the page as an active media session with iOS,
+    which then allows the Web Audio API's AudioContext to also play through the
+    media channel — bypassing the silent switch for all subsequent audio.
+  
+    The silent MP3 is the shortest valid MPEG frame (< 100 bytes) encoded as
+    a base64 data URI so no network request is needed.
+  */
+  var SILENT_MP3 =
+    'data:audio/mpeg;base64,' +
+    'SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4LjI5LjEwMAAAAAAAAAAAAAAA' +
+    '//tQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAA' +
+    'CAAADhgCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA' +
+    'gICAgICAgICAgICAgICAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' +
+    'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' +
+    'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
+  
+  var iosUnlocked = false;
+  
+  function unlockiOS() {
+    if (iosUnlocked) return;
+    try {
+      var el = document.createElement('audio');
+      el.src = SILENT_MP3;
+      el.volume = 0.001;   /* near-zero but not zero — some iOS versions need this */
+      el.setAttribute('playsinline', '');
+      el.setAttribute('webkit-playsinline', '');
+      var p = el.play();
+      if (p && typeof p.catch === 'function') p.catch(function() {});
+      iosUnlocked = true;
+    } catch (e) {}
+  }
+  
   /* ── Init (must be called from a user gesture) ───────────────────────────────── */
   function init() {
-    /* Always returns a Promise so callers can await the context being running */
-    if (ready) {
-      if (ac && ac.state === 'suspended') {
-        return ac.resume().catch(function () {});
-      }
-      return Promise.resolve();
-    }
+    if (ready) return;
+  
+    /* Unlock iOS silent mode before creating the AudioContext */
+    unlockiOS();
+  
     try {
       ac = new (window.AudioContext || window.webkitAudioContext)();
-    } catch (e) { return Promise.resolve(); }
-
+    } catch (e) { return; }
+  
+    /* On iOS, resume() is required after context creation inside a gesture */
+    if (ac.state === 'suspended') {
+      ac.resume().catch(function() {});
+    }
+  
     masterGain = ac.createGain();
     masterGain.gain.value = 0.85;
     masterGain.connect(ac.destination);
-
+  
     musicGain = ac.createGain();
     musicGain.gain.value = 0.72;
     musicGain.connect(masterGain);
-
+  
     sfxGain = ac.createGain();
     sfxGain.gain.value = 1.0;
     sfxGain.connect(masterGain);
-
+  
     ready = true;
-
-    /* iOS always starts the context suspended — must resume before scheduling */
-    if (ac.state === 'suspended') {
-      return ac.resume().catch(function () {});
-    }
-    return Promise.resolve();
   }
   
   /* ── Utility ─────────────────────────────────────────────────────────────────── */
   function now() { return ac ? ac.currentTime : 0; }
-
-  /* On iOS, ac.currentTime stays at 0 for a brief moment after resume().
-     Any note scheduled at or before 0 is silently dropped. safeNow() ensures
-     we always schedule at least 50 ms ahead, so the first batch of notes
-     always lands in the future regardless of context state. */
-  function safeNow() { return now() + 0.05; }
   
   function bpm() {
     /* 90 BPM at level 1, ramps to 138 BPM at level 12, capped there */
@@ -433,20 +463,13 @@ var TetrisAudio = (function () {
   /* ── Public music controls ───────────────────────────────────────────────────── */
   function start() {
     if (!ready) return;
-    var doStart = function () {
-      stop();
-      musicActive  = true;
-      beatIndex    = 0;
-      nextBeatTime = safeNow();
-      musicGain.gain.setValueAtTime(0, now());
-      musicGain.gain.linearRampToValueAtTime(0.72, now() + 1.5);
-      scheduleAhead();
-    };
-    if (ac && ac.state === 'suspended') {
-      ac.resume().then(doStart).catch(doStart);
-    } else {
-      doStart();
-    }
+    stop();
+    musicActive  = true;
+    beatIndex    = 0;
+    nextBeatTime = now() + 0.1;
+    musicGain.gain.setValueAtTime(0, now());
+    musicGain.gain.linearRampToValueAtTime(0.72, now() + 1.5);
+    scheduleAhead();
   }
   
   function stop() {
@@ -472,19 +495,12 @@ var TetrisAudio = (function () {
   
   function resume() {
     if (!ready) return;
-    var doResume = function () {
-      musicActive  = true;
-      nextBeatTime = safeNow();
-      musicGain.gain.cancelScheduledValues(now());
-      musicGain.gain.setValueAtTime(musicGain.gain.value, now());
-      musicGain.gain.linearRampToValueAtTime(0.72, now() + 0.4);
-      scheduleAhead();
-    };
-    if (ac && ac.state === 'suspended') {
-      ac.resume().then(doResume).catch(doResume);
-    } else {
-      doResume();
-    }
+    musicActive  = true;
+    nextBeatTime = now() + 0.05;
+    musicGain.gain.cancelScheduledValues(now());
+    musicGain.gain.setValueAtTime(musicGain.gain.value, now());
+    musicGain.gain.linearRampToValueAtTime(0.72, now() + 0.4);
+    scheduleAhead();
   }
   
   function setLevel(n) {
@@ -505,20 +521,19 @@ var TetrisAudio = (function () {
   
     rotate: function () {
       if (!ready) return;
-      var t = safeNow();
       var osc = ac.createOscillator();
       var g   = ac.createGain();
       osc.type = 'square';
-      osc.frequency.setValueAtTime(520, t);
-      osc.frequency.linearRampToValueAtTime(640, t + 0.04);
-      env(g, t, 0.001, 0, 0.06, 0.18);
+      osc.frequency.setValueAtTime(520, now());
+      osc.frequency.linearRampToValueAtTime(640, now() + 0.04);
+      env(g, now(), 0.001, 0, 0.06, 0.18);
       chain([osc, g], sfxGain);
-      osc.start(t); osc.stop(t + 0.1);
+      osc.start(now()); osc.stop(now() + 0.1);
     },
   
     drop: function () {
       if (!ready) return;
-      var t   = safeNow();
+      var t   = now();
       var osc = ac.createOscillator();
       var g   = ac.createGain();
       osc.type = 'sine';
@@ -532,7 +547,7 @@ var TetrisAudio = (function () {
     lineClear: function (n) {
       if (!ready) return;
       /* Escalate character from single to Tetris */
-      var t = safeNow();
+      var t = now();
       if (n >= 4) {
         /* Tetris — handled separately */
         sfx.tetris();
@@ -560,7 +575,7 @@ var TetrisAudio = (function () {
     tetris: function () {
       if (!ready) return;
       /* Four staccato rising notes + impact */
-      var t   = safeNow();
+      var t   = now();
       var bd  = 0.07;
       [523, 659, 784, 1047].forEach(function (freq, i) {
         var osc = ac.createOscillator();
@@ -586,7 +601,7 @@ var TetrisAudio = (function () {
   
     levelUp: function () {
       if (!ready) return;
-      var t  = safeNow();
+      var t  = now();
       var bd = 0.06;
       [392, 523, 659, 784, 1047].forEach(function (freq, i) {
         var osc = ac.createOscillator();
@@ -603,7 +618,7 @@ var TetrisAudio = (function () {
     gameOver: function () {
       if (!ready) return;
       /* Descending chromatic doom */
-      var t  = safeNow();
+      var t  = now();
       var bd = 0.12;
       [392, 370, 349, 330, 311, 294, 262].forEach(function (freq, i) {
         var osc = ac.createOscillator();
@@ -629,7 +644,7 @@ var TetrisAudio = (function () {
   
     pause: function () {
       if (!ready) return;
-      var t = safeNow();
+      var t = now();
       [660, 440].forEach(function (freq, i) {
         var osc = ac.createOscillator();
         var g   = ac.createGain();
@@ -644,7 +659,7 @@ var TetrisAudio = (function () {
   
     resume: function () {
       if (!ready) return;
-      var t = safeNow();
+      var t = now();
       [440, 660].forEach(function (freq, i) {
         var osc = ac.createOscillator();
         var g   = ac.createGain();
@@ -659,7 +674,7 @@ var TetrisAudio = (function () {
   
     newGame: function () {
       if (!ready) return;
-      var t  = safeNow();
+      var t  = now();
       var bd = 0.055;
       /* Upward arp */
       [330, 392, 494, 660].forEach(function (freq, i) {
@@ -687,4 +702,4 @@ var TetrisAudio = (function () {
     sfx:      sfx
   };
   
-  }());
+  }());  
