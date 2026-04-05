@@ -68,6 +68,9 @@ var quotes = [{
   quote: "Routine, in an intelligent man, is a sign of ambition.",
   source: "W. H. Auden"
 }, {
+  quote: "Action produces information. If you’re unsure of what to do, just do anything, even if it’s the wrong thing. This will give you information about what you should actually be doing. Sounds simple on the surface — the hard part is making it part of your every day working process.",
+  source: "Brian Armstrong"
+}, {
   quote: "Fallor Ergo Sum. (I err therefore I am.)",
   source: "St. Augustine"
 }, {
@@ -904,6 +907,9 @@ var quotes = [{
 }, {
   quote: "I think the secret to success is pretty simple. The more you listen, the smarter you get.",
   source: "Miles Nadal"
+}, {
+  quote: "When we engage in what we are naturally suited to do, our work takes on the quality of play, and it is play that stimulates creativity.",
+  source: "Linda Naiman"
 }, {
   quote: "We live in a wonderful world that is full of beauty, charm, and adventure. There is no end to the adventures we can have if only we seek them with our eyes open.",
   source: "Jawaharlal Nehru"
