@@ -443,6 +443,9 @@ var quotes = [{
   quote: "Your greatest fear carries with it your highest growth.",
   source: "Dr. Pinki Feinstein"
 }, {
+  quote: "The unprepared mind cannot see the outstretched hand of opportunity.",
+  source: "Sir Alexander Fleming"
+}, {
   quote: "Efficiency is doing things right; effectiveness is doing the right things.",
   source: "Tim Ferris"
 }, {
