@@ -24,7 +24,7 @@ html, body { height: 100%; }
 body {
   background: var(--black);
   color: var(--white);
-  font-family: 'Karla', sans-serif;
+  font-family: 'Work Sans', sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -195,7 +195,7 @@ h1 {
   color: var(--black);
   border: none;
   padding: 10px 22px;
-  font-family: 'Karla', sans-serif;
+  font-family: 'Work Sans', sans-serif;
   font-size: clamp(0.6rem, 1.8vw, 0.72rem);
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -223,7 +223,7 @@ h1 {
   background: #0d0d0d;
   border: 1px solid var(--blue);
   color: var(--white);
-  font-family: 'Karla', sans-serif;
+  font-family: 'Work Sans', sans-serif;
   font-size: 0.75rem;
   padding: 8px 12px;
   width: min(190px, 80%);
@@ -388,7 +388,7 @@ h1 {
   background: transparent;
   border: 1px solid var(--border);
   color: var(--blue);
-  font-family: var(--font, 'Karla', sans-serif);
+  font-family: var(--font, 'Work Sans', sans-serif);
   font-size: 0.85rem;
   padding: 4px 10px;
   cursor: pointer;
