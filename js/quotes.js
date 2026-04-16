@@ -1418,6 +1418,9 @@ var quotes = [{
   quote: "Life begins at the end of your comfort zone.",
   source: "Neale Donald Walsch"
 }, {
+  quote: "Champions behave like champions before they’re champions; they have a winning standard of performance before they are winners.",
+  source: "Bill Walsh"
+}, {
   quote: "Gratitude can transform common days into thanksgivings, turn routine jobs into joy, and change ordinary opportunities into blessings.",
   source: "William Arthur Ward"
 }, {
