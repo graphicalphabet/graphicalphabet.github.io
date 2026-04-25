@@ -1,5 +1,5 @@
 var quotes = [{
-  quote: "It's not about time, it's about choices. How are you spending your choices?",
+  quote: "It’s not about time, it’s about choices. How are you spending your choices?",
   source: "Beverly Adamo"
 }, {
   quote: "I love deadlines. I love the whooshing sound they make as they go by.",
@@ -89,7 +89,7 @@ var quotes = [{
   quote: "If you get tired, learn to rest, not to quit.",
   source: "Banksy"
 }, {
-  quote: "If you're in a place in life you don’t want to be, it’s up to you to make it better. To reframe it by focusing on the positive, and approaching it with enthusiasm. In the end, your positivity and enthusiasm will contribute to creating the outcome you’re after. Once you apply this mindset to all aspects of your life, you corner fear. Fear basically has nowhere to go.",
+  quote: "If you’re in a place in life you don’t want to be, it’s up to you to make it better. To reframe it by focusing on the positive, and approaching it with enthusiasm. In the end, your positivity and enthusiasm will contribute to creating the outcome you’re after. Once you apply this mindset to all aspects of your life, you corner fear. Fear basically has nowhere to go.",
   source: "Tom Brady"
 }, {
   quote: "Though no one can go back and make a brand new start, anyone can start from now and make a brand new ending.",
@@ -719,7 +719,7 @@ var quotes = [{
   quote: "We act as though comfort and luxury were the chief requirements of life, when all that we need to make us happy is something to be enthusiastic about.",
   source: "Charles Kingsley"
 }, {
-  quote: "Remember, we all stumble, every one of us. That's why it's a comfort to go hand in hand.",
+  quote: "Remember, we all stumble, every one of us. That’s why it’s a comfort to go hand in hand.",
   source: "Emily Kimbrough"
 }, {
   quote: "Before you finish eating breakfast this morning, you’ve depended on more than half the world. This is the way our universe is structured. We aren’t going to have peace on earth until we recognize this fact.",
@@ -1112,7 +1112,7 @@ var quotes = [{
   quote: "If you feel pain within yourself, it is a sign that you are still alive. But if you feel the pain someone else feels, it is a sign that you are human.",
   source: "Rumi"
 }, {
-  quote: "The soul knows what the heart can't understand.",
+  quote: "The soul knows what the heart can’t understand.",
   source: "Rumi"
 }, {
   quote: "Yesterday I was clever so I wanted to change the world. Today I am wise so I’m trying to change myself.",
@@ -1451,7 +1451,7 @@ var quotes = [{
   quote: "The moment of surrender is not when life is over. It’s when life begins.",
   source: "Marianne Williamson"
 }, {
-  quote: "Every nervous system creates its own 'reality' minute by minute — we live inside a ‘bubble’ of neural abstractions which we identify with reality. Make this neurological fact into conscious experience, and you will never be bored or depressed again.",
+  quote: "Every nervous system creates its own ‘reality’ minute by minute — we live inside a ‘bubble’ of neural abstractions which we identify with reality. Make this neurological fact into conscious experience, and you will never be bored or depressed again.",
   source: "Robert Anton Wilson"
 }, {
   quote: "No amount of sophistication is going to allay the fact that all your knowledge is about the past and all your decisions are about the future.",
