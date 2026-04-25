@@ -512,7 +512,7 @@ var quotes = [{
   quote: "Live as if you were to die tomorrow. Learn as if you were to live forever.",
   source: "Mahatma Gandhi"
 }, {
-  quote: "“Happiness is when what you think, what you say, and what you do are in harmony.",
+  quote: "Happiness is when what you think, what you say, and what you do are in harmony.",
   source: "Mahatma Gandhi"
 }, {
   quote: "Happiness is when what you think, what you say, and what you do are in harmony.",
