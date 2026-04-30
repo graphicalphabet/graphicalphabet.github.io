@@ -296,6 +296,9 @@ var quotes = [{
   quote: "Pain plus reflection equals progress.",
   source: "Ray Dalio"
 }, {
+  quote: "Teach in order to learn.",
+  source: "Baba Hari Daas"
+}, {
   quote: "Have no fear of perfection — you’ll never reach it.",
   source: "Salvador Dalí"
 }, {
