@@ -1,4 +1,4 @@
-var mantras = [{
+const mantras = [{
     mantra: 'Things are always working out for me.'
 }, {
     mantra: 'I accomplish everything I set my mind to.'

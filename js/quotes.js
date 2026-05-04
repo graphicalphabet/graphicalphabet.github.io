@@ -1,4 +1,4 @@
-var quotes = [{
+const quotes = [{
   quote: "It’s not about time, it’s about choices. How are you spending your choices?",
   source: "Beverly Adamo"
 }, {
@@ -1338,46 +1338,46 @@ var quotes = [{
   source: "Neil deGrasse Tyson"
 }, {
   quote: "A river always finds its way.",
-  source: "Unknown"
+  source: "Yogi Tea-bag Wisdom"
 }, {
   quote: "Be guided. Listen to the whispers of the universe.",
-  source: "Unknown"
+  source: "Yogi Tea-bag Wisdom"
 }, {
   quote: "Be kind to yourself.",
-  source: "Unknown"
+  source: "Yogi Tea-bag Wisdom"
 }, {
   quote: "Celebrate your successes and failures; both required great courage.",
-  source: "Unknown"
+  source: "Yogi Tea-bag Wisdom"
 }, {
   quote: "Compassion is your strength.",
-  source: "Unknown"
+  source: "Yogi Tea-bag Wisdom"
 }, {
   quote: "Gratitude is not about what is received; it’s about how you receive what is there.",
-  source: "Unknown"
+  source: "Yogi Tea-bag Wisdom"
 }, {
   quote: "Laughter is the same in all languages.",
-  source: "Unknown"
+  source: "Yogi Tea-bag Wisdom"
 }, {
   quote: "Life is best lived by focusing on your goals and dancing through all other distractions.",
-  source: "Unknown"
+  source: "Yogi Tea-bag Wisdom"
 }, {
   quote: "Make your heart the most beautiful thing about you.",
-  source: "Unknown"
+  source: "Yogi Tea-bag Wisdom"
 }, {
   quote: "The goal is to grow so strong on the inside, that nothing on the outside can affect your inner wellness without your conscious permission.",
-  source: "Unknown"
+  source: "Yogi Tea-bag Wisdom"
 }, {
   quote: "The most engaged, yet least attached, wins.",
   source: "Unknown"
 }, {
   quote: "Travel in grace knowing that you are protected by love.",
-  source: "Unknown"
+  source: "Yogi Tea-bag Wisdom"
 }, {
   quote: "We all want to be understood, to be acknowledged, to be loved.",
-  source: "Unknown"
+  source: "Yogi Tea-bag Wisdom"
 }, {
   quote: "What you have experienced, no power on earth can take from you.",
-  source: "Unknown"
+  source: "Yogi Tea-bag Wisdom"
 }, {
   quote: "When is an oak tree perfect?",
   source: "Unknown"
