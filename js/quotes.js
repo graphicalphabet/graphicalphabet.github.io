@@ -1337,36 +1337,6 @@ const quotes = [{
   quote: "The cause is a failure of the education system to teach people how to think about information. Specifically, how to think about data, how to turn data into knowledge, and how to turn knowledge into wisdom.",
   source: "Neil deGrasse Tyson"
 }, {
-  quote: "A river always finds its way.",
-  source: "Yogi Tea-bag Wisdom"
-}, {
-  quote: "Be guided. Listen to the whispers of the universe.",
-  source: "Yogi Tea-bag Wisdom"
-}, {
-  quote: "Be kind to yourself.",
-  source: "Yogi Tea-bag Wisdom"
-}, {
-  quote: "Celebrate your successes and failures; both required great courage.",
-  source: "Yogi Tea-bag Wisdom"
-}, {
-  quote: "Compassion is your strength.",
-  source: "Yogi Tea-bag Wisdom"
-}, {
-  quote: "Gratitude is not about what is received; it’s about how you receive what is there.",
-  source: "Yogi Tea-bag Wisdom"
-}, {
-  quote: "Laughter is the same in all languages.",
-  source: "Yogi Tea-bag Wisdom"
-}, {
-  quote: "Life is best lived by focusing on your goals and dancing through all other distractions.",
-  source: "Yogi Tea-bag Wisdom"
-}, {
-  quote: "Make your heart the most beautiful thing about you.",
-  source: "Yogi Tea-bag Wisdom"
-}, {
-  quote: "The goal is to grow so strong on the inside, that nothing on the outside can affect your inner wellness without your conscious permission.",
-  source: "Yogi Tea-bag Wisdom"
-}, {
   quote: "The most engaged, yet least attached, wins.",
   source: "Unknown"
 }, {
@@ -1495,6 +1465,39 @@ const quotes = [{
 }, {
   quote: "There is a magnet in your heart that will attract true friends. That magnet is unselfishness, thinking of others first. When you learn to love for others, they will live for you.",
   source: "Paramahansa Yogananda"
+}, {
+  quote: "A river always finds its way.",
+  source: "Yogi Tea-bag Wisdom"
+}, {
+  quote: "Be guided. Listen to the whispers of the universe.",
+  source: "Yogi Tea-bag Wisdom"
+}, {
+  quote: "Be kind to yourself.",
+  source: "Yogi Tea-bag Wisdom"
+}, {
+  quote: "Celebrate your successes and failures; both required great courage.",
+  source: "Yogi Tea-bag Wisdom"
+}, {
+  quote: "Compassion is your strength.",
+  source: "Yogi Tea-bag Wisdom"
+}, {
+  quote: "Gratitude is not about what is received; it’s about how you receive what is there.",
+  source: "Yogi Tea-bag Wisdom"
+}, {
+  quote: "Laughter is the same in all languages.",
+  source: "Yogi Tea-bag Wisdom"
+}, {
+  quote: "Life is best lived by focusing on your goals and dancing through all other distractions.",
+  source: "Yogi Tea-bag Wisdom"
+}, {
+  quote: "Love is the ultimate law of life.",
+  source: "Yogi Tea-bag Wisdom"
+}, {
+  quote: "Make your heart the most beautiful thing about you.",
+  source: "Yogi Tea-bag Wisdom"
+}, {
+  quote: "The goal is to grow so strong on the inside, that nothing on the outside can affect your inner wellness without your conscious permission.",
+  source: "Yogi Tea-bag Wisdom"
 }, {
   quote: "A mind is like a parachute. It doesn’t work if it is not open.",
   source: "Frank Zappa"
