@@ -552,7 +552,10 @@ const quotes = [{
   source: "Johann Wolfgang Von Goethe"
 }, {
   quote: "Nothing happens in living nature that is not in relation to the whole.",
-  source: "Goethe"
+  source: "Johann Wolfgang Von Goethe"
+}, {
+  quote: "The infinite is found in the finite.",
+  source: "Johann Wolfgang Von Goethe"
 }, {
   quote: "Each one of us matters, has a role to play, and makes a difference. Each one of us must take responsibility for our own lives, and above all, show respect and love for living things around us, especially each other.",
   source: "Jane Goodall"
