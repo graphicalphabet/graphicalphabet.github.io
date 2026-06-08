@@ -917,6 +917,9 @@ const quotes = [{
   quote: "The best life is not a life with good circumstances. The best life is a life in which you feel alive.",
   source: "Jim Murphy"
 }, {
+  quote: "There is no failure. Only feedback.",
+  source: "Jim Murphy"
+}, {
   quote: "I think the secret to success is pretty simple. The more you listen, the smarter you get.",
   source: "Miles Nadal"
 }, {
