@@ -914,6 +914,9 @@ const quotes = [{
   quote: "Go slow to go fast. We live as though there aren’t enough hours in the day, but if we do each thing calmly and carefully, we will get it done quicker and with much less stress.",
   source: "Viggo Mortensen"
 }, {
+  quote: "The best life is not a life with good circumstances. The best life is a life in which you feel alive.",
+  source: "Jim Murphy"
+}, {
   quote: "I think the secret to success is pretty simple. The more you listen, the smarter you get.",
   source: "Miles Nadal"
 }, {
