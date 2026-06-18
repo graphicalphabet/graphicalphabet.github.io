@@ -1433,11 +1433,14 @@ const quotes = [{
   quote: "The moment of surrender is not when life is over. It’s when life begins.",
   source: "Marianne Williamson"
 }, {
-  quote: "Every nervous system creates its own ‘reality’ minute by minute — we live inside a ‘bubble’ of neural abstractions which we identify with reality. Make this neurological fact into conscious experience, and you will never be bored or depressed again.",
-  source: "Robert Anton Wilson"
+  quote: "The real problem of humanity is: we have paleolithic emotions; medieval institutions; and god-like technology.",
+  source: "Edward O. Wilson"
 }, {
   quote: "No amount of sophistication is going to allay the fact that all your knowledge is about the past and all your decisions are about the future.",
   source: "Ian Wilson"
+}, {
+  quote: "Every nervous system creates its own ‘reality’ minute by minute — we live inside a ‘bubble’ of neural abstractions which we identify with reality. Make this neurological fact into conscious experience, and you will never be bored or depressed again.",
+  source: "Robert Anton Wilson"
 }, {
   quote: "Passion is energy. Feel the power that comes from focusing on what excites you. ",
   source: "Oprah Winfrey"
