@@ -1022,6 +1022,9 @@ const quotes = [{
   quote: "When I was the age of these children I could draw like Raphael, but it took me a lifetime to learn how to draw like these children.",
   source: "Pablo Picasso"
 }, {
+  quote: "All the water in the world cannot sink a ship unless it gets inside the ship. All the negativity in the world cannot sink a person unless it gets inside the mind.",
+  source: "Mary Pickford"
+}, {
   quote: "What we have done for ourselves dies with us; what we have done for others and the world remains and is immortal.",
   source: "Albert Pike"
 }, {
