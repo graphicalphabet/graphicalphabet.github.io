@@ -20,6 +20,9 @@ const quotes = [{
   quote: "Every end is a beginning. We just don’t know it at the time.",
   source: "Mitch Albom"
 }, {
+  quote: "There is no such thing as failure, only feedback.",
+  source: "Robert Allen"
+}, {
   quote: "The bad news is, time flies. The good news is, you’re the pilot.",
   source: "Michael Altshuler"
 }, {
@@ -768,6 +771,9 @@ const quotes = [{
   source: "Dalai Lama"
 }, {
   quote: "The roots of all goodness lie in the soil of appreciation for goodness.",
+  source: "Dalai Lama"
+}, {
+  quote: "When you talk, you are only repeating what you already know. But if you listen, you may learn something new.",
   source: "Dalai Lama"
 }, {
   quote: "Perfection is the voice of the oppressor.",
