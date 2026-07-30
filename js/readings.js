@@ -849,7 +849,7 @@ const entry = [{
 }, {
 	readingdate: 'July 31',
 	readingtitle: 'When You See Your Neighbour, Melt the Same Way',
-	readingbody: 'Question: At times my surrender is quite intense and I feel that I am melting at the mention of God’s name. Can you offer any advice to develop pure love and the higher states of Divine Love? Sri Gurudev: When pure love matures, it will take you to the higher state itself. You don’t have to worry about higher states. “Melting at the mention of God’s name” itself is enough. Slowly it will lead you to further and further experiences, in a natural way. When you see your neighbor, melt in the same way. That’s even more important. When you see your pets, melt in that way. When you see your plants, melt in that way. Not only when you hear God’s name. Try to apply this love towards everything around you.'
+	readingbody: 'Question: At times my surrender is quite intense and I feel that I am melting at the mention of God’s name. Can you offer any advice to develop pure love and the higher states of Divine Love? Sri Gurudev: When pure love matures, it will take you to the higher state itself. You don’t have to worry about higher states. “Melting at the mention of God’s name” itself is enough. Slowly it will lead you to further and further experiences, in a natural way. When you see your neighbour, melt in the same way. That’s even more important. When you see your pets, melt in that way. When you see your plants, melt in that way. Not only when you hear God’s name. Try to apply this love towards everything around you.'
 }, {
 	readingdate: 'August 1',
 	readingtitle: 'Have Heaven in Your Heart',
