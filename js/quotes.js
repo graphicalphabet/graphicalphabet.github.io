@@ -731,6 +731,9 @@ const quotes = [{
   quote: "Remember, we all stumble, every one of us. That’s why it’s a comfort to go hand in hand.",
   source: "Emily Kimbrough"
 }, {
+  quote: "Truth is not a territory to be defended, ut a good to be shared.",
+  source: "Pope Leo XIV"
+}, {
   quote: "Before you finish eating breakfast this morning, you’ve depended on more than half the world. This is the way our universe is structured. We aren’t going to have peace on earth until we recognize this fact.",
   source: "Martin Luther King Jr."
 }, {
