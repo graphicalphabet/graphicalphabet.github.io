@@ -989,7 +989,7 @@ const entry = [{
 }, {
 	readingdate: 'September 4',
 	readingtitle: 'Self-Healing Should Be That Way',
-	readingbody: 'By putting out positive thoughts, and correcting your mistakes, you can heal your problems. But don’t do something to alleviate the problem without correcting the cause. The suffering came for your benefit. You should not try to take that away. Instead, bring out the nice things, the good qualities in you , the positive side in you, and the negative will get cured itself. Self-healing should be that way. If you have some problem, ask yourself, “How did I get into this? What is the cause?” Then make a resolution: “Yes, in the future I will not encourage such thoughts. I will cultivate the opposite.” The best way to drive away the darkness is to bring light into the room.'
+	readingbody: 'By putting out positive thoughts, and correcting your mistakes, you can heal your problems. But don’t do something to alleviate the problem without correcting the cause. The suffering came for your benefit. You should not try to take that away. Instead, bring out the nice things, the good qualities in you, the positive side in you, and the negative will get cured itself. Self-healing should be that way. If you have some problem, ask yourself, “How did I get into this? What is the cause?” Then make a resolution: “Yes, in the future I will not encourage such thoughts. I will cultivate the opposite.” The best way to drive away the darkness is to bring light into the room.'
 }, {
 	readingdate: 'September 5',
 	readingtitle: 'There is Nothing to Be Afraid Of',
