@@ -731,6 +731,9 @@ const quotes = [{
   quote: "Remember, we all stumble, every one of us. That’s why it’s a comfort to go hand in hand.",
   source: "Emily Kimbrough"
 }, {
+  quote: "It is good to have an end to journey towards; but it is the journey that matters, in the end.",
+  source: "Ursula K. Le Guin"
+}, {
   quote: "Truth is not a territory to be defended, ut a good to be shared.",
   source: "Pope Leo XIV"
 }, {
