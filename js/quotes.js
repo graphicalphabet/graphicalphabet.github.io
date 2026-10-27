@@ -1394,6 +1394,9 @@ const quotes = [{
   quote: "Common sense is not so common.",
   source: "Voltaire"
 }, {
+  quote: "The perfect is the enemy of the good.",
+  source: "Voltaire"
+}, {
   quote: "To practice any art, no matter how well or badly, is a way to make your soul grow.",
   source: "Kurt Vonnegut"
 }, {
